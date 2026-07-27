@@ -15,7 +15,23 @@
       "Bash(git -C \"C:\\\\Users\\\\020168\\\\Documents\\\\Claude\\\\AIdiver_office\" status)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(git branch *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(curl -s https://api.github.com/repos/oshikubo-cmd/aidiver-office/commits?per_page=5)",
+      "Bash(python3 -c \"import sys,json; commits=json.load\\(sys.stdin\\); [print\\(c['commit']['message'], '|', c['commit']['author']['date']\\) for c in commits]\")",
+      "Bash(curl -s \"https://api.github.com/repos/oshikubo-cmd/aidiver-office/commits?per_page=5\")",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:finance.yahoo.co.jp)",
+      "WebFetch(domain:jp.tradingview.com)",
+      "mcp__990faa7a-1e85-4602-b13a-a3b31a661165__slack_send_message",
+      "WebFetch(domain:www.matsui.co.jp)",
+      "WebFetch(domain:s.kabutan.jp)",
+      "WebFetch(domain:finance.minkabu.jp)",
+      "mcp__scheduled-tasks__list_scheduled_tasks",
+      "WebFetch(domain:finance.matsui.co.jp)"
     ]
   }
 }

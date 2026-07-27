@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026年度PL分析・構造転換提言（1枚サマリ）</title>
+<style>
+  :root{
+    --navy:#1E2761; --navy2:#2B3573; --ice:#E9EEF9; --ice2:#F4F7FC;
+    --steel:#5B6B8C; --ink:#222633; --line:#D4DBE8;
+    --red:#C0392B; --green:#1E8E6A; --amber:#C9821B; --white:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Yu Gothic UI","Hiragino Sans","Noto Sans JP",-apple-system,system-ui,sans-serif;
+    color:var(--ink);background:#eef1f7;line-height:1.55;padding:18px}
+  .sheet{max-width:1180px;margin:0 auto;background:var(--white);border-radius:10px;overflow:hidden;
+    box-shadow:0 6px 30px rgba(30,39,97,.13)}
+  /* header */
+  header{background:var(--navy);color:#fff;padding:26px 32px;position:relative}
+  header .tag{position:absolute;top:20px;right:28px;background:var(--amber);color:var(--navy);
+    font-weight:700;font-size:12px;padding:5px 12px;border-radius:4px}
+  header h1{font-size:27px;letter-spacing:.5px;margin-bottom:6px}
+  header .sub{color:#CADCFC;font-size:14px}
+  header .meta{color:#9FADCC;font-size:11.5px;margin-top:10px}
+  /* kpi */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+  .kpi{background:var(--ice2);padding:16px 18px}
+  .kpi .v{font-size:30px;font-weight:800;color:var(--navy);line-height:1.1}
+  .kpi .v.red{color:var(--red)} .kpi .v.amber{color:var(--amber)}
+  .kpi .l{font-size:11.5px;color:var(--steel);margin-top:5px}
+  /* body */
+  main{padding:24px 32px 30px}
+  section{margin-bottom:22px}
+  h2{font-size:16px;color:var(--navy);border-left:5px solid var(--navy);padding-left:10px;margin-bottom:10px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{background:var(--navy);color:#fff;font-weight:700;padding:7px 9px;text-align:center;white-space:nowrap}
+  th:first-child{text-align:left}
+  td{padding:6px 9px;border-bottom:1px solid var(--line);text-align:center}
+  td:first-child{text-align:left;font-weight:600}
+  tbody tr:nth-child(odd){background:var(--ice2)}
+  tr.total td{font-weight:800;background:var(--ice)}
+  .red{color:var(--red);font-weight:700} .green{color:var(--green);font-weight:700}
+  .amber{color:var(--amber);font-weight:700} .navyb{color:var(--navy);font-weight:800}
+  .tblwrap{overflow-x:auto}
+  /* phase cards */
+  .phases{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+  .pc{border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .pc .hd{padding:8px 12px;color:#fff;font-weight:700;font-size:13px}
+  .pc .nm{padding:9px 12px 4px;font-weight:700;font-size:12.5px}
+  .pc ul{padding:2px 12px 8px 26px;font-size:11.5px;color:var(--steel)}
+  .pc li{margin:3px 0}
+  .pc .eff{margin:0 10px 10px;background:var(--ice);color:var(--navy);font-weight:700;
+    font-size:11px;text-align:center;padding:6px;border-radius:5px}
+  .g0{background:var(--green)} .g1{background:var(--navy)} .g2{background:var(--red)}
+  /* insight box */
+  .insight{background:var(--navy);color:#fff;border-radius:8px;padding:14px 18px;font-size:12.5px}
+  .insight b{color:#fff} .insight .pt{color:#E3E9F7;margin:5px 0}
+  .insight .pt::before{content:"▸ ";color:var(--amber)}
+  /* action list */
+  .acts{font-size:12.5px}
+  .acts th:nth-child(3),.acts td:nth-child(3){text-align:left}
+  .note{font-size:10.5px;color:var(--steel);margin-top:7px}
+  footer{background:var(--ice2);border-top:1px solid var(--line);padding:12px 32px;font-size:10.5px;color:var(--steel)}
+  @media(max-width:760px){.cols,.phases,.kpis{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header>
+    <span class="tag">社外秘</span>
+    <h1>2026年度 PL分析と事業構造転換の提言</h1>
+    <div class="sub">全社・部門別の業績と見通し ／ 競合比較 ／ 出版部門の構造転換（人件費・直接原価）</div>
+    <div class="meta">データ：4-5月実績＋6/16時点メディア上期読み（2026PL_翔泳社.xlsx／メディア_読み報告.xlsx）　|　作成：analyst　2026/6/19　|　単位：百万円</div>
+  </header>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v red">75.6%</div><div class="l">全社 4-5月 売上達成率（予算比）</div></div>
+    <div class="kpi"><div class="v red">▲33</div><div class="l">全社 4-5月 営業利益（予算+85）</div></div>
+    <div class="kpi"><div class="v navyb">89%</div><div class="l">全社営業利益に占めるメディアの寄与</div></div>
+    <div class="kpi"><div class="v amber">662</div><div class="l">メディア上期読み（予算720・▲58）</div></div>
+  </div>
+
+  <main>
+    <section>
+      <h2>結論</h2>
+      <div class="insight">
+        利益エンジンの<b>メディアが減速</b>（上期読みは前年並み±0%、想定した成長が起きていない）。主因は<b>主力Web媒体（MarkeZine／EnterpriseZine／CodeZine）の未達で▲77百万</b>。<b>AIdiverは投資フェーズで損失は計画内・絶対額僅少（影響は約▲2百万のみ）</b>。
+        一方<b>出版は人件費37%＋直接費32%＝売上の約7割が固定的に重く</b>、売上が予算比76%に沈むと即赤字（4-5月OP▲23百万）。
+        <div class="pt"><b>メディア：</b>ウェブをリード型・AIパッケージ・会員活用へ転換（AIdiver）。イベントは成長エンジンとして協賛枠を早期確定。</div>
+        <div class="pt"><b>出版：</b>原価・在庫改革（Phase0）で率5%超 → 人員を成長部門へ再配置（Phase1）→ 残る余剰のみ人員圧縮（Phase2／最終手段）。</div>
+        <div class="pt"><b>全社：</b>AIを軸に出版×メディア×イベントを統合。検索流入減のヘッジは会員基盤（KGI10万人）。</div>
+      </div>
+    </section>
+
+    <section class="cols">
+      <div>
+        <h2>全社：通期予算の利益構造</h2>
+        <div class="tblwrap"><table>
+          <thead><tr><th>部門</th><th>売上予算</th><th>営業利益</th><th>利益率</th><th>OP寄与</th></tr></thead>
+          <tbody>
+            <tr><td>出版</td><td>2,288</td><td class="red">35</td><td>1.5%</td><td>11%</td></tr>
+            <tr><td>メディア</td><td>1,518</td><td class="green">283</td><td>18.7%</td><td class="navyb">89%</td></tr>
+            <tr class="total"><td>全社</td><td>3,806</td><td>318</td><td>8.4%</td><td>100%</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <h2>全社：4-5月実績（純売上）</h2>
+        <div class="tblwrap"><table>
+          <thead><tr><th></th><th>売上予算</th><th>売上実績</th><th>達成率</th><th>OP実績</th></tr></thead>
+          <tbody>
+            <tr><td>出版</td><td>445</td><td>339</td><td>76.2%</td><td class="red">▲23</td></tr>
+            <tr><td>メディア</td><td>185</td><td>137</td><td>74.0%</td><td class="red">▲10</td></tr>
+            <tr class="total"><td>全社</td><td>629</td><td>475</td><td class="red">75.6%</td><td class="red">▲33</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <section class="cols">
+      <div>
+        <h2>メディア：上期（4-9月）読み</h2>
+        <div class="tblwrap"><table>
+          <thead><tr><th>ストリーム</th><th>予算</th><th>読み</th><th>予算対</th><th>前年比</th></tr></thead>
+          <tbody>
+            <tr><td>イベント</td><td>320</td><td>338</td><td class="green">+18</td><td class="green">+4.6%</td></tr>
+            <tr><td>ウェブ（6媒体合計）</td><td>396</td><td>319</td><td class="red">▲77</td><td class="red">▲5.7%</td></tr>
+            <tr><td>書籍</td><td>5</td><td>6</td><td class="green">+1</td><td>—</td></tr>
+            <tr class="total"><td>合計</td><td>720</td><td>662</td><td class="red">▲58</td><td>±0%</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note">※ウェブ＝CodeZine/MarkeZine/EnterpriseZine/Biz/Zine/HRzine/AIdiverの6媒体合計。▲77の主因は主力媒体（MarkeZine▲14・EnterpriseZine▲11・CodeZine▲7.6・Biz/Zine▲6.3）。イベントは市場（+11.2%）と整合し堅調だが9月+68百万が未確定。</div>
+      </div>
+      <div>
+        <h2>競合比較（直近通期・出典付き）</h2>
+        <div class="tblwrap"><table>
+          <thead><tr><th>社・媒体</th><th>売上</th><th>営業利益</th><th>出典</th></tr></thead>
+          <tbody>
+            <tr><td class="navyb">翔泳社メディア事業</td><td>15.2億*</td><td class="green">2.83億*</td><td>社内PL</td></tr>
+            <tr><td>アイティメディア(2148)</td><td>81.0億</td><td class="green">20.3億</td><td>決算短信</td></tr>
+            <tr><td>インプレスHD(9479)</td><td>143.9億</td><td class="red">▲2.37億</td><td>IR</td></tr>
+            <tr><td>日経BP（非上場）</td><td>361億</td><td>非開示</td><td>会社情報</td></tr>
+            <tr><td>宣伝会議（非上場）</td><td>約25.8億</td><td>非開示</td><td>官報</td></tr>
+          </tbody>
+        </table></div>
+        <div class="note">*翔泳社は予算値。ウェブ不振は業界構造（AI Overviewsで検索クリック率15%→8%／Pew）。AI媒体は最大手も売上を単独開示せず＝AIdiver先行の好機。</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>メディア媒体別の4-5月実績（FY2026）</h2>
+      <div class="tblwrap"><table>
+        <thead><tr><th>媒体</th><th>売上予算</th><th>売上実績</th><th>達成率</th><th>粗利実績</th><th>評価</th></tr></thead>
+        <tbody>
+          <tr><td>MarkeZine</td><td>60.0</td><td>46.0</td><td>77%</td><td class="green">+23.4</td><td>最大媒体。5月62%に失速＝要回復筆頭</td></tr>
+          <tr><td>CodeZine</td><td>34.8</td><td>27.1</td><td>78%</td><td class="green">+14.4</td><td>Devsumi系イベントが収益柱</td></tr>
+          <tr><td>EnterpriseZine</td><td>30.0</td><td>18.7</td><td class="red">62%</td><td class="green">+9.4</td><td>4月43%・変動大</td></tr>
+          <tr><td>HRzine</td><td>6.3</td><td>8.3</td><td class="green">132%</td><td class="green">+4.2</td><td>予算超で好調</td></tr>
+          <tr><td>Biz/Zine</td><td>7.7</td><td>1.4</td><td class="red">18%</td><td class="red">▲3.2</td><td>構造赤字。再構築/統廃合候補</td></tr>
+          <tr><td>AIdiver</td><td>3.6</td><td>1.6</td><td>44%</td><td class="amber">▲2.0</td><td>投資フェーズ（予算上も赤字）・絶対僅少</td></tr>
+        </tbody>
+      </table></div>
+      <div class="cols" style="margin-top:10px">
+        <div class="insight" style="background:var(--ice2);color:var(--ink);border:1px solid var(--line)">
+          <b style="color:var(--red)">▲77の主因＝主力Web媒体</b><br>MarkeZine▲14／EnterpriseZine▲11／CodeZine▲7.6／Biz/Zine▲6.3。広告収益が立つ既存媒体の未達で、検索流入減・タイアップ単価の頭打ちと整合。
+        </div>
+        <div class="insight">
+          <b>AIdiverは“計画どおりの投資”</b><br>粗利予算がそもそも赤字＝投資フェーズ。▲77への影響は約▲2百万のみ。FY25は2〜3月に予算比438〜787%（粗利率60%）の実績も。削減でなく会員・AX Dayでの収益化が筋。
+        </div>
+      </div>
+      <div class="note">単位：百万円（4-5月合計・EnterpriseZineはOEM除く）。出典：プロダクトPL（社外取締役会資料）。</div>
+    </section>
+
+    <section>
+      <h2>出版の構造転換：「純減」より「成長部門への再配置」を優先</h2>
+      <div class="phases">
+        <div class="pc">
+          <div class="hd g0">PHASE 0｜原価・在庫改革（即時／人員影響なし）</div>
+          <ul>
+            <li>初版部数の最適化・POD/電子先行（直接費▲5%）</li>
+            <li>印刷・用紙・製本の再交渉（▲2-3%）</li>
+            <li>滞留在庫の処分で保管料▲20-30%</li>
+            <li>効果の低い販促の停止</li>
+          </ul>
+          <div class="eff">営業利益 +80〜100百万（率5%超）</div>
+        </div>
+        <div class="pc">
+          <div class="hd g1">PHASE 1｜再配置（3-6ヶ月）</div>
+          <ul>
+            <li>取次依存→直販（SEshop）シフト</li>
+            <li>校閲・制作・販売管理など機能を集約・外注化</li>
+            <li>出版編集の余剰を成長テーマ（AI）へ</li>
+            <li>メディア/AIdiver/イベント/直販へ配置転換</li>
+          </ul>
+          <div class="eff">固定費を成長セグメントの売上へ紐付け利益化</div>
+        </div>
+        <div class="pc">
+          <div class="hd g2">PHASE 2｜人員圧縮（最終手段）</div>
+          <ul>
+            <li>Phase0+1後も残る構造的余剰のみ対象</li>
+            <li>希望退職・早期退職を検討</li>
+            <li>整理解雇の4要件・手続きの遵守が前提</li>
+            <li>下表の3パターンで試算</li>
+          </ul>
+          <div class="eff">要・法務／労使（下表 10/15/20名）</div>
+        </div>
+      </div>
+      <div class="tblwrap" style="margin-top:12px"><table>
+        <thead><tr><th>削減人数</th><th>給与ベース節減</th><th>総額人件費ベース節減</th><th>出版営業利益の着地（現状35）</th></tr></thead>
+        <tbody>
+          <tr><td>10名</td><td>53百万</td><td>74百万</td><td class="green">約90〜110百万</td></tr>
+          <tr><td>15名</td><td>80百万</td><td>111百万</td><td class="green">約120〜150百万</td></tr>
+          <tr><td>20名</td><td>106百万</td><td>148百万</td><td class="green">約150〜180百万（率6〜8%）</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note">平均給与530万円前提。会社負担（総額人件費）は給与の約1.3〜1.5倍。人員規模は人件費ベースで全社の約6割（概算90名）。</div>
+    </section>
+
+    <section>
+      <h2>改善アクション総括（優先順位）</h2>
+      <div class="tblwrap"><table class="acts">
+        <thead><tr><th>優先</th><th>領域</th><th>アクション</th><th>ねらい・効果</th></tr></thead>
+        <tbody>
+          <tr><td class="red">★1</td><td>メディア（主力Web）</td><td>MarkeZine/CodeZine/EZの広告回復・リード型/AIパッケージ化</td><td>未達の主因（▲77）の回復</td></tr>
+          <tr><td class="red">★2</td><td>メディア</td><td>イベント協賛枠の早期確定（9月+68百万ほか）</td><td>成長エンジン・読みを“確定”に</td></tr>
+          <tr><td class="amber">★3</td><td>メディア</td><td>Biz/Zineの再構築/統廃合を検討</td><td>構造赤字（達成率18%）の解消</td></tr>
+          <tr><td class="green">★4</td><td>AIdiver</td><td>投資継続。会員・AX Dayで収益化、短期広告でなくKPIで評価</td><td>KGI10万人・将来の収益源</td></tr>
+          <tr><td class="navyb">★5</td><td>出版</td><td>Phase0：原価・在庫・販促改革</td><td>人員に手をつけず +80〜100百万</td></tr>
+          <tr><td class="navyb">★6</td><td>出版</td><td>取次→直販シフト・機能集約・成長部門へ再配置</td><td>薄利構造の是正・固定費の利益化</td></tr>
+          <tr><td class="amber">★7</td><td>出版</td><td>Phase2：希望/早期退職（最終手段）</td><td>10名で+74前後（要・法務/労使）</td></tr>
+          <tr><td class="navyb">★8</td><td>全社</td><td>AI軸で出版×メディア×イベントを統合</td><td>成長テーマへの集中・KGI10万人</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+  </main>
+
+  <footer>
+    社外秘・社内検討用。本書は財務面の意思決定支援であり、人員に関する施策は労働法・労使手続き（整理解雇の4要件等）の検討・法務確認が前提。
+    部門別人員数は組織図からの概算（要・HR確認）。6月の▲5.6億在庫調整は棚卸/仕掛調整の可能性が高く営業損益は調整前（4-5月）で評価。
+  </footer>
+</div>
+</body>
+</html>
