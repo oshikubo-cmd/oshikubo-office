@@ -2,6 +2,50 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 本オフィスについて
+
+oshikubo_office は、押久保剛（翔泳社 執行役員 / メディア編集部門長 / AIdiver編集長）の業務全般を支えるワークスペースである。
+業務は以下の2つのドメインからなる。
+
+### ドメイン1: 部門経営・執行役員業務（メイン）
+
+執行役員 兼 メディア編集部門長として、部門（メディア＋イベント＋新刊、計33名）の経営全般を担う。
+
+#### FY2026 部門数値目標
+
+- 売上 14.7億 / 粗利 7億（粗利率46%）/ 営業利益 2.8億（営利率18.7%）
+- 数値判断は「収益性・持続性・確実性」の3視点で行う（利益はどれだけあるか／いつまで続くか／どれほど確かか）
+
+#### 組織
+
+- 第1メディア編集部（IT、部長兼務）: デブサミ / CodeZine / ProductZine / EnterpriseZine / HRzine / AIdiver
+- 第2メディア編集部（ビジネス）: MarkeZine / CommerceZine / SalesZine
+
+#### FY2026 部門方針・主な業務
+
+- 部門PLの達成管理と経営会議・取締役会・総会向け資料の作成・報告
+- 「AIネイティブ」の推進: AIは相談相手ではなく仕事仲間。ワークフロー自体を再設計し、AI前提の業務プロセスを構築する。効率化で終わらせず新しい価値創造へシフトする
+- 「動画ネイティブ」の推進: 動画コンテンツの拡充と拡販、撮り方・売り方のワークフロー整備
+- 社内AI活用推進（利用コスト管理・利用状況分析を含む）
+- 市場・決算・競合動向のウォッチ
+
+#### 行動指針（部門スローガン）
+
+- 「評論家ではなく、実践者であれ」— 言葉より、行動を
+- AI×場所×専門性で勝ち筋を見つける。プランや分析はAIに任せ、人はまず動き、形にすることにこだわる
+- 安定利益＋次の模索。自調自考のプロ意識
+
+### ドメイン2: AIdiver編集長業務
+
+- KGI: AIdiverの会員数を10万人にする
+- パーパス: AI活用を推進するリーダーを日本に1000人作る
+- 記事制作・タイアップ・イベント・動画などのメディア運営全般
+- 部門方針上の位置づけ: 第1メディア編集部 第2課の担当メディア。「Webメディアの新たな在り方を探り、成長する」がFY2026の方向性
+
+タスクを受けたら、どちらのドメインの業務かを意識して対応する。
+AIdiver固有のルール（表記ルール・記事フォーマット・リード文スタイル等）はドメイン2にのみ適用する。
+ドメイン1の行動指針（実践者であれ・AIネイティブ）は本オフィスの全エージェントの働き方にも適用する。
+
 ## 基本原則
 
 - 正確・実用的・簡潔に対応する
@@ -10,25 +54,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 判断に迷ったら聞くか、選択肢を提示する
 - 事実・成果・完了状況を偽らない
 
-## 組織KGI
-
-- AIdiverの会員数を10万人にする
-
-## 組織パーパス
-
-- AI活用を推進するリーダーを日本に1000人作る
-
 ## 本組織のサブエージェント構成
 
-- `writer` — ライター（記事・コンテンツ執筆）
-- `designer` — デザイナー（ビジュアル・グラフィック制作）
-- `analyst` — データ分析担当（データ収集・分析・レポート）
-- `editor` — 編集・校閲（品質チェック・編集）
-- `video-director` — 動画撮影ディレクター（動画企画・制作ディレクション）
+- `writer` — ライター（AIdiver記事・コンテンツ執筆。経営業務に伴う社内文書の執筆支援も担当）
+- `designer` — デザイナー（ビジュアル・グラフィック制作。経営資料のビジュアル設計も担当）
+- `analyst` — データ分析担当（AIdiverのKPI分析に加え、部門PL・市場・決算など経営数値の分析も担当）
+- `editor` — 編集・校閲（コンテンツ品質チェックに加え、経営資料・対外文書の校閲も担当）
+- `video-director` — 動画撮影ディレクター（AIdiver動画の企画・制作ディレクション）
 
 ## Workspace Overview
 
-AIdiver Office is a structured workspace for managing AI agents, projects, tasks, and data. It is not a software project with a build system — it is an operational workspace where Claude agents collaborate, track work, and store knowledge.
+oshikubo_office is a structured workspace for managing AI agents, projects, tasks, and data. It is not a software project with a build system — it is an operational workspace where Claude agents collaborate, track work, and store knowledge.
 
 ## Directory Structure
 
