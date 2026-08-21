@@ -66,6 +66,24 @@ AIdiver固有のルール（表記ルール・記事フォーマット・リー�
 
 oshikubo_office is a structured workspace for managing AI agents, projects, tasks, and data. It is not a software project with a build system — it is an operational workspace where Claude agents collaborate, track work, and store knowledge.
 
+## 外部資料庫（oshikubo_storage）
+
+本オフィスは「仕事の管理層」、以下は「資料と素材の保管庫」として分離運用する（旧cowork_root。2026-08-21リネーム）。
+
+`C:\Users\020168\Documents\oshikubo_storage\`
+
+- `01_進行中/` — 案件の素材置き場（取材素材・クライアント提供物など）
+- `02_社内資料・データ/` — 経営・マネジメント資料の正本（総会資料・PL・契約・採用など）
+- `03_AIdiver関連/` — 取材依頼書・登壇資料・企画書など
+- `04_請求処理関連/` `05_業務改善/` `99_アーカイブ/`
+
+運用ルール:
+
+- 資料・素材を探すときは、まずこの資料庫を確認する
+- 保管庫の資料は正本として参照し、勝手に移動・削除しない
+- 案件着手時に必要なテキスト系素材のみ `workplace/projects/<案件名>/` にコピーして使う
+- 重いメディアファイル（音声・動画）は保管庫に置いたままパス参照する（gitに入れない）
+
 ## Directory Structure
 
 ```
