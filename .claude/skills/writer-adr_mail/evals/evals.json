@@ -1,0 +1,19 @@
+{
+  "skill_name": "writer-adr_mail",
+  "evals": [
+    {
+      "id": 0,
+      "eval_name": "event-lp-summit",
+      "prompt": "タイアップ案件の単独メール作成して\n・クライアント：データループ\n・飛ばし先URL：https://dataloop.jp/summit2026\n・タイトル：全半角35文字以内、本文100行以内\n・LP情報は添付の eval0_lp.md にまとめてある（URLはダミーでアクセス不可のため、この素材を正とする）",
+      "expected_output": "定型フォーマット（ルーラー行・タイトル35字以内・本文100行以内・おすすめボックス・開催概要）のTEXT原稿。参加費に[要確認]、マイク・チェンは中黒、10月14日は(水)、12000人は1万2,000人、（仮）セッションタイトルは改変なし",
+      "files": ["inputs/eval0_lp.md"]
+    },
+    {
+      "id": 1,
+      "eval_name": "webinar-title-ab",
+      "prompt": "クラウドシフトさまのタイアップ単独メールお願い。ウェビナー素材は添付のeval1_materials.mdに。タイトルはA案B案の2案ほしい。飛ばし先URL：https://cloudshift.jp/webinar/ai-helpdesk",
+      "expected_output": "タイトルA/B2案つきの定型TEXT原稿。ウェビナータイトルの（仮）を保持、リサ・モリタは中黒、4,500件のカンマ表記、3ヵ月表記、本文100行以内",
+      "files": ["inputs/eval1_materials.md"]
+    }
+  ]
+}

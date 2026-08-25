@@ -31,7 +31,23 @@
       "WebFetch(domain:s.kabutan.jp)",
       "WebFetch(domain:finance.minkabu.jp)",
       "mcp__scheduled-tasks__list_scheduled_tasks",
-      "WebFetch(domain:finance.matsui.co.jp)"
+      "WebFetch(domain:finance.matsui.co.jp)",
+      "mcp__990faa7a-1e85-4602-b13a-a3b31a661165__slack_read_thread",
+      "mcp__990faa7a-1e85-4602-b13a-a3b31a661165__slack_search_channels",
+      "mcp__990faa7a-1e85-4602-b13a-a3b31a661165__slack_read_channel",
+      "PowerShell(winget install --id Gyan.FFmpeg -e --accept-source-agreements --accept-package-agreements --disable-interactivity)",
+      "PowerShell(python --version 2>$null)",
+      "PowerShell(pip --version 2>$null)",
+      "PowerShell(python -c \"import faster_whisper; print\\('faster-whisper OK', faster_whisper.__version__\\)\" 2>$null)",
+      "PowerShell(python -c \"import whisper; print\\('openai-whisper OK'\\)\" 2>$null)",
+      "PowerShell(Get-CimInstance Win32_Processor | Select-Object Name, NumberOfCores, NumberOfLogicalProcessors; Get-CimInstance Win32_VideoController | Select-Object Name; [Math]::Round\\(\\(Get-CimInstance Win32_ComputerSystem\\).TotalPhysicalMemory / 1GB, 1\\))",
+      "PowerShell(pip install faster-whisper --quiet --disable-pip-version-check)",
+      "PowerShell(python -c \"import faster_whisper; print\\('faster-whisper', faster_whisper.__version__\\)\")",
+      "PowerShell(python \"C:\\\\Users\\\\020168\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-020168-Documents-Claude-AIdiver-office\\\\f2b5ce5c-cdf2-4451-be6e-223523418744\\\\scratchpad\\\\transcribe_s1_fukuda.py\")",
+      "PowerShell(python -c \"import ssl, certifi, io; pem = io.open\\(certifi.where\\(\\), encoding='utf-8'\\).read\\(\\); certs = [ssl.DER_cert_to_PEM_cert\\(c\\) for store in \\('ROOT','CA'\\) for c, enc, _ in ssl.enum_certificates\\(store\\) if enc == 'x509_asn']; out = r'C:\\\\Users\\\\020168\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-020168-Documents-Claude-AIdiver-office\\\\f2b5ce5c-cdf2-4451-be6e-223523418744\\\\scratchpad\\\\ca_bundle.pem'; io.open\\(out, 'w', encoding='utf-8'\\).write\\(pem + '\\\\n' + '\\\\n'.join\\(certs\\)\\); print\\(len\\(certs\\), 'windows certs added'\\)\")",
+      "PowerShell($env:SSL_CERT_FILE = \"C:\\\\Users\\\\020168\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-020168-Documents-Claude-AIdiver-office\\\\f2b5ce5c-cdf2-4451-be6e-223523418744\\\\scratchpad\\\\ca_bundle.pem\"; $env:REQUESTS_CA_BUNDLE = $env:SSL_CERT_FILE; $env:CURL_CA_BUNDLE = $env:SSL_CERT_FILE; python \"C:\\\\Users\\\\020168\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-020168-Documents-Claude-AIdiver-office\\\\f2b5ce5c-cdf2-4451-be6e-223523418744\\\\scratchpad\\\\transcribe_s1_fukuda.py\")",
+      "WebFetch(domain:docs.google.com)",
+      "mcp__mcp-registry__list_connectors"
     ]
   }
 }

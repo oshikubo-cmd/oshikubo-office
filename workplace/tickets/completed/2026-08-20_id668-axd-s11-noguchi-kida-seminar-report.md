@@ -1,0 +1,63 @@
+# id668 AXD Session11 野口竜司氏×木田浩理氏 セミナーレポート制作
+
+- ID: id668
+- 優先度: 高
+- ステータス: completed
+- 完了日: 2026-08-20
+- 担当者: writer
+- 作成日: 2026-08-20
+- 概要: AXD Session11（野口竜司氏［AIX partner代表／AIdiver特命副編集長］×木田浩理氏［積水ハウス イノベーション＆コミュニケーション］、モデレーター押久保剛）のセミナーレポート記事を制作する。掲載媒体はAIdiver、読者はAX・DX推進担当者。
+
+## 要件
+
+- seminar-report-writerスキルのフロー（WHO→WHAT→HOW）に従う
+- 成果物はid669 Muture記事と同形式のHTML入稿ファイル（3ページ構成、CMS入力欄コメント付き）
+- スライド図版の位置指定（◎/○優先度付き）、写真選定（OGP＝全員写り、本文＝一人写り）
+- 翔泳社表記ルール、AIdiverリード文はである調
+
+## 素材
+
+- 音声起こし: `S11_のぐりゅう.txt`（523行）
+- スライド: `Session11_野口 竜司...0728_1612.pptx`
+- 写真: 写真/ 260804_0032.jpg 〜 0044.jpg（13枚）
+- 素材ディレクトリ: `C:\Users\020168\Documents\cowork_root\01_進行中\AXD\セミナーレポ\S-11野口・木田\`
+
+## タスクリスト
+
+- [x] 音声起こし精読・マーク（話者同定: 参加者1=押久保／2=野口氏／3=木田氏）
+- [x] スライド内容抽出・使用スライド選定（◎6枚＋○2枚）
+- [x] 写真確認・OGP/本文写真選定（13カットから0040/0041/0044）
+- [x] 構成案（タイトル・リード・小見出し・箇条書き）
+- [x] 執筆（HTML入稿形式・3P・H2×6・本文5,444字）
+- [x] 図版書き出し・ファイル命名（zu01〜zu08、OGP/arena/01/02）
+
+## 実施内容
+
+- seminar-report-writerスキルのWHO→WHAT→HOWフローで制作
+- スライドPNGはLibreOffice不在のためPowerPoint COM（Slide.Export）で幅1300書き出し
+- 写真加工: OGP 1200×630／arena 400×300（260804_0040センタークロップ）、本文写真は幅1300リサイズ
+- 本文初稿6,027字→S-7時の押久保さん指示（4,500〜5,000字）に寄せて5,444字まで圧縮
+
+## 成果物
+
+- 入稿HTML: `data/documents/id668_noguchi-kida-ai-leader-seminar-report-assembled.html`
+- 構成案: `workplace/projects/axd-s11-noguchi-kida-seminar-report/構成案.md`
+- 画像12点: `workplace/projects/axd-s11-noguchi-kida-seminar-report/images/`（id668_OGP/arena/01/02、zu01〜zu08）
+
+## 発生した問題と対処
+
+- markitdownのstdoutリダイレクトで文字化け → PYTHONIOENCODING=utf-8で解決
+- LibreOffice/pdftoppm未インストール → PowerPoint COMオートメーションでPNG書き出し
+
+## 学び
+
+- [INSIGHT] Windows環境のスライドPNG書き出しはPowerPoint COMの `Slide.Export(path,"PNG",w,h)` が最速。LibreOffice不要で当日版フォントも正確
+- [INSIGHT] 登壇者2人の対談型セミナーは、スライドの章立て（提案→実践→今後）をそのまま3ページに割り当てると構成が安定する
+- [INSIGHT] 人物同定はpptx内の自己紹介スライドのメディア画像（ppt/media/）を抽出して当日写真と突き合わせると確実
+
+## 2026-08-21 押久保さんフィードバック改訂（v2）
+
+- リード文: CMSコメント内に記載済みだったが、レンダリング表示では見えず「ない」と認識された → 返信で本文提示。以後、納品時にリード文をチャットにも明記する
+- 拡大画像: id669と同対応。zu05（モック実例）にb付き拡大画像（id668_zu05b.png・横1500）を追加しlightbox形式に。他はテキスト主体のため対象外
+- 表現修正: 業者→外部／「正直どうでもいい」→「正直重視していません」（見出しも「資料の見た目より、前に進むかどうか」に変更）／週末Claude Code発言をビジネス層向けにやわらげ／野口氏×木田氏の身内感（レクチャー・ナンバーワン・舌を巻く）を弱める／「鎌倉市の」トル／「使ってくれ」→「意見をくれ」
+- 追加: 「AIものづくり」の概念をP1に追記（H2-1、野口氏のAIリーダー定義の直後）

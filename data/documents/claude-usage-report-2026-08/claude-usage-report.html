@@ -1,0 +1,554 @@
+<title>Claude利用実績</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#F1F4F3; --surface:#FFFFFF; --surface-2:#E9EEED;
+  --ink:#161C1D; --ink-2:#3D4A4B; --muted:#657677;
+  --line:#D3DBDA; --line-2:#BFCAC9;
+  --accent:#0F5257; --accent-soft:#DCE9E9; --accent-ink:#0F5257;
+  --warn:#9E6412; --warn-soft:#F4E7CF;
+  --crit:#93362D; --crit-soft:#F3DCD8;
+  --good:#356A4C; --good-soft:#DCEAE1;
+  --shadow:0 1px 2px rgba(22,28,29,.06), 0 8px 24px -16px rgba(22,28,29,.28);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1213; --surface:#171E1E; --surface-2:#1F2827;
+    --ink:#E7EDEC; --ink-2:#BCC8C7; --muted:#8B9C9B;
+    --line:#293332; --line-2:#3A4645;
+    --accent:#68B9BD; --accent-soft:#16302F; --accent-ink:#8FD0D3;
+    --warn:#DCA24E; --warn-soft:#33270F;
+    --crit:#E28378; --crit-soft:#361D19;
+    --good:#77C094; --good-soft:#152A1F;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1213; --surface:#171E1E; --surface-2:#1F2827;
+  --ink:#E7EDEC; --ink-2:#BCC8C7; --muted:#8B9C9B;
+  --line:#293332; --line-2:#3A4645;
+  --accent:#68B9BD; --accent-soft:#16302F; --accent-ink:#8FD0D3;
+  --warn:#DCA24E; --warn-soft:#33270F;
+  --crit:#E28378; --crit-soft:#361D19;
+  --good:#77C094; --good-soft:#152A1F;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"IBM Plex Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  font-size:15px; line-height:1.75; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1000px; margin:0 auto; padding:clamp(28px,5vw,64px) clamp(18px,4vw,40px) 96px;
+  display:flex; flex-direction:column; gap:clamp(40px,5vw,64px)}
+
+h1,h2,h3{margin:0; text-wrap:balance; line-height:1.35}
+h1{font-size:clamp(28px,4.4vw,42px); font-weight:700; letter-spacing:-.02em}
+h2{font-size:clamp(19px,2.4vw,23px); font-weight:600; letter-spacing:-.01em}
+h3{font-size:15px; font-weight:600}
+p{margin:0}
+.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace; font-variant-numeric:tabular-nums}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11px; font-weight:500;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+.note{font-size:13px; color:var(--muted); line-height:1.7}
+
+.masthead{display:flex; flex-direction:column; gap:20px; padding-bottom:28px;
+  border-bottom:2px solid var(--ink)}
+.meta{display:flex; flex-wrap:wrap; gap:6px 28px; font-family:"IBM Plex Mono",monospace;
+  font-size:12px; color:var(--muted); font-variant-numeric:tabular-nums}
+.meta b{color:var(--ink-2); font-weight:500}
+.period{display:inline-flex; align-items:baseline; gap:10px;
+  font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:500;
+  color:var(--accent-ink); letter-spacing:.02em}
+.period::before{content:""; width:26px; height:2px; background:var(--accent); align-self:center}
+.phase{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;
+  padding:12px 16px; background:var(--accent-soft); border-radius:2px}
+.phase .note{color:var(--ink-2)}
+.phase strong{font-weight:600; color:var(--ink)}
+
+.verdict{display:flex; flex-direction:column; gap:0; background:var(--surface);
+  border:1px solid var(--line); border-radius:2px; box-shadow:var(--shadow); overflow:hidden}
+.verdict-head{padding:14px 22px; border-bottom:1px solid var(--line);
+  background:var(--surface-2); display:flex; justify-content:space-between; align-items:center; gap:16px}
+.vrow{display:grid; grid-template-columns:44px 1fr; gap:0 18px; padding:20px 22px;
+  border-bottom:1px solid var(--line)}
+.vrow:last-child{border-bottom:0}
+.vnum{font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600; color:var(--accent-ink);
+  padding-top:3px; letter-spacing:.06em}
+.vrow strong{font-weight:600}
+.vrow .lede{font-size:15.5px}
+.vrow[data-flag="warn"] .vnum{color:var(--warn)}
+
+.kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+  background:var(--line); border:1px solid var(--line)}
+@media (max-width:880px){.kpis{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:440px){.kpis{grid-template-columns:1fr}}
+.kpi{background:var(--surface); padding:20px 20px 18px; display:flex; flex-direction:column; gap:4px}
+.kpi .k-label{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--muted)}
+.kpi .k-val{font-family:"IBM Plex Mono",monospace; font-size:27px; font-weight:600;
+  letter-spacing:-.02em; font-variant-numeric:tabular-nums; line-height:1.2}
+.kpi .k-unit{font-size:15px}
+.kpi .k-sub{font-size:12px; color:var(--muted); line-height:1.6}
+.kpi.is-hero .k-val{color:var(--accent-ink)}
+.jpy{display:block; font-size:11px; color:var(--muted); font-weight:400; letter-spacing:0}
+
+section{display:flex; flex-direction:column; gap:20px}
+.sec-head{display:flex; flex-direction:column; gap:6px; padding-bottom:12px;
+  border-bottom:1px solid var(--line-2)}
+.sec-head .idx{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.14em;
+  color:var(--muted)}
+
+.bars{display:flex; flex-direction:column; gap:2px}
+.bar{display:grid; grid-template-columns:minmax(96px,142px) 1fr minmax(112px,150px);
+  align-items:center; gap:14px; padding:7px 0}
+.bar .lbl{font-size:13.5px; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.track{position:relative; display:block; height:16px; background:var(--surface-2);
+  border-radius:1px; overflow:hidden}
+.fill{position:absolute; top:0; bottom:0; left:0; display:block; background:var(--accent); border-radius:1px}
+.fill.f-warn{background:var(--warn)}
+.fill.f-crit{background:var(--crit)}
+.fill.f-ghost{background:var(--line-2)}
+.bar .val{font-family:"IBM Plex Mono",monospace; font-size:12.5px; color:var(--ink-2);
+  text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+.bar .val em{font-style:normal; color:var(--muted)}
+
+.dual{display:grid; grid-template-columns:minmax(72px,104px) 1fr; gap:12px 16px; align-items:center;
+  padding:11px 0; border-bottom:1px solid var(--line)}
+.dual:last-child{border-bottom:0}
+.dual .lbl{font-size:14px; font-weight:600}
+.dual .pair{display:flex; flex-direction:column; gap:5px}
+.dline{display:grid; grid-template-columns:64px 1fr 62px; gap:10px; align-items:center}
+.dline .tag{font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted)}
+.dline .track{height:11px}
+.dline .n{font-family:"IBM Plex Mono",monospace; font-size:12px; text-align:right;
+  font-variant-numeric:tabular-nums; color:var(--ink-2)}
+
+.spine{background:var(--surface); border:1px solid var(--line); border-radius:2px;
+  box-shadow:var(--shadow); padding:22px clamp(14px,3vw,26px)}
+.spine-top{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap}
+.spine-rows{display:flex; flex-direction:column; gap:1px; margin-top:14px}
+.srow{display:grid; grid-template-columns:26px minmax(88px,132px) 1fr minmax(96px,124px);
+  align-items:center; gap:10px; padding:4px 0}
+.srow .rk{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--muted); text-align:right}
+.srow .nm{font-family:"IBM Plex Mono",monospace; font-size:12.5px; overflow:hidden;
+  text-overflow:ellipsis; white-space:nowrap}
+.srow .track{height:13px}
+.srow .n{font-family:"IBM Plex Mono",monospace; font-size:11.5px; text-align:right;
+  font-variant-numeric:tabular-nums; color:var(--muted)}
+.srow.is-top .nm{font-weight:600; color:var(--accent-ink)}
+.srow.is-low .nm{color:var(--warn)}
+.cutline{display:flex; align-items:center; gap:12px; margin:10px 0 9px}
+.cutline::before,.cutline::after{content:""; height:1px; background:var(--crit); flex:1; opacity:.5}
+.cutline span{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.08em;
+  color:var(--crit); white-space:nowrap}
+
+.scroll{overflow-x:auto; border:1px solid var(--line); border-radius:2px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; min-width:640px; font-size:13.5px}
+th,td{text-align:left; padding:10px 14px; border-bottom:1px solid var(--line)}
+thead th{font-family:"IBM Plex Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted); font-weight:500; background:var(--surface-2);
+  white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right; font-family:"IBM Plex Mono",monospace;
+  font-variant-numeric:tabular-nums; white-space:nowrap}
+
+.chip{display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:10.5px;
+  letter-spacing:.06em; padding:2px 7px; border-radius:2px; white-space:nowrap;
+  background:var(--surface-2); color:var(--ink-2)}
+.chip.c-crit{background:var(--crit-soft); color:var(--crit)}
+.chip.c-warn{background:var(--warn-soft); color:var(--warn)}
+.chip.c-good{background:var(--good-soft); color:var(--good)}
+.chip.c-acc{background:var(--accent-soft); color:var(--accent-ink)}
+
+.callout{display:flex; flex-direction:column; gap:8px; padding:18px 20px; border-radius:2px;
+  background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--accent)}
+.callout.is-warn{border-left-color:var(--warn)}
+.callout.is-crit{border-left-color:var(--crit)}
+.callout .ct{font-size:13px; font-weight:600; display:flex; align-items:center; gap:9px; flex-wrap:wrap}
+.callout p{font-size:14px; color:var(--ink-2)}
+
+.cmp{display:flex; flex-direction:column; gap:14px; background:var(--surface);
+  border:1px solid var(--line); border-radius:2px; padding:22px}
+.cmp-row{display:grid; grid-template-columns:minmax(120px,210px) 1fr auto; gap:16px; align-items:center}
+.cmp-row .track{height:24px}
+.cmp-row .lbl{font-size:13px; color:var(--ink-2)}
+.cmp-row .n{font-family:"IBM Plex Mono",monospace; font-size:16px; font-weight:600;
+  font-variant-numeric:tabular-nums}
+
+.acts{display:flex; flex-direction:column; gap:1px; background:var(--line);
+  border:1px solid var(--line)}
+.act{background:var(--surface); display:grid; grid-template-columns:auto 1fr; gap:0 16px;
+  padding:17px 20px}
+.act .pri{padding-top:2px}
+.act h3{margin-bottom:4px}
+.act p{font-size:13.5px; color:var(--ink-2)}
+
+.limits{display:flex; flex-direction:column; gap:12px}
+.limit{display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:start}
+.limit .dot{width:5px; height:5px; border-radius:50%; background:var(--muted); margin-top:9px}
+.limit p{font-size:13.5px; color:var(--ink-2)}
+
+footer{border-top:1px solid var(--line-2); padding-top:20px; display:flex; flex-direction:column; gap:6px}
+
+@media (max-width:640px){
+  .bar{grid-template-columns:1fr auto; grid-template-areas:"l v" "t t"; gap:6px 12px}
+  .bar .lbl{grid-area:l} .bar .val{grid-area:v} .bar .track{grid-area:t}
+  .srow{grid-template-columns:22px 1fr; grid-template-areas:"r n" "t t" "v v"; gap:3px 8px}
+  .srow .rk{grid-area:r} .srow .nm{grid-area:n} .srow .track{grid-area:t}
+  .srow .n{grid-area:v; text-align:left}
+  .cmp-row{grid-template-columns:1fr auto; grid-template-areas:"l n" "t t"; gap:6px 12px}
+  .cmp-row .lbl{grid-area:l} .cmp-row .n{grid-area:n} .cmp-row .track{grid-area:t}
+  .dual{grid-template-columns:1fr}
+}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <span class="period mono">2026-05-21 → 2026-08-19 ／ 91日間</span>
+  <h1>Claude利用実績レポート</h1>
+  <div class="phase">
+    <span class="chip c-acc">試験運用フェーズ</span>
+    <span class="note">本資料は<strong>普及状況の把握</strong>を目的とした現状報告です。個人の評価・査定には使用できません（§07参照）。</span>
+  </div>
+  <div class="meta mono">
+    <span>出典: <b>Anthropic管理コンソール spend report CSV</b></span>
+    <span>取得日: <b>2026-08-20</b></span>
+    <span>集計: <b>224行 / 22ユーザー / 5プロダクト / 8モデル</b></span>
+    <span>担当: <b>analyst</b></span>
+    <span>円換算: <b>1USD=160円</b></span>
+  </div>
+</header>
+
+<section>
+  <div class="verdict">
+    <div class="verdict-head">
+      <span class="eyebrow">結論</span>
+      <span class="chip c-acc">3分で読む要点</span>
+    </div>
+    <div class="vrow">
+      <span class="vnum">01</span>
+      <p class="lede">同期間の <strong>実支出は$2,773.75（約44万円）</strong>。同じ利用量を従量課金で使った場合の換算額 <strong>約$16,091（約257万円）</strong> に対して <strong>5.8倍の費用対効果</strong>（実効割引82.8%）。<strong>1シート月$48（約7,700円）の負担で、従量換算$244（約39,000円）相当を使っている</strong>。</p>
+    </div>
+    <div class="vrow">
+      <span class="vnum">02</span>
+      <p class="lede">利用は <strong>エージェント型へ完全移行済み</strong>。Cowork 42.0% ＋ Claude Code 38.0% で全リクエストの <strong>80%</strong>。対話型のChatは13.6%にとどまる。</p>
+    </div>
+    <div class="vrow">
+      <span class="vnum">03</span>
+      <p class="lede">利用量には <strong>大きな幅がある</strong>。上位3名で46.0%、上位10名で88.3%、下位6名は合計 <strong>0.79%</strong>。ただしシートは5月11名→7月20名と段階的に付与しており、<strong>下位層は参加して間もない可能性が高い</strong>。現時点では格差ではなく<strong>参加時期の差として読むべき</strong>（§07参照）。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="idx mono">01 / 全体サマリ</span>
+    <h2>91日間で何が消費され、いくら払ったか</h2>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><span class="k-label">リクエスト</span><span class="k-val">129,879</span><span class="k-sub">1日平均 1,427件</span></div>
+    <div class="kpi"><span class="k-label">入力トークン</span><span class="k-val">161.6<span class="k-unit">億</span></span><span class="k-sub">平均 124,439 / req</span></div>
+    <div class="kpi"><span class="k-label">出力トークン</span><span class="k-val">1.04<span class="k-unit">億</span></span><span class="k-sub">平均 801 / req</span></div>
+    <div class="kpi"><span class="k-label">実支出（同期間）</span><span class="k-val">$2,774</span><span class="k-sub">¥443,800 ／ シート課金＋クレジット</span></div>
+    <div class="kpi"><span class="k-label">従量換算 推定額</span><span class="k-val">$16,091</span><span class="k-sub">¥2,574,610 ／ 1人月 ¥39,040相当</span></div>
+    <div class="kpi is-hero"><span class="k-label">費用対効果</span><span class="k-val">5.8<span class="k-unit">倍</span></span><span class="k-sub">実効割引 82.8%</span></div>
+    <div class="kpi"><span class="k-label">キャッシュ読込率</span><span class="k-val">94.1%</span><span class="k-sub">入力161.6億のうち152.1億</span></div>
+    <div class="kpi"><span class="k-label">利用ユーザー</span><span class="k-val">22<span class="k-unit">名</span></span><span class="k-sub">中央値 3,567 / 平均 5,904 req</span></div>
+  </div>
+
+  <div class="cmp">
+    <span class="eyebrow">費用対効果（2026-05-21〜2026-08-19）</span>
+    <div class="cmp-row">
+      <span class="lbl">同じ利用量を従量課金で使った場合（換算）</span>
+      <span class="track"><span class="fill f-ghost" style="width:100%"></span></span>
+      <span class="n">$16,091<span class="jpy">¥2,574,610</span></span>
+    </div>
+    <div class="cmp-row">
+      <span class="lbl">実支出（シート課金＋クレジット）</span>
+      <span class="track"><span class="fill" style="width:17.2%"></span></span>
+      <span class="n">$2,774<span class="jpy">¥443,800</span></span>
+    </div>
+    <p class="note"><strong>5.8倍の費用対効果（実効割引82.8%）</strong>。1シートあたり月$48（約7,700円）の負担で、従量換算$244（約39,000円）相当を使っている計算になる。試験運用の成果として、これが最も明確な数字。</p>
+    <p class="note">※円換算はすべて <strong>1USD=160円</strong> の想定レート。為替が動けば円建て金額も変動する。</p>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>請求日</th><th class="num">メンバー</th><th class="num">シート課金</th><th class="num">クレジット等</th><th class="num">月額計</th></tr></thead>
+      <tbody>
+        <tr><td>2026-05-05</td><td class="num">11名</td><td class="num">$302.50<span class="jpy">¥48,400</span></td><td class="num">$123.17<span class="jpy">¥19,707</span></td><td class="num">$425.67<span class="jpy">¥68,107</span></td></tr>
+        <tr><td>2026-06-05</td><td class="num">12名</td><td class="num">$605.00<span class="jpy">¥96,800</span></td><td class="num">$133.73<span class="jpy">¥21,397</span></td><td class="num">$738.73<span class="jpy">¥118,197</span></td></tr>
+        <tr><td>2026-07-05</td><td class="num">20名</td><td class="num">$825.00<span class="jpy">¥132,000</span></td><td class="num">$124.35<span class="jpy">¥19,896</span></td><td class="num">$949.35<span class="jpy">¥151,896</span></td></tr>
+        <tr><td>2026-08-05</td><td class="num">20名</td><td class="num">$962.50<span class="jpy">¥154,000</span></td><td class="num">$0.00<span class="jpy">¥0</span></td><td class="num">$962.50<span class="jpy">¥154,000</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">出典: Anthropic管理コンソール 請求書一覧（2026-08-20時点）。「クレジット等」はメンバー数の記載がない少額請求を月内で合算したもの。2026-08は8/20時点で発生なし。シート課金額はいずれも $27.50 の整数倍（11／22／30／35倍）で、期中追加の日割り分を含むと見られる。</p>
+
+  <div class="callout">
+    <span class="ct"><span class="chip c-acc">付与の方針</span>マネージャー全員 ＋ 目的提出による承認制</span>
+    <p>シートは<strong>マネージャー全員に付与</strong>し、それ以外は<strong>「Claudeを使って何の成果を出したいか」を事前提出する承認制</strong>で配布している（2026年5月開始）。5月11名 → 6月12名 → 7月以降20名という推移はこの運用によるもので、<strong>意図的に段階を踏んでいる</strong>。当面はこの運用を継続して様子を見る方針。</p>
+  </div>
+
+  <div class="callout is-warn">
+    <span class="ct"><span class="chip c-warn">従量換算額の前提</span>比較のための試算値</span>
+    <p>CSVの <span class="mono">net_spend</span> / <span class="mono">gross_spend</span> は<strong>全224行が0</strong>（シート課金のため利用量が金額に現れない）。そこで Anthropic公開API価格（2026-08時点／1Mトークンあたり Fable 5 $10・$50、Opus系 $5・$25、Sonnet系 $3・$15、Haiku 4.5 $1・$5、キャッシュ読込×0.1／書込5分×1.25・1時間×2.0）で換算した。Sonnet 5の導入価格（2026-08-31まで $2/$10）は未反映のため<strong>上振れ側の保守的な数値</strong>＝費用対効果5.8倍は<strong>控えめな見積り</strong>。</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="idx mono">02 / プロダクト別</span>
+    <h2>対話ではなく、エージェントが8割を回している</h2>
+  </div>
+
+  <div class="bars">
+    <div class="bar"><span class="lbl">Cowork</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="val">54,560 <em>／42.0%</em></span></div>
+    <div class="bar"><span class="lbl">Claude Code</span><span class="track"><span class="fill" style="width:90.5%"></span></span><span class="val">49,385 <em>／38.0%</em></span></div>
+    <div class="bar"><span class="lbl">Chat</span><span class="track"><span class="fill" style="width:32.3%"></span></span><span class="val">17,639 <em>／13.6%</em></span></div>
+    <div class="bar"><span class="lbl">Claude in Chrome</span><span class="track"><span class="fill f-ghost" style="width:14.7%"></span></span><span class="val">8,019 <em>／6.2%</em></span></div>
+    <div class="bar"><span class="lbl">Claude Design</span><span class="track"><span class="fill f-warn" style="width:0.6%"></span></span><span class="val">276 <em>／0.2%</em></span></div>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>プロダクト</th><th class="num">リクエスト</th><th class="num">構成比</th><th class="num">利用者</th><th class="num">推定額</th><th class="num">平均入力/req</th></tr></thead>
+      <tbody>
+        <tr><td>Cowork</td><td class="num">54,560</td><td class="num">42.0%</td><td class="num">14名</td><td class="num">$6,643<span class="jpy">¥1,062,952</span></td><td class="num">105,807</td></tr>
+        <tr><td>Claude Code</td><td class="num">49,385</td><td class="num">38.0%</td><td class="num">14名</td><td class="num">$6,137<span class="jpy">¥981,907</span></td><td class="num">143,943</td></tr>
+        <tr><td>Chat</td><td class="num">17,639</td><td class="num">13.6%</td><td class="num">19名</td><td class="num">$3,054<span class="jpy">¥488,690</span></td><td class="num">154,697</td></tr>
+        <tr><td>Claude in Chrome</td><td class="num">8,019</td><td class="num">6.2%</td><td class="num">8名</td><td class="num">$222<span class="jpy">¥35,475</span></td><td class="num">66,159</td></tr>
+        <tr><td>Claude Design</td><td class="num">276</td><td class="num">0.2%</td><td class="num">4名</td><td class="num">$35<span class="jpy">¥5,584</span></td><td class="num">77,179</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="note"><strong>読み取り</strong>／「人が1問1答する」使い方から「エージェントに作業させる」使い方へ完全に移行している。平均入力12.4万トークン／リクエストは、エージェントが長い文脈を繰り返し読み込む使い方を示す。<strong>Claude Design は276リクエスト・4名でほぼ未活用</strong>。</p>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="idx mono">03 / モデル別</span>
+    <h2>Opusがリクエストの32%でコストの55%を作る</h2>
+  </div>
+
+  <div>
+    <div class="dual">
+      <span class="lbl">Sonnet</span>
+      <div class="pair">
+        <div class="dline"><span class="tag">リクエスト</span><span class="track"><span class="fill" style="width:43.3%"></span></span><span class="n">43.3%</span></div>
+        <div class="dline"><span class="tag">推定コスト</span><span class="track"><span class="fill f-ghost" style="width:29.5%"></span></span><span class="n">29.5%</span></div>
+      </div>
+    </div>
+    <div class="dual">
+      <span class="lbl">Opus</span>
+      <div class="pair">
+        <div class="dline"><span class="tag">リクエスト</span><span class="track"><span class="fill" style="width:32.0%"></span></span><span class="n">32.0%</span></div>
+        <div class="dline"><span class="tag">推定コスト</span><span class="track"><span class="fill f-warn" style="width:55.0%"></span></span><span class="n">55.0%</span></div>
+      </div>
+    </div>
+    <div class="dual">
+      <span class="lbl">Haiku</span>
+      <div class="pair">
+        <div class="dline"><span class="tag">リクエスト</span><span class="track"><span class="fill" style="width:20.2%"></span></span><span class="n">20.2%</span></div>
+        <div class="dline"><span class="tag">推定コスト</span><span class="track"><span class="fill f-ghost" style="width:1.1%"></span></span><span class="n">1.1%</span></div>
+      </div>
+    </div>
+    <div class="dual">
+      <span class="lbl">Fable</span>
+      <div class="pair">
+        <div class="dline"><span class="tag">リクエスト</span><span class="track"><span class="fill" style="width:4.6%"></span></span><span class="n">4.6%</span></div>
+        <div class="dline"><span class="tag">推定コスト</span><span class="track"><span class="fill f-warn" style="width:14.5%"></span></span><span class="n">14.5%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>モデル</th><th class="num">リクエスト</th><th class="num">入力トークン</th><th class="num">推定額</th><th class="num">平均入力/req</th></tr></thead>
+      <tbody>
+        <tr><td>Sonnet 5</td><td class="num">28,661</td><td class="num">49.5億</td><td class="num">$3,053<span class="jpy">¥488,448</span></td><td class="num">172,790</td></tr>
+        <tr><td>Sonnet 4.6</td><td class="num">27,531</td><td class="num">25.9億</td><td class="num">$1,687<span class="jpy">¥269,878</span></td><td class="num">94,037</td></tr>
+        <tr><td>Haiku 4.5</td><td class="num">26,217</td><td class="num">1.6億</td><td class="num">$172<span class="jpy">¥27,456</span></td><td class="num">6,145</td></tr>
+        <tr><td>Opus 4.8</td><td class="num">22,892</td><td class="num">33.6億</td><td class="num">$4,559<span class="jpy">¥729,360</span></td><td class="num">146,592</td></tr>
+        <tr><td>Opus 5</td><td class="num">13,523</td><td class="num">27.4億</td><td class="num">$2,869<span class="jpy">¥459,053</span></td><td class="num">202,552</td></tr>
+        <tr><td>Fable 5</td><td class="num">5,967</td><td class="num">8.6億</td><td class="num">$2,334<span class="jpy">¥373,446</span></td><td class="num">144,488</td></tr>
+        <tr><td>Opus 4.7</td><td class="num">4,947</td><td class="num">14.9億</td><td class="num">$1,404<span class="jpy">¥224,709</span></td><td class="num">301,837</td></tr>
+        <tr><td>Opus 4.6</td><td class="num">141</td><td class="num">0.09億</td><td class="num">$14<span class="jpy">¥2,261</span></td><td class="num">66,198</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <span class="ct"><span class="chip c-good">良い使われ方</span>Haiku 4.5 はサブエージェント／検索役として機能している</span>
+    <p>Haiku 4.5 は全Web検索9,791回のうち<strong>9,283回（94.8%）</strong>を担い、キャッシュ率も9.0%と他モデル（93〜96%）と大きく異なる。対話用ではなく、上位モデル配下の検索実行役として動いていると解釈できる。<strong>全リクエストの20%を吸収しながらコスト構成比は1.1%</strong>で、コスト効率上は理想的。この構成は維持を推奨する。</p>
+  </div>
+
+  <p class="note"><strong>世代移行の進捗</strong>／第5世代（Opus 5・Sonnet 5・Fable 5）はリクエスト <span class="mono">37.1%</span>・推定額 <span class="mono">51.3%</span>。旧世代（4.6〜4.8系）がまだ約6割を占め、移行は進行中。</p>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="idx mono">04 / キャッシュ効率</span>
+    <h2>プロンプトキャッシュが推定コストを77.5%削っている</h2>
+  </div>
+
+  <div class="cmp">
+    <div class="cmp-row">
+      <span class="lbl">仮にキャッシュが全く効かなかった場合</span>
+      <span class="track"><span class="fill f-ghost" style="width:100%"></span></span>
+      <span class="n">$71,666<span class="jpy">¥11,466,525</span></span>
+    </div>
+    <div class="cmp-row">
+      <span class="lbl">実際（キャッシュ適用後）</span>
+      <span class="track"><span class="fill" style="width:22.5%"></span></span>
+      <span class="n">$16,091<span class="jpy">¥2,574,610</span></span>
+    </div>
+    <p class="note">差分 <strong>$55,574（約889万円）の削減（77.5%）</strong>。キャッシュ読み込み率94.1%は非常に良好で、<strong>この点に改善余地はほぼない</strong>。今後コストを下げる余地はキャッシュではなく「モデル選択」と「利用者ごとの使い方」にある。</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="idx mono">05 / ユーザー別</span>
+    <h2>深く使う層と、まだ触れていない層に分かれている</h2>
+  </div>
+
+  <div class="spine">
+    <div class="spine-top">
+      <span class="eyebrow">ユーザー別リクエスト数（22名・降順）</span>
+      <span class="note">バー長は最大値 24,325件に対する比率</span>
+    </div>
+    <div class="spine-rows">
+      <div class="srow is-top"><span class="rk">1</span><span class="nm">saiki</span><span class="track"><span class="fill" style="width:100%"></span></span><span class="n">24,325 / 18.7%</span></div>
+      <div class="srow is-top"><span class="rk">2</span><span class="nm">h-inoue</span><span class="track"><span class="fill" style="width:73.9%"></span></span><span class="n">17,981 / 13.8%</span></div>
+      <div class="srow is-top"><span class="rk">3</span><span class="nm">oshikubo</span><span class="track"><span class="fill" style="width:71.9%"></span></span><span class="n">17,488 / 13.5%</span></div>
+      <div class="srow"><span class="rk">4</span><span class="nm">d-suzuki</span><span class="track"><span class="fill" style="width:55.6%"></span></span><span class="n">13,513 / 10.4%</span></div>
+      <div class="srow"><span class="rk">5</span><span class="nm">h-yamamoto</span><span class="track"><span class="fill" style="width:36.7%"></span></span><span class="n">8,928 / 6.9%</span></div>
+      <div class="srow"><span class="rk">6</span><span class="nm">yu-kondoh</span><span class="track"><span class="fill" style="width:34.5%"></span></span><span class="n">8,393 / 6.5%</span></div>
+      <div class="srow"><span class="rk">7</span><span class="nm">yusuke.nakano</span><span class="track"><span class="fill" style="width:28.4%"></span></span><span class="n">6,915 / 5.3%</span></div>
+      <div class="srow"><span class="rk">8</span><span class="nm">yasunari</span><span class="track"><span class="fill" style="width:26.8%"></span></span><span class="n">6,526 / 5.0%</span></div>
+      <div class="srow"><span class="rk">9</span><span class="nm">ryo.tanizawa</span><span class="track"><span class="fill" style="width:23.5%"></span></span><span class="n">5,712 / 4.4%</span></div>
+      <div class="srow"><span class="rk">10</span><span class="nm">takuya.nakajima</span><span class="track"><span class="fill" style="width:20.0%"></span></span><span class="n">4,871 / 3.8%</span></div>
+      <div class="srow"><span class="rk">11</span><span class="nm">r-yamamoto</span><span class="track"><span class="fill" style="width:19.0%"></span></span><span class="n">4,623 / 3.6%</span></div>
+      <div class="srow"><span class="rk">12</span><span class="nm">m-matsuzaki</span><span class="track"><span class="fill f-warn" style="width:10.3%"></span></span><span class="n">2,512 / 1.9%</span></div>
+      <div class="srow"><span class="rk">13</span><span class="nm">yuki.fujii</span><span class="track"><span class="fill" style="width:9.1%"></span></span><span class="n">2,207 / 1.7%</span></div>
+      <div class="srow"><span class="rk">14</span><span class="nm">ryuji.hatakeyama</span><span class="track"><span class="fill" style="width:7.8%"></span></span><span class="n">1,897 / 1.5%</span></div>
+      <div class="srow"><span class="rk">15</span><span class="nm">h-miyata</span><span class="track"><span class="fill" style="width:7.3%"></span></span><span class="n">1,781 / 1.4%</span></div>
+      <div class="srow"><span class="rk">16</span><span class="nm">s-moriyama</span><span class="track"><span class="fill" style="width:4.8%"></span></span><span class="n">1,177 / 0.9%</span></div>
+      <div class="cutline"><span>ここから下位6名 ＝ 合計1,030件 ＝ 全体の0.79%</span></div>
+      <div class="srow is-low"><span class="rk">17</span><span class="nm">maeda</span><span class="track"><span class="fill f-warn" style="width:1.1%"></span></span><span class="n">269 / 0.21%</span></div>
+      <div class="srow is-low"><span class="rk">18</span><span class="nm">hasegawa</span><span class="track"><span class="fill f-warn" style="width:1.1%"></span></span><span class="n">267 / 0.21%</span></div>
+      <div class="srow is-low"><span class="rk">19</span><span class="nm">ayaka.morisawa</span><span class="track"><span class="fill f-warn" style="width:0.9%"></span></span><span class="n">213 / 0.16%</span></div>
+      <div class="srow is-low"><span class="rk">20</span><span class="nm">takuya.okamoto</span><span class="track"><span class="fill f-warn" style="width:0.8%"></span></span><span class="n">195 / 0.15%</span></div>
+      <div class="srow is-low"><span class="rk">21</span><span class="nm">riko.kodama</span><span class="track"><span class="fill f-warn" style="width:0.4%"></span></span><span class="n">82 / 0.06%</span></div>
+      <div class="srow is-low"><span class="rk">22</span><span class="nm">yukari.yokoyama</span><span class="track"><span class="fill f-warn" style="width:0.3%"></span></span><span class="n">4 / 0.003%</span></div>
+    </div>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th class="num">#</th><th>ユーザー</th><th class="num">リクエスト</th><th class="num">構成比</th><th class="num">推定額</th><th>主な利用プロダクト</th><th>状態</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>saiki</td><td class="num">24,325</td><td class="num">18.7%</td><td class="num">$2,536<span class="jpy">¥405,797</span></td><td>Claude Code 23,508</td><td><span class="chip c-good">Code特化</span></td></tr>
+        <tr><td class="num">2</td><td>h-inoue</td><td class="num">17,981</td><td class="num">13.8%</td><td class="num">$2,697<span class="jpy">¥431,509</span></td><td>Cowork 14,155 / Chat 2,855</td><td><span class="chip c-good">Cowork特化</span></td></tr>
+        <tr><td class="num">3</td><td>oshikubo</td><td class="num">17,488</td><td class="num">13.5%</td><td class="num">$2,124<span class="jpy">¥339,869</span></td><td>Cowork 8,451 / Claude Code 8,287</td><td><span class="chip c-good">併用</span></td></tr>
+        <tr><td class="num">4</td><td>d-suzuki</td><td class="num">13,513</td><td class="num">10.4%</td><td class="num">$905<span class="jpy">¥144,842</span></td><td>Chrome 6,553 / Cowork 6,150</td><td><span class="chip">Chrome主体</span></td></tr>
+        <tr><td class="num">5</td><td>h-yamamoto</td><td class="num">8,928</td><td class="num">6.9%</td><td class="num">$437<span class="jpy">¥69,963</span></td><td>Cowork 8,916</td><td><span class="chip c-good">Cowork特化</span></td></tr>
+        <tr><td class="num">6</td><td>yu-kondoh</td><td class="num">8,393</td><td class="num">6.5%</td><td class="num">$1,078<span class="jpy">¥172,557</span></td><td>Claude Code 6,335</td><td><span class="chip">—</span></td></tr>
+        <tr><td class="num">7</td><td>yusuke.nakano</td><td class="num">6,915</td><td class="num">5.3%</td><td class="num">$1,579<span class="jpy">¥252,606</span></td><td>Claude Code 6,799</td><td><span class="chip">—</span></td></tr>
+        <tr><td class="num">8</td><td>yasunari</td><td class="num">6,526</td><td class="num">5.0%</td><td class="num">$693<span class="jpy">¥110,914</span></td><td>Cowork 5,969</td><td><span class="chip">—</span></td></tr>
+        <tr><td class="num">9</td><td>ryo.tanizawa</td><td class="num">5,712</td><td class="num">4.4%</td><td class="num">$1,321<span class="jpy">¥211,381</span></td><td>Cowork 5,688</td><td><span class="chip c-good">Cowork特化</span></td></tr>
+        <tr><td class="num">10</td><td>takuya.nakajima</td><td class="num">4,871</td><td class="num">3.8%</td><td class="num">$486<span class="jpy">¥77,696</span></td><td>Chat 2,785 / Cowork 2,086</td><td><span class="chip">—</span></td></tr>
+        <tr><td class="num">11</td><td>r-yamamoto</td><td class="num">4,623</td><td class="num">3.6%</td><td class="num">$901<span class="jpy">¥144,142</span></td><td>Claude Code 2,284 / Chat 2,104</td><td><span class="chip">—</span></td></tr>
+        <tr><td class="num">12</td><td>m-matsuzaki</td><td class="num">2,512</td><td class="num">1.9%</td><td class="num">$408<span class="jpy">¥65,230</span></td><td>Chat のみ</td><td><span class="chip c-warn">Chatのみ</span></td></tr>
+        <tr><td class="num">13</td><td>yuki.fujii</td><td class="num">2,207</td><td class="num">1.7%</td><td class="num">$277<span class="jpy">¥44,328</span></td><td>Chat 2,037</td><td><span class="chip">—</span></td></tr>
+        <tr><td class="num">14</td><td>ryuji.hatakeyama</td><td class="num">1,897</td><td class="num">1.5%</td><td class="num">$303<span class="jpy">¥48,446</span></td><td>Cowork 1,380</td><td><span class="chip">—</span></td></tr>
+        <tr><td class="num">15</td><td>h-miyata</td><td class="num">1,781</td><td class="num">1.4%</td><td class="num">$146<span class="jpy">¥23,389</span></td><td>Chat 765 / Cowork 564</td><td><span class="chip">—</span></td></tr>
+        <tr><td class="num">16</td><td>s-moriyama</td><td class="num">1,177</td><td class="num">0.9%</td><td class="num">$95<span class="jpy">¥15,163</span></td><td>Claude Code 1,153</td><td><span class="chip">—</span></td></tr>
+        <tr><td class="num">17</td><td>maeda</td><td class="num">269</td><td class="num">0.21%</td><td class="num">$45<span class="jpy">¥7,262</span></td><td>Chat のみ</td><td><span class="chip c-warn">未定着</span> <span class="chip c-warn">Chatのみ</span></td></tr>
+        <tr><td class="num">18</td><td>hasegawa</td><td class="num">267</td><td class="num">0.21%</td><td class="num">$19<span class="jpy">¥3,085</span></td><td>Chat 149 / Claude Code 85</td><td><span class="chip c-warn">未定着</span></td></tr>
+        <tr><td class="num">19</td><td>ayaka.morisawa</td><td class="num">213</td><td class="num">0.16%</td><td class="num">$19<span class="jpy">¥3,085</span></td><td>Chat 140 / Cowork 73</td><td><span class="chip c-warn">未定着</span></td></tr>
+        <tr><td class="num">20</td><td>takuya.okamoto</td><td class="num">195</td><td class="num">0.15%</td><td class="num">$15<span class="jpy">¥2,346</span></td><td>Claude Code のみ</td><td><span class="chip c-warn">未定着</span></td></tr>
+        <tr><td class="num">21</td><td>riko.kodama</td><td class="num">82</td><td class="num">0.06%</td><td class="num">$7<span class="jpy">¥1,080</span></td><td>Claude Code のみ</td><td><span class="chip c-warn">未定着</span></td></tr>
+        <tr><td class="num">22</td><td>yukari.yokoyama</td><td class="num">4</td><td class="num">0.003%</td><td class="num">$0.24<span class="jpy">¥38</span></td><td>Chat のみ</td><td><span class="chip c-warn">未着手</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">メールアドレスの <span class="mono">@shoeisha.co.jp</span> を省略。推定額は §01 の前提による試算値。</p>
+
+  <div class="callout is-warn">
+    <span class="ct"><span class="chip c-warn">定着支援の対象</span>3名はまだエージェントに移行していない</span>
+    <p><strong>m-matsuzaki / maeda / yukari.yokoyama</strong> は Chat のみで、Claude Code も Cowork も利用実績が0。参加者全体では80%がエージェント型に移行している中、この3名は旧来型の使い方に留まっている。特に m-matsuzaki は2,512リクエスト・$408と<strong>利用量自体はあるため、同じ作業をCoworkに移すだけで生産性が上がる可能性が高い</strong>。</p>
+  </div>
+
+  <div class="callout">
+    <span class="ct"><span class="chip c-good">成功パターン</span>単一プロダクトを深く使い込む型が上位を占める</span>
+    <p><strong>saiki</strong>（Claude Code 23,508件＝自身の97%）、<strong>h-yamamoto</strong>（Cowork 8,916件＝99%）、<strong>ryo.tanizawa</strong>（Cowork 5,688件＝99%）。広く浅くではなく、1つのプロダクトを主戦場にしているユーザーが伸びている。<strong>横展開の素材として使える。</strong></p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="idx mono">06 / 次アクション</span>
+    <h2>試験運用の次フェーズに向けた打ち手</h2>
+  </div>
+
+  <div class="acts">
+    <div class="act"><span class="pri"><span class="chip c-crit">高</span></span><div>
+      <h3>「深く使う人を増やす」次フェーズを設計する</h3>
+      <p>費用対効果は実証済み（5.8倍）。範囲を広げる前に、<strong>いまいる20名の中で使い込む人を増やす</strong>ほうが効く。成功パターンは<strong>単一プロダクト特化型</strong>（saiki＝Claude Code 97%／h-yamamoto＝Cowork 99%／ryo.tanizawa＝Cowork 99%）。この3名の使い方を<strong>型として言語化し、承認時に提出された「出したい成果」と紐づけて渡す</strong>のが最短。</p></div></div>
+    <div class="act"><span class="pri"><span class="chip c-crit">高</span></span><div>
+      <h3>試験運用の「出口条件」を先に決める</h3>
+      <p>現状は利用量しか測れていない。<strong>何をもって本運用に移すと判断するのか</strong>の基準（対象範囲・期間・判断指標）を決めておかないと、この先も同じ利用量レポートが並ぶだけになる。評価指標の設計は本運用移行の前提。</p></div></div>
+    <div class="act"><span class="pri"><span class="chip c-warn">中</span></span><div>
+      <h3>承認時に提出された「出したい成果」と実績を突き合わせる</h3>
+      <p>承認制では<strong>事前に達成したい成果が提出されている</strong>。利用量の多寡を見るより、<strong>提出内容がどこまで実現できたか</strong>を本人に確認するほうが、試験運用の評価材料として的確。使えていない場合も、原因（用途が合わない／やり方が分からない／時間がない）が分かれば次の打ち手が決まる。</p></div></div>
+    <div class="act"><span class="pri"><span class="chip c-warn">中</span></span><div>
+      <h3>Chat中心の3名にエージェントを一度体験させる</h3>
+      <p>m-matsuzaki / maeda / yukari.yokoyama は Chat のみ。特に m-matsuzaki は2,512件と<strong>利用量自体は十分あり、使う意欲はある</strong>。いまChatでやっている複数ステップの作業を1件Coworkに移す実演から始めるのが早い。</p></div></div>
+    <div class="act"><span class="pri"><span class="chip c-warn">中</span></span><div>
+      <h3>Opus / Fable 5 の使い分けガイドを整備する</h3>
+      <p>Opusがコストの55%、Fable 5が14.5%。シート課金下では即時のコスト削減効果はないが、本運用移行時の規模試算やレート制限回避の観点で「どのタスクにどのモデルを使うか」の目安を作る価値がある。Haikuをサブエージェントに使う現行パターンは維持。</p></div></div>
+    <div class="act"><span class="pri"><span class="chip c-warn">中</span></span><div>
+      <h3>Claude Design の活用可否を判断する</h3>
+      <p>276リクエスト・4名でほぼ未活用。designer業務で使えるのか、Canva等の既存フローで足りるのかを切り分け、使わないなら「使わない」と明示して選択肢から外す。</p></div></div>
+    <div class="act"><span class="pri"><span class="chip">低</span></span><div>
+      <h3>月次モニタリングを定常化する</h3>
+      <p>集計スクリプト <span class="mono">data/scripts/analyze_claude_spend_report.py</span> は再利用可能。毎月同じCSVを投入すれば同じレポートが出る。「利用者数・上位集中度・未着手者数」の3点を追うだけで十分な監視になる。</p></div></div>
+    <div class="act"><span class="pri"><span class="chip">低</span></span><div>
+      <h3>第5世代モデルへの移行状況を四半期でウォッチする</h3>
+      <p>現在リクエスト37.1%・推定額51.3%。旧世代が6割残っている状態が続くなら、更新の周知に課題がある可能性。</p></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <span class="idx mono">07 / 本レポートの限界</span>
+    <h2>このデータで分からないこと</h2>
+  </div>
+  <div class="limits">
+    <div class="limit"><span class="dot"></span><p><strong>個人の評価・査定には使用できない。</strong>本データは試験運用期間の利用ログであり、業務内容・役割・繁忙度の違いを一切考慮していない。リクエスト数は<strong>作業量でも成果でもない</strong>。「使っていない」ことが低評価を意味する段階ではなく、<strong>案内や支援が届いていないサインとして読むべきデータ</strong>である。</p></div>
+    <div class="limit"><span class="dot"></span><p><strong>日次・週次の推移が取れない。</strong>CSVは期間合計のみで時系列カラムがない。「使い始めたが離脱した」のか「最近使い始めた」のかを区別できない。推移を見るには期間を分けて複数回エクスポートする必要がある。</p></div>
+    <div class="limit"><span class="dot"></span><p><strong>「22名」は利用実績のあった人数で、シート数ではない。</strong>CSVには <span class="mono">total_requests</span> が0の行が1件も存在せず（最小値1）、期間内に1回以上使ったユーザーのみが記録されている。8/5請求のメンバーは20名なので、<strong>期間中にシートの入れ替わりが起きている</strong>（22名 &gt; 20シート）。逆に言えば<strong>完全未使用のシートが多数隠れている状況ではない</strong>。</p></div>
+    <div class="limit"><span class="dot"></span><p><strong>参加時期を考慮していない。</strong>シートは5月11名→6月12名→7月以降20名と段階的に付与しており、<strong>利用者の約半数は7月以降の参加</strong>。§05の利用量順位は<strong>在籍期間の差を大きく含む</strong>。下位層が「使っていない」のではなく「まだ日が浅い」可能性が高く、順位をそのまま定着度として読むことはできない。正確に見るにはメンバーごとの参加日と突き合わせる必要がある。</p></div>
+    <div class="limit"><span class="dot"></span><p><strong>円建て金額は想定レート（1USD=160円）による換算。</strong>請求は米ドル建てのため、為替が動けば円建ての負担額は変動する。円換算値は社内比較のための目安として扱う。</p></div>
+    <div class="limit"><span class="dot"></span><p><strong>従量換算額は推定値。</strong>CSVの実請求は$0。この換算額は<strong>利用規模を掴むための参考値</strong>であり、費用対効果の判定には使えない。本運用移行時の規模試算の入力として使うのが適切。</p></div>
+    <div class="limit"><span class="dot"></span><p><strong>リクエスト数は利用の深さを測れない。</strong>1リクエストの価値（成果物の質・削減できた工数）はこのデータからは分からない。下位ユーザーが「少ない回数で高価値な仕事をしている」可能性は否定できない。解釈にはヒアリングを併用すること。</p></div>
+    <div class="limit"><span class="dot"></span><p><strong>Sonnet 5 の導入価格（2026-08-31まで $2/$10）を未反映。</strong>そのぶん推定額は上振れしている。</p></div>
+  </div>
+</section>
+
+<footer>
+  <p class="note mono">analyst / 2026-08-20 ｜ 出典: Anthropic管理コンソール spend report CSV（2026-05-21〜2026-08-19、取得日 2026-08-20）</p>
+  <p class="note mono">集計スクリプト: data/scripts/analyze_claude_spend_report.py ｜ 詳細版: data/documents/2026-08-20_claude-usage-spend-report-analysis.md</p>
+</footer>
+
+</div>
