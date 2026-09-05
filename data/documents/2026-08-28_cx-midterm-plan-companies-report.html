@@ -1,0 +1,326 @@
+<title>CX経営アジェンダ企業マップ</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#F6F7F9; --surface:#FFFFFF; --ink:#1C242E; --muted:#5B6674; --line:#DDE2E8;
+    --accent:#0E7C6B; --accent-soft:#E2F0ED; --accent-ink:#0A5A4E;
+    --amber:#A8701C; --amber-soft:#F6EBD9; --amber-ink:#7C5310;
+    --chip2-bg:#EAEDF1; --chip2-ink:#5B6674;
+    --thead:#EEF1F4;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#12161A; --surface:#1A2026; --ink:#E7EBEF; --muted:#98A3AF; --line:#2C343D;
+      --accent:#43BCA4; --accent-soft:#173129; --accent-ink:#6FD3BE;
+      --amber:#D9A24C; --amber-soft:#33270F; --amber-ink:#E4B76E;
+      --chip2-bg:#242C34; --chip2-ink:#98A3AF;
+      --thead:#20272E;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12161A; --surface:#1A2026; --ink:#E7EBEF; --muted:#98A3AF; --line:#2C343D;
+    --accent:#43BCA4; --accent-soft:#173129; --accent-ink:#6FD3BE;
+    --amber:#D9A24C; --amber-soft:#33270F; --amber-ink:#E4B76E;
+    --chip2-bg:#242C34; --chip2-ink:#98A3AF;
+    --thead:#20272E;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Noto Sans JP",-apple-system,"Hiragino Sans","Yu Gothic",sans-serif;
+    font-size:14.5px; line-height:1.75; margin:0;
+  }
+  a{color:var(--accent-ink); text-decoration:none; border-bottom:1px solid color-mix(in srgb, var(--accent) 40%, transparent)}
+  a:hover{border-bottom-color:var(--accent)}
+  a:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:2px}
+  .wrap{max-width:1080px; margin:0 auto; padding:48px 28px 80px}
+  h1,h2,h3{font-family:"Zen Kaku Gothic New","Noto Sans JP",sans-serif; text-wrap:balance; line-height:1.35}
+  .eyebrow{
+    font-size:12px; letter-spacing:.14em; color:var(--accent-ink); font-weight:700;
+    display:flex; align-items:center; gap:10px; margin-bottom:14px;
+  }
+  .eyebrow::before{content:""; width:26px; height:3px; background:var(--accent); display:inline-block}
+  h1{font-size:clamp(26px,4vw,38px); font-weight:900; margin:0 0 10px}
+  .lede{color:var(--muted); max-width:44em; margin:0 0 6px}
+  .meta{font-size:12.5px; color:var(--muted); display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:14px}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin:30px 0 8px}
+  .stat{background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:16px 18px}
+  .stat .n{font-family:"IBM Plex Sans","Noto Sans JP",sans-serif; font-variant-numeric:tabular-nums;
+    font-size:30px; font-weight:600; line-height:1.15; color:var(--ink)}
+  .stat .n small{font-size:15px; font-weight:500; color:var(--muted); margin-left:2px}
+  .stat .l{font-size:12px; color:var(--muted); margin-top:4px; letter-spacing:.04em}
+  .stat.hot{border-color:color-mix(in srgb, var(--amber) 45%, var(--line)); background:linear-gradient(0deg, var(--amber-soft), var(--surface) 70%)}
+  .stat.hot .n{color:var(--amber-ink)}
+  section{margin-top:52px}
+  h2{font-size:21px; font-weight:900; margin:0 0 4px; display:flex; align-items:baseline; gap:12px}
+  h2 .tag{font-size:11px; letter-spacing:.12em; color:var(--accent-ink); font-weight:700}
+  .sub{color:var(--muted); font-size:13px; margin:0 0 18px; max-width:52em}
+  h3{font-size:15.5px; font-weight:700; margin:30px 0 10px; color:var(--ink)}
+  /* summary panel */
+  .panel{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:20px 24px; margin-top:16px}
+  .panel dt{font-weight:700; font-size:13px; letter-spacing:.06em; margin-bottom:6px}
+  .panel dd{margin:0 0 14px; color:var(--muted)}
+  .panel dd:last-child{margin-bottom:0}
+  .panel ul{margin:4px 0 0; padding-left:1.3em}
+  .panel li{margin:4px 0}
+  /* tier1 cards */
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; margin-top:18px}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:20px 22px; display:flex; flex-direction:column; gap:8px}
+  .card .co{font-family:"Zen Kaku Gothic New",sans-serif; font-weight:900; font-size:17px}
+  .card .doc{font-size:12px; color:var(--muted)}
+  .card blockquote{margin:6px 0; padding:10px 14px; border-left:3px solid var(--amber); background:var(--amber-soft); border-radius:0 6px 6px 0; font-size:13px}
+  .card .src{font-size:12px; margin-top:auto}
+  .chips{display:flex; gap:6px; flex-wrap:wrap}
+  .chip{font-size:11px; font-weight:700; letter-spacing:.05em; padding:2px 9px; border-radius:99px; white-space:nowrap}
+  .chip.p1{background:var(--accent-soft); color:var(--accent-ink)}
+  .chip.p2{background:var(--chip2-bg); color:var(--chip2-ink)}
+  .chip.cc{background:var(--amber-soft); color:var(--amber-ink)}
+  /* tables */
+  .tbl{overflow-x:auto; background:var(--surface); border:1px solid var(--line); border-radius:10px; margin-top:12px}
+  table{border-collapse:collapse; width:100%; min-width:860px; font-size:13px}
+  th{background:var(--thead); text-align:left; font-size:11.5px; letter-spacing:.08em; color:var(--muted);
+    padding:10px 14px; border-bottom:1px solid var(--line); white-space:nowrap}
+  td{padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.co{font-weight:700; white-space:nowrap}
+  td.q{min-width:300px}
+  q{quotes:"「" "」"}
+  td .doc{display:block; font-size:11.5px; color:var(--muted); font-weight:400; margin-top:2px; white-space:normal}
+  .note{font-size:12.5px; color:var(--muted); margin-top:10px}
+  .warn{border-left:3px solid var(--amber); padding:12px 18px; background:var(--surface); border-radius:0 8px 8px 0; margin:10px 0; font-size:13px}
+  footer{margin-top:64px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--muted)}
+  @media (prefers-reduced-motion: no-preference){
+    section{animation:rise .4s ease both}
+    @keyframes rise{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">AI CONTACT CENTER SUMMIT 2026 ｜ 打診・協賛営業 基礎資料</div>
+    <h1>中期経営計画に「顧客体験」を掲げる上場企業マップ</h1>
+    <p class="lede">全上場企業を対象に東証全業種の主要企業の中期経営計画・長期ビジョンを確認し、「顧客体験・顧客起点・CX・コンタクトセンター」を経営アジェンダ化している約60社を抽出。全件に出典と確認レベルを付す。</p>
+    <div class="meta">
+      <span>作成: 2026-08-28（analyst・6並列調査の統合）</span>
+      <span>出典取得日: 全件 2026-08-28</span>
+      <span>確認レベル: <strong>一次</strong>＝中計本文・IR資料・公式リリースを直接確認／<strong>二次</strong>＝報道・検索経由（一次資料は所在特定済み）</span>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="stat hot"><div class="n">4<small>社</small></div><div class="l">中計・経営文書に「コンタクトセンター」明記（＋BPO 3社）</div></div>
+    <div class="stat"><div class="n">約60<small>社</small></div><div class="l">CX関連文言を経営文書で確認</div></div>
+    <div class="stat"><div class="n">約40<small>社</small></div><div class="l">うち一次情報で直接確認済み</div></div>
+    <div class="stat"><div class="n">全17<small>業種</small></div><div class="l">東証業種を横断カバー</div></div>
+  </div>
+
+  <section>
+    <h2>要旨</h2>
+    <dl class="panel">
+      <dt>事実（調査で確認できたこと）</dt>
+      <dd>中計・経営文書の<strong>本文</strong>に「コンタクトセンター／コールセンター」を明記していたのは、事業会社ではJR西日本・イオンフィナンシャルサービス・LIXIL・トヨタの4社のみ。大多数は「顧客体験」「顧客接点」「顧客起点」「VoC」の語彙で経営アジェンダ化している。かんぽ生命は「お客さま接点領域の社員比率70%以上」を中計KPIに設定。</dd>
+      <dt>解釈（営業・打診への示唆）</dt>
+      <dd>
+        <ul>
+          <li>営業トークは「コンタクトセンター投資」ではなく<strong>「中計に掲げた顧客接点／CX戦略の実行部隊がコンタクトセンター」</strong>という接続で組む。</li>
+          <li>「CX」を <em>Corporate Transformation</em> の意で使う企業がある（りそな・セブン銀行等）。打診文面で安易に略さない。</li>
+          <li>製薬業界の語彙は「Patient Centricity／患者起点」。PX文脈で組み立てる方が刺さる可能性が高い。</li>
+        </ul>
+      </dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2><span class="tag">TIER 1</span>コンタクトセンターを経営文書に明記した4社</h2>
+    <p class="sub">「経営アジェンダとしてのコンタクトセンターAX」という企画コンセプトに文言レベルで直結する、登壇打診の最優先候補。</p>
+    <div class="cards">
+      <div class="card">
+        <div class="chips"><span class="chip cc">CC明記</span><span class="chip p1">一次確認</span></div>
+        <div class="co">JR西日本</div>
+        <div class="doc">中期経営計画2030（2026〜2030年度）</div>
+        <blockquote>基本方針に「心動く顧客体験の追求」を掲げ、「コンタクトセンターへのAIエージェントの導入」を明記（p31）</blockquote>
+        <div class="src">出典: <a href="https://www.westjr.co.jp/company/info/plan/pdf/plan_2030.pdf">中計2030本文PDF</a></div>
+      </div>
+      <div class="card">
+        <div class="chips"><span class="chip cc">CC明記</span><span class="chip p1">一次確認</span></div>
+        <div class="co">イオンフィナンシャルサービス</div>
+        <div class="doc">中期経営計画（2026〜2030年度）</div>
+        <blockquote>「コンタクトセンター等の顧客接点を含めた業務オペレーション等における業務効率化・高度化を推進することで、お客さまの体験価値向上…」</blockquote>
+        <div class="src">出典: <a href="https://www.aeonfinancial.co.jp/ir/strategy/medium/">中期経営計画ページ</a></div>
+      </div>
+      <div class="card">
+        <div class="chips"><span class="chip cc">CC明記</span><span class="chip p1">一次確認</span></div>
+        <div class="co">LIXIL</div>
+        <div class="doc">中期経営計画＋DX戦略（IR）</div>
+        <blockquote>「顧客体験（CX）をより良いものに進化し続けるためにDXに取り組んでいます」「コールセンターでは…自動的に音声認識し、要約して記録する技術を導入」</blockquote>
+        <div class="src">出典: <a href="https://www.lixil.com/jp/investor/strategy/digital_index.html">IR「DXの取り組み」</a></div>
+      </div>
+      <div class="card">
+        <div class="chips"><span class="chip cc">CC明記</span><span class="chip p1">一次（スニペット）</span></div>
+        <div class="co">トヨタ自動車</div>
+        <div class="doc">全社CX戦略（トヨタCX CENTER）</div>
+        <blockquote>TOYOTAアカウント中核の「CX最適化プラットフォーム」。「web・アプリ・車載ナビ・店舗・コールセンターを通じて一貫・統一したブランドサービスを提供」</blockquote>
+        <div class="src">出典: <a href="https://global.toyota/info/cxcenter/strategy/">CX CENTER戦略ページ</a>（公式サイトが403のため検索経由で本文確認）</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="tag">TIER 2</span>顧客接点・VoC・CXを中計のKPI／戦略の柱に明記</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>企業</th><th>業種</th><th>該当記載（原文）</th><th>出典</th><th>確認</th></tr></thead>
+      <tbody>
+        <tr><td class="co">かんぽ生命<span class="doc">中期経営計画（2026〜2028年度）</span></td><td>保険</td><td class="q"><q>CX向上のためのDX推進</q>、<q>お客さま接点領域の社員比率70%以上</q>をKPI化。前中計では<q>お客さま体験価値（CX）を最優先とするビジネスモデルへ転換</q></td><td><a href="https://www.jp-life.japanpost.jp/IR/management/pdf/plan_20260515.pdf">新中計PDF</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">三菱UFJ FG<span class="doc">中期経営計画（2024〜2026年度）</span></td><td>銀行</td><td class="q">リテール戦略の柱<q>顧客体験（CX）の進化</q>、<q>リアル・リモート・デジタルのベストミックスを通じたお客さま接点拡大</q></td><td><a href="https://www.mufg.jp/dam/ir/report/disclosure/pdf/ir2024_04_ja.pdf">IR資料PDF</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">H2Oリテイリング<span class="doc">中期経営計画2024-2026</span></td><td>百貨店・スーパー</td><td class="q"><q>店舗・売場を超えたパーソナルな顧客体験を提供</q>、<q>VoC（Voice of the Customer）活用システム</q>を中計に明記</td><td><a href="https://data.swcms.net/file/h2o-retailing/ja/news/auto_20240515597987/pdfFile.pdf">中計PDF</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">東京メトロ<span class="doc">中期経営計画2025-2027</span></td><td>鉄道</td><td class="q"><q>『お客様の声』がグループ理念を実現する貴重な経営資源</q>、<q>デジタル顧客接点の魅力向上</q></td><td><a href="https://www.tokyometro.jp/corporate/ir/management/plan/pdf/mp2025.pdf">中計PDF</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">TOTO<span class="doc">WILL2030 STAGE2（2024〜2026年度）</span></td><td>住宅設備</td><td class="q">経営KPIに<q>アフターサービス お客様満足度</q>（2030年目標95pt）、<q>ショールーム満足度</q>（80pt）を設定</td><td><a href="https://jp.toto.com/assets/files/report2025_47-48.pdf">統合報告書2025</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">千葉銀行<span class="doc">第16次中計（2026/4〜2029/3）</span></td><td>銀行</td><td class="q">基本方針Ⅰ<q>最高の顧客体験の創造</q>、<q>人×AIによる生産性の向上</q></td><td><a href="https://www.chibabank.co.jp/company/services/strategy/plan">中計ページ</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">パーソルHD<span class="doc">中期経営計画FY2028（2026〜2028年度）</span></td><td>人材</td><td class="q"><q>顧客接点データを起点とした課題解決による収益性向上</q>、<q>顧客接点やスタッフフォロー…競争優位に直結する業務へ人的リソースを集中</q></td><td><a href="https://www.persol-group.co.jp/ir/upload_file/m009-/MidtermmanagementplanFY2028.pdf">中計PDF</a></td><td><span class="chip p1">一次</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2><span class="tag">TIER 3</span>顧客体験・顧客起点を経営文書に明記（業種別）</h2>
+
+    <h3>金融</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>企業</th><th>該当記載（原文）</th><th>出典</th><th>確認</th></tr></thead>
+      <tbody>
+        <tr><td class="co">東京海上日動<span class="doc">中計「Re-New2026」（2024年度〜）</span></td><td class="q"><q>本当に信頼されるお客様起点の会社</q>。グループの安心110番がビジョン「コミュニケーションセンター変革〜高CXサービスの実現〜」を公表</td><td><a href="https://www.tokiomarine-nichido.co.jp/company/about/strategy.html">経営戦略</a> / <a href="https://www.anshin110ban.co.jp/company/challenge/index.html">安心110番</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">アフラック生命<span class="doc">中期経営戦略（2025〜2027年）</span></td><td class="q"><q>感動的なお客様体験の提供を実現するため、生成AIなどのデジタルテクノロジーを積極的に活用し、事業を変革</q></td><td><a href="https://www.aflac.co.jp/corp/value/strategy/pdf/medium_term_management_strategy.pdf">中期経営戦略PDF</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">第一生命HD<span class="doc">中計（2024〜2026年度）</span></td><td class="q"><q>リアルとデジタルの融合によるCX・生産性の向上</q>。CCXO（Chief Customer Experience Officer）を設置</td><td><a href="https://www.dai-ichi-life-hd.com/investor/pdf/event_006.pdf">経営戦略PDF</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">三井住友FG<span class="doc">新中計（2026〜2028年度）</span></td><td class="q">ビジョン実現の重要要素<q>お客さま起点への徹底的なこだわり</q>、バリュー「Customer First」</td><td><a href="https://www.smfg.co.jp/news/pdf/j20260401_plan.pdf">新中計リリースPDF</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">三井住友カード<span class="doc">ビジョン・ミッション（2026年4月改定）※非上場・中計非公表</span></td><td class="q"><q>人の声から発想し…体験やサポートでお客さまのニーズに真摯に応えます</q></td><td><a href="https://www.smbc-card.com/brand/about-us/index.html">ビジョンページ</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">セブン銀行<span class="doc">中計（2021〜2025年度）</span></td><td class="q">リテール戦略に<q>顧客体験改革</q>。ATMを「非対面の有用な顧客接点」と定義。※同社の「CX」はCorporate Transformationの意</td><td><a href="https://www.sevenbank.co.jp/ir/library/disclosure/pdf/2024073104.pdf">ディスクロージャー誌</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">りそなHD<span class="doc">中計（2023〜2025年度）</span></td><td class="q"><q>積立投資における新たなお客さま体験</q>。カスタマーサクセス部を設置（2021年）。※中計の「CX」はコーポレートトランスフォーメーションの意</td><td><a href="https://www.resona-gr.co.jp/holdings/about/strategy/pdf/20230512_1a.pdf">中計PDF</a></td><td><span class="chip p1">一次</span></td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>通信・IT・インフラ・運輸</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>企業</th><th>該当記載（原文）</th><th>出典</th><th>確認</th></tr></thead>
+      <tbody>
+        <tr><td class="co">KDDI<span class="doc">中期経営戦略「Power-to-Connect 2028」</span></td><td class="q"><q>お客さま体験をテクノロジーで変革</q>、<q>AIを駆使、お客さま体験価値向上と企業業務を変革</q>（AI-BPO文脈＝グループのアルティウスリンクがCC大手）</td><td><a href="https://www.kddi.com/extlib/files/corporate/ir/library/presentation/2026/pdf/kddi_260512_plan_pvHOPw.pdf">中計説明資料PDF</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">NTT（持株）<span class="doc">中期経営戦略2030 powered by AIOWN</span></td><td class="q"><q>お客さま体験（CX）の高度化</q>を3つの柱の一つとして明記</td><td><a href="https://group.ntt/jp/ir/mgt/managementstrategy/">中期経営戦略</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">NTTドコモ<span class="doc">中期経営目標（2030年度）</span></td><td class="q"><q>お客さま一人ひとりに最適な体験を先回りして提供</q>。2025-07に「ブランド体験とCXの向上」目的の組織改編</td><td><a href="https://www.docomo.ne.jp/corporate/philosophy_vision/strategy/">中期経営目標</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">ソフトバンク<span class="doc">中計（2026〜2030年度）</span></td><td class="q"><q>AIエージェントによる利便性向上や新たな顧客体験の創出を通じて、事業成長を目指します</q></td><td><a href="https://www.softbank.jp/sbnews/entry/20260529_01">公式解説</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">JR東日本<span class="doc">グループ経営ビジョン「勇翔2034」</span></td><td class="q"><q>事業活動の起点を『鉄道インフラ』から『ヒト』へと抜本的に転換</q>、<q>販売窓口のAI化…『お待たせしない駅空間』</q></td><td><a href="https://prtimes.jp/main/html/rd/p/000001163.000017557.html">公式リリース</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">ANA HD<span class="doc">中期経営戦略（2026〜2028年度）</span></td><td class="q">MaaS領域で<q>顧客体験価値を向上</q>。接点横断の「CX基盤」「CX Portal」を構築済み（統合報告書）</td><td><a href="https://www.anahd.co.jp/group/pr/202601/20260130-2.html">リリース</a> / <a href="https://www.ana.co.jp/group/investors/irdata/annual/pdf/24/24_04.pdf">AR抜粋</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">東京ガス<span class="doc">中計（2026〜2028年度）</span></td><td class="q"><q>DXによる顧客基盤拡大、顧客体験向上</q>、<q>AI活用を前提としたビジネスモデルへの変革</q>、<q>マルチチャネルで顧客接点を提供</q></td><td><a href="https://www.tokyo-gas.co.jp/news/press/20251029-02.pdf">中計PDF</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">関西電力<span class="doc">中計（2021-2025、2024-04更新）</span></td><td class="q">DX戦略に<q>IoT・予測・最適化技術等を活用した新たなソリューションの実現や顧客体験の向上</q></td><td><a href="https://www.kepco.co.jp/corporate/pr/2021/pdf/0326_1j_01.pdf">中計PDF</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">東急不動産HD<span class="doc">GROUP VISION 2030＋中計2030</span></td><td class="q"><q>顧客接点の高度化による感動体験の創出</q>、<q>顧客起点での体験価値創出</q>（OMO推進）</td><td><a href="https://www.tokyu-fudosan-hd.co.jp/ir/mgtpolicy/plan/">長期経営方針</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">ENEOS HD<span class="doc">長期ビジョン2040・中計</span></td><td class="q"><q>AIを活用した…新たな顧客体験創出</q>。SS約13,000カ所を顧客接点プラットフォームと位置づけ</td><td><a href="https://www.eneos.co.jp/company/strategy/">経営戦略</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">JAL<span class="doc">ローリングプラン2025</span></td><td class="q"><q>一貫した顧客体験を創出し、お客さまの共感度合い世界No.1エアライングループを目指します</q>。CX本部を設置（2021年）</td><td><a href="https://press.jal.co.jp/ja/release/202503/008710.html">リリース</a>（サイトbot遮断）</td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">日本郵政<span class="doc">JPビジョン2025＋（2024〜2025年度）</span></td><td class="q"><q>DXの推進等によるUX（ユーザー体験価値）向上</q>。※現行JPプラン2028では当該文言未確認</td><td><a href="https://www.soumu.go.jp/main_content/000950862.pdf">総務省掲載資料</a></td><td><span class="chip p2">二次</span></td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>小売・消費財・サービス</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>企業</th><th>該当記載（原文）</th><th>出典</th><th>確認</th></tr></thead>
+      <tbody>
+        <tr><td class="co">資生堂<span class="doc">2030中期経営戦略（2025-11発表）</span></td><td class="q"><q>感動を生み、生活者と深く繋がる顧客体験</q>、<q>AI投資を強化し…顧客体験・ロイヤリティ向上</q>、<q>CX体験の革新</q></td><td><a href="https://corp.shiseido.com/jp/ir/pdf/ir20251110_226.pdf">中計説明資料PDF</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">イオン<span class="doc">中計（2021〜2025年度）※次期中計は要ウォッチ</span></td><td class="q"><q>店舗・デジタルが融合したシームレスな顧客体験を実現</q>、<q>顧客接点のデジタル化を進め新たな収益源の創出へ</q></td><td><a href="https://www.aeon.info/wp-content/uploads/news/pdf/2021/04/210409R_3.pdf">中計リリースPDF</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">三越伊勢丹HD<span class="doc">中計（2025-2030年度）</span></td><td class="q"><q>"館業"から"個客業"へのスイッチ</q>、<q>個客接点の拡大に向け、デジタル接点改革</q>、<q>最高の顧客体験の提供</q></td><td><a href="https://pdf.irpocket.com/C3099/Bv1s/jsbW/w6lN.pdf">中計開示PDF</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">ローソン<span class="doc">Challenge 2030（非公開化後）</span></td><td class="q"><q>リアルの温かみとテックの力を融合し、新しいお客さま体験と店舗運営を実現</q>（リモート接客・AIサイネージ実装）</td><td><a href="https://www.lawson.co.jp/company/news/detail/1507040_2504.html">公式リリース</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">メルカリ<span class="doc">中計文書は非公表</span></td><td class="q">IRサイト・マテリアリティに<q>テクノロジーを活用した新しいお客さま体験の創造</q></td><td><a href="https://about.mercari.com/ir/">IRサイト</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">令和トラベル<span class="doc">未上場（経営計画文書なし）</span></td><td class="q">AIチャットエージェント「NEWT Chat」を自社展開・外販。<q>デジタルの力で体験価値を高めていく</q></td><td><a href="https://www.reiwatravel.co.jp/news/251203">公式リリース</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">オリエンタルランド<span class="doc">2024中計＋2035長期経営戦略</span></td><td class="q"><q>ゲスト体験価値の向上を最優先</q>、<q>リゾート全体での体験価値の向上</q></td><td><a href="https://www.olc.co.jp/ja/news/news_olc/COPY-auto_20250428525727/main/0/link/20250428.pdf">2035長期戦略PDF</a>（フェッチ不可）</td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">ポーラ・オルビスHD<span class="doc">中計2024〜2026</span></td><td class="q">「One POLA」としてチャネルシームレスなブランド体験によるLTV向上</td><td><a href="https://www.syogyo.jp/news/2024/02/post_037857">週刊粧業</a></td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">カインズ<span class="doc">PROJECT KINDNESS（2019〜2021、非上場）</span></td><td class="q">「IT小売業」への転換。<q>Emotionalな体験の創造</q></td><td><a href="https://www.ryutsuu.biz/strategy/l030141.html">流通ニュース</a></td><td><span class="chip p2">二次</span></td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>外食・物流・広告・商社・住宅</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>企業</th><th>該当記載（原文）</th><th>出典</th><th>確認</th></tr></thead>
+      <tbody>
+        <tr><td class="co">ヤマトHD<span class="doc">SX2030 1st Stage（FY2024-2026）</span></td><td class="q"><q>サービスラインアップの拡充、顧客体験価値の向上…により、事業収益を拡大</q>、<q>ストレスフリーな顧客体験</q></td><td><a href="https://www.yamato-hd.co.jp/company/plan/pdf/sx20301st.pdf">中計PDF（p17,22）</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">日本マクドナルドHD<span class="doc">中計2025-2027</span></td><td class="q"><q>マクドナルドが目指す顧客体験の向上、収益性の改善</q>、<q>お客様と従業員の両方の店舗体験を向上</q></td><td><a href="https://ircms.irstreet.com/contents/data_file.php?template=1872&amp;brand=74&amp;folder_contents=8917&amp;src_data=465124&amp;filename=pdf_file.pdf">決算説明会資料PDF</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">ゼンショーHD<span class="doc">中計26/3期-28/3期</span></td><td class="q"><q>レジ・券売機・セルフオーダー端末・モバイルオーダーUIなど、お客様との接点となる機器およびシステムの標準化・単純化を推進</q></td><td><a href="https://www.zensho.co.jp/jp/company/dx/">公式DXページ</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">博報堂DY HD<span class="doc">新中計（〜FY2028）</span></td><td class="q"><q>生活者インターフェース市場での事例創出</q>＝生活者接点のサービス化を成長領域と定義</td><td><a href="https://www.hakuhodody-holdings.co.jp/businessplan/business_domains/">中計ページ</a></td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">伊藤忠商事<span class="doc">Brand-new Deal 2023（方針継続）</span></td><td class="q"><q>『マーケットイン』による事業変革</q>、<q>生活消費分野における消費者接点を活用</q></td><td><a href="https://www.itochu.co.jp/ja/ir/doc/annual_report/online2021/market1.html">統合レポート</a></td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">積水ハウス<span class="doc">第6次中計2023-2025</span></td><td class="q">経営計画説明会資料で<q>顧客体験の向上</q>（PLATFORM HOUSE構想）</td><td><a href="https://www.sekisuihouse.co.jp/company/financial/library/ir_document/2024/2024_kessan/p20250306.pdf">説明会資料PDF</a>（フェッチ不可）</td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">大和ハウス工業<span class="doc">第7次中計FY2022-2026</span></td><td class="q">DXアニュアルレポートで中計と顧客基盤活用を接続</td><td><a href="https://www.daiwahouse.co.jp/ir/dxar/2025/7th_mid-term_plan.html">DXアニュアルレポート</a>（403）</td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">すかいらーくHD<span class="doc">中期事業計画2025-2027</span></td><td class="q"><q>新しい外食体験による顧客満足度追求と働き方の改革</q>（DX推進の柱）</td><td><a href="https://corp.skylark.co.jp/Portals/0/images/ir/section/2024/04_dx.pdf">IR資料PDF</a>（画像ベース）</td><td><span class="chip p2">二次</span></td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>製造業</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>企業</th><th>該当記載（原文）</th><th>出典</th><th>確認</th></tr></thead>
+      <tbody>
+        <tr><td class="co">ダイキン工業<span class="doc">FUSION25後半3ヵ年</span></td><td class="q">重点戦略11テーマの一つ<q>顧客とつながるソリューションの強化</q>。CC（年間約180万件）へのAI自動応答導入事例も公開</td><td><a href="https://www.daikin.co.jp/press/2023/20230531">リリース</a> / <a href="https://dcross.impress.co.jp/docs/usecase/003804.html">導入事例（二次）</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">ヤマハ発動機<span class="doc">新中計（2025〜2027年）</span></td><td class="q"><q>デジタル技術の活用とユーザーに寄り添った体験の提供により、顧客エンゲージメントを高めます</q></td><td><a href="https://global.yamaha-motor.com/jp/news/2025/0212/mtp.html">リリース</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">コニカミノルタ<span class="doc">中計（2023〜2025年度）</span></td><td class="q"><q>提供価値の捉え方を製品軸から産業軸・顧客軸に改め</q>、<q>長年培ってきた顧客接点や信頼関係の深さを生かす</q></td><td><a href="https://www.konicaminolta.com/jp-ja/investors/ir_library/ar/ar2023/pdf/midterm_plan.pdf">中計資料PDF</a></td><td><span class="chip p1">一次（スニペット）</span></td></tr>
+        <tr><td class="co">SUBARU<span class="doc">中期経営ビジョン「STEP」（2018策定）</span></td><td class="q"><q>お客様一人一人が主役の、心に響く事業活動を展開する</q>。※策定が古く現行方針は要再確認</td><td><a href="https://www.subaru.co.jp/press/news/2018_07_10_6036/">リリース</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">日産自動車<span class="doc">The Arc（2024〜2026年度）</span></td><td class="q">フィジカル×デジタル融合のブランド体験促進。※2025年に「Re:Nissan」へ移行、優先度低下の可能性</td><td><a href="https://global.nissannews.com/ja-JP/releases/240325-02-j">リリース</a></td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">富士通<span class="doc">中計（2023〜2025年度）</span></td><td class="q">カスタマーサクセス戦略・全接点での「顧客中心」デジタル体験。※CXソリューション提供側でもある＝協賛候補</td><td><a href="https://cloud.watch.impress.co.jp/docs/column/ohkawara/1507213.html">クラウドWatch</a></td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">ソニーグループ<span class="doc">第五次中計（2024〜2026年度）</span></td><td class="q"><q>感動の新たなタッチポイントとして世界中に広げる</q>（エンタメ体験文脈）</td><td><a href="https://gamebiz.jp/news/386513">gamebiz</a></td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">ブリヂストン<span class="doc">24MBP（2024-2026）</span></td><td class="q"><q>社会価値・顧客価値を持続的に提供している会社</q>への進化</td><td><a href="https://www.bridgestone.co.jp/ir/library/strategy/pdf/jpn_mbp20240301_02.pdf">24MBP資料PDF</a></td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">マツダ<span class="doc">中計（2019策定・2022更新）</span></td><td class="q">「ブランド価値経営」を軸に<q>店舗体験の向上</q>を国内構造変革方針に明記</td><td><a href="https://www.nikkei.com/article/DGXZRSP644567_S2A121C2000000/">日経リリース記事</a></td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">ホンダ<span class="doc">2024ビジネスアップデート</span></td><td class="q">Honda 0シリーズ「デジタルUX」、オンライン販売「Honda ON」で新たな顧客接点</td><td><a href="https://global.honda/jp/news/2024/c240516.html">公式リリース</a></td><td><span class="chip p2">二次</span></td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>医薬・ヘルスケア・化学・エネルギー</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>企業</th><th>該当記載（原文）</th><th>出典</th><th>確認</th></tr></thead>
+      <tbody>
+        <tr><td class="co">小林製薬<span class="doc">2023-2025中計＋DX方針</span></td><td class="q"><q>顧客体験や従業員体験の向上につなげること</q>、<q>アイデア創出からアフターサービスまでの…全てのステークホルダーとの接点や体験をDXで改革</q></td><td><a href="https://prtimes.jp/main/html/rd/p/000000142.000086052.html">DX方針リリース</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">中外製薬<span class="doc">TOP I 2030</span></td><td class="q">「患者中心の高度で持続可能な医療」。Value Delivery改革＝<q>リアル・リモート・デジタルの最適活用</q>で顧客への情報提供体制を構築</td><td><a href="https://www.chugai-pharm.co.jp/ir/policy/growth_strategy.html">TOP I 2030</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">塩野義製薬<span class="doc">STS2030 Revision</span></td><td class="q"><q>顧客ニーズに応じた様々なヘルスケアサービスを提供</q>（ヘルスケアプロバイダーへ変革）</td><td><a href="https://www.shionogi.com/jp/ja/company/strategy/sts2030.html">STS2030</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">ロート製薬<span class="doc">中長期成長戦略2025〜2035</span></td><td class="q"><q>お客様・患者様が満たされないニーズの解決を最優先に取り組む</q></td><td><a href="https://www.rohto.co.jp/ir/strategy/strength/">IR戦略ページ</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">エーザイ<span class="doc">EWAY Future &amp; Beyond</span></td><td class="q">貢献対象を「患者様と生活者の皆様」に拡大。生活者向けデジタル接点を展開</td><td><a href="https://www.eisai.co.jp/innovation/ecosystem/index.html">hhceco</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">参天製薬<span class="doc">中計（2025-2029年度）</span></td><td class="q"><q>患者さんのニーズの深い理解に基づく眼科医療のイノベーション</q>（患者起点）</td><td><a href="https://www.santen.com/ja/news/2025/2025_1/20250521_2">中計発表</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">テルモ<span class="doc">GS26（2022〜2026年度）</span></td><td class="q"><q>製品軸から顧客軸・疾病軸へとフォーカスを移す</q></td><td><a href="https://www.terumo.co.jp/sites/g/files/qlpvch151/files/document/2024-11/TR2024_07_J.pdf">Terumo Report 2024</a></td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">第一三共<span class="doc">5カ年事業計画＋Patient Centricity推進体制</span></td><td class="q">2024年4月よりPatient Centricity特命担当がグループ全体を推進</td><td><a href="https://www.daiichisankyo.co.jp/sustainability/our_approach/patient_centricity/">公式ページ</a></td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">ライオン<span class="doc">Vision2030 1st STAGE（2022〜2024）</span></td><td class="q"><q>健康、快適、清潔・衛生を通じた新たな顧客体験価値の創造</q>。※現行2nd STAGEは要再確認</td><td><a href="https://syogyo.jp/news/2022/03/post_032844">週刊粧業</a></td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">ユニ・チャーム<span class="doc">第13次中計（FY2026〜FY2030）</span></td><td class="q">アプリ『ソフィBe』で購入時の「点」の接点を「線」の関係へ（生活者接点のデジタル化）</td><td><a href="https://www.unicharm.co.jp/ja/ir/library/chukei.html">中計ページ</a></td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">出光興産<span class="doc">中計2023〜2025年度（前中計）</span></td><td class="q">全国約6,200のSSを「スマートよろずや」化＝地域の顧客接点へ転換。※現行中計での扱いは要確認</td><td><a href="https://finance.logmi.jp/articles/377671">ログミーF</a></td><td><span class="chip p2">二次</span></td></tr>
+        <tr><td class="co">コスモエネルギーHD<span class="doc">第6次連結中計（過去）</span></td><td class="q"><q>CX（カスタマーエクスペリエンス）の向上とDX、ブランディング</q>に言及。※現行第8次中計での継続は要確認</td><td><a href="https://www.cosmo-energy.co.jp/ja/ir/library/consolidated-medium-term-management-plan.html">IRライブラリー</a></td><td><span class="chip p2">二次</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>参考: BPO・コンタクトセンター事業者（受注側＝協賛営業リスト向け）</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>企業</th><th>該当記載（原文）</th><th>出典</th><th>確認</th></tr></thead>
+      <tbody>
+        <tr><td class="co">ベルシステム24 HD<span class="doc">中計2025（FY2023-2025。中計2028を2026-04公表済み）</span></td><td class="q"><q>型化：CX業務の深化</q>、<q>既存のコンタクトセンター業務の高度化に加え…経営支援につながる業務改善へとCXを深化</q></td><td><a href="https://contents.xj-storage.jp/xcontents/AS07594/a27ed7b0/3735/4d24/94a6/74103b8e71b2/140120230412545930.pdf">中計2025 PDF</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">トランスコスモス<span class="doc">中期事業計画2026-2028</span></td><td class="q"><q>顧客接点のデジタルトランスフォーメーションによるCX向上/売上拡大</q>。CX/BPOでアジアNo.1志向</td><td><a href="https://www.trans-cosmos.co.jp/ir/management/mtp.html">中計ページ</a></td><td><span class="chip p1">一次</span></td></tr>
+        <tr><td class="co">プレステージ・インターナショナル<span class="doc">第8次中計（〜2027年3月期）</span></td><td class="q">コールセンター産業の需要増を捉えBPO総席数6,000席超へ拡大（定量目標）</td><td><a href="https://www.prestigein.com/IR/policy/plan.html">中計ページ</a></td><td><span class="chip p1">一次</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>該当文言を確認できなかった企業</h2>
+    <p class="sub">事実として記録。関係済み企業は個別ヒアリング・フル版資料での裏取りを推奨。</p>
+    <div class="warn"><strong>みずほFG</strong> — 中計リリース（2023-05）に顧客体験系文言なし。CPO発言「EXの向上なくしてCXの向上なし」は二次情報のみ。新中計（2026年度〜）は未確認。</div>
+    <div class="warn"><strong>横浜銀行（コンコルディアFG）</strong> — 新中計リリース（2025-03、概要9p）に該当文言なし。フル版・統合報告書は未確認 → 関係済み企業のため個別ヒアリング推奨。</div>
+    <div class="warn"><strong>クレディセゾン</strong> — 中計FY24-26本文に該当文言なし。別建てのCSDX戦略側に「顧客満足度の向上（CX/EX）」。</div>
+    <p class="note">その他: SGホールディングス（中計リリースに文言なし）／花王（K27戦略ページに文言なし・説明資料PDF未確認）／大塚HD・コーセー・パナソニックHD（グループ中計レベル）・リクルートHD（中計非公表）・学研HD・ベネッセ（サイトbot遮断＋2024年非公開化）— 未確認または非該当。</p>
+  </section>
+
+  <section>
+    <h2>次のアクション候補（解釈）</h2>
+    <dl class="panel">
+      <dt>1. 登壇打診の優先順位</dt>
+      <dd>JR西日本・イオンFS（中計にCC明記）→ かんぽ生命・MUFG・千葉銀行・LIXIL・ダイキン（CX/接点をKPI・柱に明記＋AI言及）。</dd>
+      <dt>2. 既存リレーション先との接続</dt>
+      <dd>三井住友カード（Vision改定でCX明記）・アフラック（中計に生成AI×お客様体験）・東京海上（グループにCC変革ビジョンあり）は、あぽろぐ実績と中計文言の両方が揃った。</dd>
+      <dt>3. 二次情報止まりの約20社</dt>
+      <dd>打診前にIR資料フル版で個別確認（企業サイトのbot遮断が多く、開示配信インフラ経由かブラウザ目視が確実）。</dd>
+      <dt>4. ウォッチ対象</dt>
+      <dd>イオン次期中計（2026年度〜）・みずほ新中計は発表され次第確認。</dd>
+    </dl>
+  </section>
+
+  <footer>
+    oshikubo_office / analyst ｜ 正本: data/documents/2026-08-28_cx-midterm-plan-companies-report.md ｜ 引用は各社公式資料の原文表現（一部要約あり）。出典は全件2026-08-28取得。
+  </footer>
+</div>

@@ -1,0 +1,356 @@
+<title>THE PRINCIPLE 方向性たたき</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --paper:#fbfbf9;
+  --surface:#f2f2ee;
+  --ink:#20242c;
+  --ink-soft:#5a6070;
+  --line:#d9d9d2;
+  --blue:#1f4fa3;
+  --blue-soft:#e8eef8;
+  --red:#b0442c;
+  --red-soft:#f7ece8;
+  --tag-bg:#20242c;
+  --tag-fg:#fbfbf9;
+}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#181a1f;
+    --surface:#20232a;
+    --ink:#e8e8e4;
+    --ink-soft:#a3a8b4;
+    --line:#3a3e48;
+    --blue:#7aa3e8;
+    --blue-soft:#232c3d;
+    --red:#e08a72;
+    --red-soft:#382720;
+    --tag-bg:#e8e8e4;
+    --tag-fg:#181a1f;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#181a1f;
+  --surface:#20232a;
+  --ink:#e8e8e4;
+  --ink-soft:#a3a8b4;
+  --line:#3a3e48;
+  --blue:#7aa3e8;
+  --blue-soft:#232c3d;
+  --red:#e08a72;
+  --red-soft:#382720;
+  --tag-bg:#e8e8e4;
+  --tag-fg:#181a1f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Noto Sans JP',"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+  font-size:15px;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:56px 28px 96px}
+header.doc{border-bottom:2px solid var(--ink);padding-bottom:28px;margin-bottom:40px}
+.kicker{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--blue);margin-bottom:14px}
+h1{font-family:'Shippori Mincho',serif;font-weight:800;font-size:clamp(26px,4.5vw,38px);line-height:1.4;text-wrap:balance}
+h1 .sub{display:block;font-size:.52em;font-weight:600;color:var(--ink-soft);margin-top:10px;letter-spacing:.02em}
+.meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:18px;font-size:12.5px;color:var(--ink-soft)}
+.meta b{color:var(--ink);font-weight:500}
+section{margin-bottom:52px}
+.secno{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--red);margin-bottom:6px}
+h2{font-family:'Shippori Mincho',serif;font-weight:700;font-size:22px;line-height:1.5;margin-bottom:16px;text-wrap:balance}
+h3{font-size:15.5px;font-weight:700;margin:26px 0 8px}
+p{margin-bottom:12px;max-width:42em}
+p.note{font-size:13px;color:var(--ink-soft)}
+ul,ol{margin:0 0 14px 1.4em}
+li{margin-bottom:5px}
+li::marker{color:var(--blue)}
+strong{font-weight:700}
+em{font-style:normal;background:linear-gradient(transparent 68%,var(--blue-soft) 68%)}
+.lead-box{
+  background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--blue);
+  padding:20px 24px;margin:0 0 18px;
+}
+.lead-box .label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;color:var(--blue);margin-bottom:8px}
+.lead-box p{margin-bottom:8px}
+.lead-box p:last-child{margin-bottom:0}
+table{width:100%;border-collapse:collapse;font-size:13px;line-height:1.7;margin:14px 0 6px}
+.tablewrap{overflow-x:auto}
+th{background:var(--surface);text-align:left;font-weight:700;padding:9px 12px;border:1px solid var(--line);white-space:nowrap}
+td{padding:9px 12px;border:1px solid var(--line);vertical-align:top}
+td.hd{font-weight:700;white-space:nowrap;background:var(--surface)}
+.pill{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;background:var(--tag-bg);color:var(--tag-fg);padding:2px 8px;border-radius:2px;margin-right:8px;vertical-align:1px}
+.pill.blue{background:var(--blue);color:#fff}
+.pill.red{background:var(--red);color:#fff}
+.card{border:1px solid var(--line);background:var(--surface);padding:18px 22px;margin-bottom:14px}
+.card h4{font-size:14.5px;font-weight:700;margin-bottom:6px}
+.card p{font-size:13.5px;margin-bottom:6px}
+.card p:last-child{margin-bottom:0}
+.qa{border-left:3px solid var(--red);padding:4px 0 4px 18px;margin:18px 0}
+.qa .q{font-family:'Shippori Mincho',serif;font-weight:700;font-size:16px;margin-bottom:4px}
+.qa p{font-size:13.5px;color:var(--ink-soft);margin-bottom:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:640px){.grid2{grid-template-columns:1fr}}
+.map{font-size:13px;border:1px solid var(--line)}
+.map .row{display:grid;grid-template-columns:118px 1fr;border-bottom:1px solid var(--line)}
+.map .row:last-child{border-bottom:none}
+.map .ch{background:var(--surface);padding:10px 12px;font-weight:700;border-right:1px solid var(--line)}
+.map .body{padding:10px 14px}
+.map .body .t{font-weight:700}
+.map .body .d{color:var(--ink-soft);font-size:12.5px}
+.flag{color:var(--red);font-weight:700}
+.timeline{list-style:none;margin-left:0;font-size:13.5px}
+.timeline li{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:7px 0;border-bottom:1px dashed var(--line);margin:0}
+.timeline .t{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--blue);padding-top:3px;white-space:nowrap}
+footer{border-top:1px solid var(--line);padding-top:18px;font-size:12px;color:var(--ink-soft)}
+</style>
+
+<div class="wrap">
+
+<header class="doc">
+  <div class="kicker">SHOEISHA — EDITORIAL DISCUSSION DRAFT / CONFIDENTIAL</div>
+  <h1>『THE PRINCIPLE』（仮）方向性ディスカッション
+    <span class="sub">骨子ドラフトを受けた「軸・見せ方・伝える順番」のたたき台</span>
+  </h1>
+  <div class="meta">
+    <span>日付: <b>2026年8月28日</b></span>
+    <span>作成: <b>翔泳社 押久保・大久保</b></span>
+    <span>宛先: <b>福田康隆さん MTG（1.5h）用</b></span>
+    <span>素材: <b>骨子ドラフト（序章・第1〜4章・終章）＋7月メモ</b></span>
+  </div>
+</header>
+
+<section>
+  <div class="secno">SUMMARY</div>
+  <h2>編集部の推し（先に結論）</h2>
+  <div class="lead-box">
+    <div class="label">RECOMMENDATION</div>
+    <p><strong>① 読者：</strong>「THE MODELを読んだあの読者が、7年経っていま経営を任されている」——続編の読者は新しい誰かではなく、<em>同じ読者のいまの悩み</em>に定めるのが最も自然で強い。</p>
+    <p><strong>② 軸：</strong>「原理原則」をテーマ（売り物）に、<em>「フェーズ」を本の背骨（構造）に</em>据えるハイブリッド。骨子で最も新しく、福田さんにしか書けない発見は「フェーズの誤認が最大の失敗要因」（19社を横から見た帰結）。原理原則は抽象論になりやすいが、フェーズという地図に載せた瞬間、読者が自分の現在地から引ける実用書になる。</p>
+    <p><strong>③ 順番：</strong>THE MODELアンサー（第1章）は入口として1章に圧縮し、「横の視点→フェーズの発見」をできるだけ早く出す。過去の答え合わせで前半を使い切らない。</p>
+    <p><strong>④ タイトル：</strong>『THE PRINCIPLE』を推す。序章の結び「自分にとってのPRINCIPLEを作ってほしい」と完全に整合し、THEシリーズの連続性も立つ。単数形にする意味（ダリオ『PRINCIPLES』との差別化＝"あなた自身の一つの原理原則"）まで含めて当日議論したい。</p>
+  </div>
+  <p class="note">※本資料はたたき台。当日はこの推しを叩いてもらう前提で、各論点に選択肢を併記しています。</p>
+</section>
+
+<section>
+  <div class="secno">00 — GOAL</div>
+  <h2>本日のゴール：90分で3つ決める</h2>
+  <div class="tablewrap"><table>
+    <tr><th style="width:36px">#</th><th>決めたいこと</th><th>状態</th></tr>
+    <tr><td>1</td><td><strong>読者と軸</strong> — 誰の・どんな場面の本か。「原理原則」をどの角度から売るか</td><td>本日決めたい</td></tr>
+    <tr><td>2</td><td><strong>構成の背骨</strong> — 章立ての基本方針（続編ファースト型か、フェーズ背骨型か）</td><td>方向感まで</td></tr>
+    <tr><td>3</td><td><strong>進め方</strong> — 執筆順序・レビューサイクル・タイトル検討の段取り</td><td>本日決めたい</td></tr>
+  </table></div>
+  <p class="note">タイムボックス案：前提共有10分 → 読者と軸30分 → 構成30分 → 見せ方・タイトル10分 → 進め方10分</p>
+</section>
+
+<section>
+  <div class="secno">01 — CURRENT DRAFT</div>
+  <h2>骨子ドラフトの現状マップ</h2>
+  <p>共有いただいた6ファイルを読み込み、コンテンツ資産として整理しました。<strong>素材の強度は既に高い</strong>——特に「P」と印の付いた原理原則の断片は、そのまま本の商品価値になる粒が揃っています。</p>
+
+  <div class="map">
+    <div class="row"><div class="ch">序章</div><div class="body">
+      <div class="t">なぜもう一度書くのか</div>
+      <div class="d">環境の変化（SaaS is Dead／AI）＋立場の変化（縦のキャリア→横の視点）。原理原則＝判断に根拠を持つための蓄積。マシン／経営視点の定義。野村監督・ビスタ・ダリオ。</div>
+    </div></div>
+    <div class="row"><div class="ch">第1章</div><div class="body">
+      <div class="t">「THE MODEL」とはなんだったのか</div>
+      <div class="d">執筆のきっかけ／The Model成立の秘話（vs シーベル、2004年スライド）／よくある疑問への回答／7年の変化（SaaS is Dead三側面・AIエージェント・支援から完結へ）。</div>
+    </div></div>
+    <div class="row"><div class="ch">第2章</div><div class="body">
+      <div class="t">横から見るJapan Cloudと「フェーズ」という発見</div>
+      <div class="d">持続的成長の条件／成長4パターン（A〜D）／時間差の原則（観察・理解・先手）／将来の解像度。<span class="flag">※後半にGTM戦略・ICP・セールスキャパシティ・報酬設計・マネジメントシステム・年間計画まで同居——1章として過積載</span>。</div>
+    </div></div>
+    <div class="row"><div class="ch">第3章</div><div class="body">
+      <div class="t">フェーズ別の原理原則</div>
+      <div class="d">STARSモデル5フェーズ×（特徴／リーダーの重点アクション／原理原則）。「フェーズの誤認が最大の失敗要因」。合宿演習の実話。</div>
+    </div></div>
+    <div class="row"><div class="ch">第4章</div><div class="body">
+      <div class="t">採用・リーダーシップ・キャリア</div>
+      <div class="d">マルチプライヤー／実績者が成功するとは限らない／やってはいけない5つ・やるべき4つ（新任リーダーの90日論）。</div>
+    </div></div>
+    <div class="row"><div class="ch">終章</div><div class="body">
+      <div class="t">自分のPRINCIPLESを作る</div>
+      <div class="d">「初めて出会う問題はほとんどない」／レゴと粘土（フレームワークは判断を代替しない）／JC Talent Development Program／各章ワークのとりまとめ／Journey is the reward（退職メール全文）。</div>
+    </div></div>
+  </div>
+
+  <h3>読み取れる構造上のサイン</h3>
+  <ul>
+    <li>本文中に<strong>第5章（マネジメントシステム）・第6章（立ち上げ）・第7章（新任リーダー）への参照</strong>があり、頭の中の構成は7章前後。共有ドラフトの4章立てとズレている＝<em>章構成は未確定で、いま決めるのが最も効率的</em>。</li>
+    <li>第2章に「フェーズという発見」と「GTM原理原則」と「マネジメントシステム」が同居。<strong>分割は必至</strong>で、どう割るかがそのまま「本の軸」の議論になる。</li>
+    <li>各章末ワーク＋終章とりまとめ（自分のPRINCIPLEを作る）という<strong>体験設計の種</strong>が既にある。これは差別化資産。</li>
+  </ul>
+</section>
+
+<section>
+  <div class="secno">02 — PREMISE</div>
+  <h2>前提の確認：この本の勝ち筋と、最大の敵</h2>
+  <p><strong>勝ち筋は「誰が言うか」。</strong>原理原則は誰でも語れるが、「累計19社の日本法人設立に関わり、12社の取締役として同じ時期に横から見た」人は日本にほぼいない。この観測点の希少性が本書の根拠であり、序章にすでに書かれている「横の視点」がそれです。</p>
+  <p><strong>最大の敵は「原理原則」という言葉の抽象度。</strong>THE MODELが売れたのは、持ち帰れる「型」があったから。本書は「型ではなく原則だ」と言う本であり、<em>型を否定する本は、型ほど売れにくい</em>という構造的ハンデを最初から抱えます。だから編集の仕事は、型の代わりに<strong>持ち帰れる道具</strong>（フェーズ地図・原則の型化・ワーク）を設計すること。ここが今日の議論の中心だと考えています。</p>
+  <div class="qa">
+    <div class="q">あえて指摘：前作の反省と、現骨子の自己矛盾</div>
+    <p>福田さんの狙いは「フレームワーク紹介で終わらせない」。ところが現骨子は STARS・Playing to Win・ダリオ・ワイズマン・ワトキンスと、他者のフレームワーク引用が背骨になりつつあります。終章の「レゴと粘土」（フレームワークは判断を代替しない、埋めるのは自分の原理原則）こそ本書の思想なので、<strong>この思想を序盤に宣言し、主役は福田さん自身の言葉の「P（原則）」、フレームワークは脇役</strong>——という編集方針を提案します。引用許諾の実務上も、引用密度は下げたい。</p>
+  </div>
+</section>
+
+<section>
+  <div class="secno">03 — ISSUE 1</div>
+  <h2>論点1：読者は誰か</h2>
+  <div class="tablewrap"><table>
+    <tr><th style="width:70px">案</th><th>読者像</th><th>強み</th><th>弱み</th></tr>
+    <tr>
+      <td class="hd">案a</td>
+      <td><strong>THE MODEL読者の「7年後」</strong><br>当時営業・マーケ実務層 → いま部長・事業責任者・役員・社長。次のキャリアとして経営を意識する層</td>
+      <td>前作60万部級の読者基盤をそのまま引き継げる。「あの本の続き」で手に取る理由が明確。悩みの変化（実行→設計）と本の主題（プレーヤー→マシンの設計者）が一致</td>
+      <td>読者の高齢化とともに市場が狭まる。若い新規読者への入口が弱い</td>
+    </tr>
+    <tr>
+      <td class="hd">案b</td>
+      <td><strong>これから経営を担う人</strong><br>GM候補・次世代リーダー・スタートアップ経営者。「体系的に経営を学ぶ場が日本にない」（終章）への回答</td>
+      <td>市場が広く、書籍の役割（学びの場の代替）が明確。JC Talent Development Programの実績と接続</td>
+      <td>「経営書」の棚は激戦区。前作との連続性が薄れ、続編の意味が弱まる</td>
+    </tr>
+    <tr>
+      <td class="hd">案c</td>
+      <td><strong>SaaS/IT業界の当事者</strong><br>AI時代の事業運営に悩む外資・SaaS界隈</td>
+      <td>具体性が最も活きる。講演・SNSでの初速が出やすい</td>
+      <td>市場が最も狭い。「業界本」に見えた瞬間、前作が獲得した業界外読者を失う</td>
+    </tr>
+  </table></div>
+  <div class="lead-box">
+    <div class="label">編集部の推し</div>
+    <p><strong>案a を主読者、案b を拡張読者に。</strong>「THE MODELで実行を学んだあなたが、今度は設計する側に回る番だ」という一本のメッセージで a→b が繋がります。帯・序章の語りかけの主語をここに固定したい。</p>
+  </div>
+</section>
+
+<section>
+  <div class="secno">04 — ISSUE 2</div>
+  <h2>論点2：本の軸——3つの候補とハイブリッド</h2>
+  <p>福田さんの「どういう軸で書くのがいいか迷っている」に対する選択肢です。</p>
+
+  <div class="card">
+    <h4><span class="pill blue">軸A</span>続編軸 —「THE MODEL、その後」</h4>
+    <p>前作の誤解を解き、7年の変化（SaaS is Dead／AI）に答える。現骨子の第1章が該当。</p>
+    <p><strong>評価：</strong>入口として最強、ただし軸にすると「答え合わせ本」で終わる。<em>1章に圧縮して入口に使う</em>のが正解と考えます。</p>
+  </div>
+  <div class="card">
+    <h4><span class="pill blue">軸B</span>原理原則軸 —「福田版PRINCIPLES」</h4>
+    <p>判断に根拠を持つための蓄積としての原則を、エピソードとともに編む。終章「自分のPRINCIPLESを作る」が着地。</p>
+    <p><strong>評価：</strong>本書のテーマそのもの。ただし原則を並べるだけでは総花的になり、読者はどこから読めばいいか分からない。<em>売り物ではあるが、構造（背骨）は別に必要</em>。</p>
+  </div>
+  <div class="card">
+    <h4><span class="pill blue">軸C</span>フェーズ軸 —「現在地の地図」</h4>
+    <p>19社を横から見て得た発見＝「会社にはフェーズがあり、フェーズの誤認が最大の失敗要因」。フェーズごとに通用する原則が変わる。</p>
+    <p><strong>評価：</strong>骨子の中で最も新しく、最も「福田さんにしか書けない」主張。読者が<em>自分の現在地から本を引ける</em>ため、実用の背骨になる。単体では「STARS紹介本」に見えるリスクがあるので、主役はあくまで各フェーズの原則。</p>
+  </div>
+
+  <div class="lead-box">
+    <div class="label">編集部の推し</div>
+    <p><strong>C（フェーズ）を背骨に、B（原理原則）を売り物に、Aは第1章の入口に圧縮。</strong>一文で言えば——<em>「会社のフェーズを見誤るな。フェーズごとに効く原理原則を、19社の実話で渡す」</em>。前作が「プロセスの分業」という空間の地図だったのに対し、本作は「フェーズ」という<strong>時間の地図</strong>。続編としての対比も立ちます。</p>
+  </div>
+</section>
+
+<section>
+  <div class="secno">05 — ISSUE 3</div>
+  <h2>論点3：伝える順番——構成2案の比較</h2>
+
+  <div class="grid2">
+    <div class="card">
+      <h4><span class="pill">案1</span>続編ファースト型（現骨子の整流）</h4>
+      <p>序章 → 1章 THE MODELアンサー → 2章 横の視点と時間差 → 3章 GTM戦略の原則 → 4章 マネジメントシステム → 5章 フェーズ別原則 → 6章 採用・リーダーシップ → 終章</p>
+      <p><strong>○</strong> 現ドラフトからの距離が近く執筆負荷が小さい。前作読者の期待に素直</p>
+      <p><strong>×</strong> テーマ別の並びのため「自分はどこを読めばいいか」が見えにくい。前半が過去の話で重くなる</p>
+    </div>
+    <div class="card">
+      <h4><span class="pill red">案2</span>フェーズ背骨型（推し）</h4>
+      <p>序章 → 1章 THE MODELアンサー（圧縮）→ 2章 横の視点と「フェーズ」の発見（時間差・4パターン・誤認）→ 3〜7章 フェーズ別に原則を編む（各フェーズにGTM・システム・人を織り込む）→ 終章 自分のPRINCIPLE</p>
+      <p><strong>○</strong> 読者が現在地から引ける。「地図→各エリアの原則→自分の原則を作る」と体験が一直線</p>
+      <p><strong>×</strong> GTM・キャパシティ等の横断テーマをフェーズに割り付ける再構成コストが大きい。フェーズをまたぐ原則の置き場に工夫が要る</p>
+    </div>
+  </div>
+
+  <p style="margin-top:14px"><strong>折衷（実務案）：</strong>二部構成。<em>第1部「地図」</em>＝アンサー＋横の視点＋フェーズの発見、<em>第2部「原則」</em>＝GTM／マネジメントシステム／人・組織のテーマ章に、<strong>全原則へ「効くフェーズ」のタグを付ける</strong>。テーマ章の書きやすさとフェーズの引きやすさを両立でき、現ドラフトからの移行も現実的。当日はここを一番議論したい。</p>
+
+  <div class="qa">
+    <div class="q">合わせて決めたい：終章の位置エネルギー</div>
+    <p>終章（レゴと粘土／Journey is the reward／退職メール）は現時点で<strong>原稿の完成度・熱量とも最強</strong>。この思想（フレームワークでは埋まらない距離を、自分の原則が埋める）を終章まで隠すか、序章で予告して全体の読みの構えを作るか。編集部は<strong>序章での予告</strong>を推します。</p>
+  </div>
+</section>
+
+<section>
+  <div class="secno">06 — ISSUE 4</div>
+  <h2>論点4：見せ方——「原則」をプロダクトとして設計する</h2>
+  <ul>
+    <li><strong>原則の型化：</strong>散在する「P」を、<em>見出し1行（言い切り）＋なぜそうなるか＋実話1本＋読者への問い</em>の定型に統一。全50〜70本を通し番号で管理し、巻末に「原則インデックス」（フェーズ×テーマのマトリクス）を置く。→ 型の代わりの「持ち帰れる道具」その1</li>
+    <li><strong>各章ワークの本線化：</strong>骨子で仮案となっている章末ワークを正式採用し、終章「自分のPRINCIPLEを作る」で回収する一冊通しの体験に。読者が書き込んだ瞬間、本が「自分の原理原則ノート」になる。→ 道具その2</li>
+    <li><strong>図版：</strong>成長4パターン（A〜D）、フェーズ地図（STARS改）、時間差の構造（今日の意思決定→1年後の結果）は本書の顔になる図。前作の「あのスライド」級に磨く価値がある。2004年スライド等の一次資料は写真的に見せると強い</li>
+    <li><strong>引用の整理：</strong>ワトキンス・ダリオ・ワイズマン・Playing to Win・クラウド誕生ほか引用が多い。許諾要否の洗い出しを編集側で早期に実施（著者注にも【要確認】が複数）。オリジナル原則との比率管理も兼ねる</li>
+    <li><strong>AI章の鮮度：</strong>第1章後半のAIエージェント論は出版時点で必ず古びる。骨子にある通り<em>校了直前アップデート枠</em>として設計し、構造（変わらない原理原則）と時事(変わる実行手段)を段落レベルで分離しておく</li>
+  </ul>
+</section>
+
+<section>
+  <div class="secno">07 — TITLE</div>
+  <h2>タイトルの方向感</h2>
+  <div class="tablewrap"><table>
+    <tr><th>候補</th><th>根拠・狙い</th><th>論点</th></tr>
+    <tr>
+      <td class="hd">THE PRINCIPLE</td>
+      <td>序章の結び「自分にとってのPRINCIPLEを作ってほしい」と完全整合。THEシリーズの連続性。単数形＝<em>あなた自身の一つの原理原則</em>という読者への渡し方</td>
+      <td>ダリオ『PRINCIPLES』との距離感（本文で参照しており確信犯として扱えるか）。カタカナ読みの座り（ザ・プリンシプル）</td>
+    </tr>
+    <tr>
+      <td class="hd">THE PRINCIPLES</td>
+      <td>複数の原則集であることに忠実</td>
+      <td>ダリオとほぼ同名になり検索・書店で埋没</td>
+    </tr>
+    <tr>
+      <td class="hd">THE MODEL 2</td>
+      <td>続編認知が最速。現ドラフトの作業名</td>
+      <td>「型の続き」を期待させ、本書の主張（型ではなく原則）と自己矛盾</td>
+    </tr>
+    <tr>
+      <td class="hd">THE PHASE</td>
+      <td>フェーズ背骨案に忠実。「現在地の地図」が一語で立つ</td>
+      <td>原理原則というテーマ性が消える。語の強度がやや弱い</td>
+    </tr>
+  </table></div>
+  <p><strong>推し：『THE PRINCIPLE』</strong>＋日本語サブタイトルで実利を補う（例：「なぜあの会社は、同じ壁にぶつかるのか」「フェーズで読み解く経営の原理原則」）。タイトルは今日決めず、<em>方向感（THEシリーズ英語一語で行くか）だけ合意</em>できれば十分です。</p>
+</section>
+
+<section>
+  <div class="secno">08 — RISKS</div>
+  <h2>正直な懸念（先に自分たちで挙げておく）</h2>
+  <div class="tablewrap"><table>
+    <tr><th>懸念</th><th>中身</th><th>打ち手</th></tr>
+    <tr><td class="hd">続編の宿命</td><td>前作比で必ず評価される。「型」ほどのキャッチーさが原理原則にはない</td><td>持ち帰れる道具（原則インデックス・ワーク）を型の代替に。帯コピーで「答え」ではなく「地図」を約束する</td></tr>
+    <tr><td class="hd">外資IT特化の狭さ</td><td>n=19の具体は強いが、読者母数は狭い。「業界回顧録」に見えたら負け</td><td>骨子の方針通り<em>無理に汎用化せず、結論だけ汎用化</em>。各章ワークが読み替え装置として機能するかを編集で検証</td></tr>
+    <tr><td class="hd">引用密度</td><td>他者フレームワーク中心に見えると前作の反省と矛盾。許諾実務も重い</td><td>主役を福田さんの「P」に。引用は出典明記の脇役へ。許諾リストを編集側で即作成</td></tr>
+    <tr><td class="hd">AI章の陳腐化</td><td>出版まで1年前後と想定するとAI記述は確実に古びる</td><td>校了直前アップデート枠＋「変わらないもの」中心の記述に寄せる</td></tr>
+    <tr><td class="hd">「関心ある人いるのかな」問題</td><td>前作でも途中経過で陥った不安（福田さんメール）</td><td>執筆と並行してAIdiver等で一部を連載・講演化し、読者反応を先に取る。前作の「THE MODEL型」独り歩きの轍を踏まぬよう、言葉の定義発信を編集が設計</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <div class="secno">09 — NEXT</div>
+  <h2>進め方（案）</h2>
+  <ul class="timeline">
+    <li><span class="t">本日</span><span>軸・読者・構成方針・タイトル方向感の合意。宿題の切り分け</span></li>
+    <li><span class="t">〜9月中旬</span><span>編集部：合意した軸で章構成表（原則の割付マトリクス付き）を作成 → 福田さんレビュー</span></li>
+    <li><span class="t">9月下旬〜</span><span>福田さん：確定構成で第1稿の執筆開始（完成度の高い終章・第3章系から着手する案）。編集部：引用許諾リスト・図版ラフ・ワーク設計</span></li>
+    <li><span class="t">執筆中</span><span>章単位のレビューサイクル（章ごとに壁打ち。全部書いてから、にしない）。連載・講演での先行検証を並走</span></li>
+    <li><span class="t">校了前</span><span>AI関連記述の最終アップデート。タイトル・帯の最終決定</span></li>
+  </ul>
+</section>
+
+<footer>
+  翔泳社 メディア編集部門 — 押久保剛・大久保 ／ 本資料は福田康隆氏との編集ディスカッション用の社外秘たたき台です。骨子ドラフト（Japan Cloud Confidential）の内容を含むため取り扱い注意。
+</footer>
+
+</div>

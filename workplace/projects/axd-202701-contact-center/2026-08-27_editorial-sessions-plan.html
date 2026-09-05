@@ -1,0 +1,385 @@
+<title>AI Contact Center Summit 編集部セッション企画</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+  :root {
+    --paper: #FAFBF7;
+    --surface: #F1F4EC;
+    --ink: #1F2A24;
+    --ink-soft: #4A574E;
+    --ink-faint: #74816F;
+    --brand: #2E5C41;
+    --brand-strong: #234A33;
+    --olive: #6E8B3D;
+    --line: #DCE3DA;
+    --line-strong: #B9C4B4;
+    --alert-bg: #F7F1E4;
+    --alert-edge: #A8802F;
+    --alert-ink: #6B5316;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #151B17;
+      --surface: #1C241E;
+      --ink: #E5EAE2;
+      --ink-soft: #ADB8AA;
+      --ink-faint: #7E8A7B;
+      --brand: #7FB893;
+      --brand-strong: #9CCBAC;
+      --olive: #A3BE6B;
+      --line: #2C362E;
+      --line-strong: #404C41;
+      --alert-bg: #2A2417;
+      --alert-edge: #C9A24E;
+      --alert-ink: #E0C98F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #151B17;
+    --surface: #1C241E;
+    --ink: #E5EAE2;
+    --ink-soft: #ADB8AA;
+    --ink-faint: #7E8A7B;
+    --brand: #7FB893;
+    --brand-strong: #9CCBAC;
+    --olive: #A3BE6B;
+    --line: #2C362E;
+    --line-strong: #404C41;
+    --alert-bg: #2A2417;
+    --alert-edge: #C9A24E;
+    --alert-ink: #E0C98F;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    font-size: 15.5px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 860px; margin: 0 auto; padding: 56px 28px 96px; }
+  h1, h2, h3 {
+    font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+    line-height: 1.4;
+    text-wrap: balance;
+    margin: 0;
+  }
+  /* ---- header ---- */
+  .doc-head { border-bottom: 3px solid var(--brand); padding-bottom: 28px; }
+  .eyebrow {
+    font-size: 12px; font-weight: 700; letter-spacing: .14em;
+    color: var(--brand); text-transform: uppercase; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .eyebrow .status {
+    font-weight: 700; letter-spacing: .06em; color: var(--alert-ink);
+    background: var(--alert-bg); border: 1px solid var(--alert-edge);
+    border-radius: 3px; padding: 1px 10px;
+  }
+  h1 { font-size: 30px; font-weight: 900; letter-spacing: .01em; }
+  h1 .sub { display: block; font-size: 17px; font-weight: 700; color: var(--ink-soft); margin-top: 6px; }
+  .meta {
+    margin-top: 18px; display: flex; gap: 28px; flex-wrap: wrap;
+    font-size: 13px; color: var(--ink-faint);
+  }
+  .meta b { color: var(--ink-soft); font-weight: 500; }
+  /* ---- summary ---- */
+  .summary {
+    margin-top: 32px; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 6px; padding: 22px 26px;
+  }
+  .summary .label { font-size: 12px; font-weight: 700; letter-spacing: .12em; color: var(--brand); margin-bottom: 8px; }
+  .summary p { margin: 0; font-size: 16.5px; font-weight: 500; line-height: 1.9; }
+  /* ---- sections ---- */
+  section { margin-top: 56px; }
+  h2 {
+    font-size: 20px; font-weight: 700; color: var(--ink);
+    display: flex; align-items: baseline; gap: 14px;
+    border-bottom: 1px solid var(--line-strong); padding-bottom: 10px; margin-bottom: 22px;
+  }
+  h2 .no {
+    font-size: 13px; font-weight: 700; color: var(--brand);
+    letter-spacing: .08em; font-variant-numeric: tabular-nums;
+  }
+  h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  p { margin: 0 0 14px; }
+  strong { font-weight: 700; color: var(--ink); }
+  .accent { color: var(--brand-strong); font-weight: 700; }
+  /* ---- tables ---- */
+  .tablewrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; line-height: 1.7; }
+  th, td { border: 1px solid var(--line); padding: 9px 14px; text-align: left; vertical-align: top; }
+  th { background: var(--surface); font-weight: 700; color: var(--ink-soft); white-space: nowrap; }
+  td { font-variant-numeric: tabular-nums; }
+  /* ---- principles ---- */
+  ol.principles { margin: 0; padding-left: 1.4em; }
+  ol.principles li { margin-bottom: 12px; }
+  ul.plain { margin: 0 0 14px; padding-left: 1.3em; }
+  ul.plain li { margin-bottom: 6px; }
+  /* ---- session cards ---- */
+  .session { border: 1px solid var(--line); border-radius: 6px; margin-bottom: 26px; overflow: hidden; }
+  .session-head {
+    background: var(--surface); border-bottom: 1px solid var(--line);
+    padding: 14px 22px; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  }
+  .slot {
+    font-family: "Zen Kaku Gothic New", sans-serif; font-weight: 900; font-size: 13px;
+    color: var(--paper); background: var(--brand); border-radius: 3px;
+    padding: 2px 10px; letter-spacing: .06em; white-space: nowrap;
+  }
+  .session-head .time { font-size: 12.5px; color: var(--ink-faint); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .session-head h3 { font-size: 16.5px; margin: 0; flex: 1 1 100%; }
+  .session-body { padding: 18px 22px 8px; }
+  .row { display: grid; grid-template-columns: 108px 1fr; gap: 4px 18px; margin-bottom: 12px; }
+  .row .k {
+    font-size: 12px; font-weight: 700; color: var(--brand);
+    letter-spacing: .08em; padding-top: 4px;
+  }
+  .row .v { margin: 0; }
+  .row .v .alt { color: var(--ink-faint); font-size: 13.5px; }
+  @media (max-width: 560px) { .row { grid-template-columns: 1fr; } .row .k { padding-top: 0; } }
+  /* ---- risk ---- */
+  .risk { border-left: 3px solid var(--alert-edge); background: var(--alert-bg); border-radius: 0 5px 5px 0; padding: 14px 20px; margin-bottom: 14px; }
+  .risk b { color: var(--alert-ink); }
+  .risk p { margin: 0; font-size: 14.5px; }
+  /* ---- footer ---- */
+  .sources { font-size: 13px; color: var(--ink-faint); }
+  .sources a { color: var(--brand); text-decoration: none; border-bottom: 1px solid var(--line-strong); }
+  footer { margin-top: 72px; border-top: 1px solid var(--line); padding-top: 16px; font-size: 12px; color: var(--ink-faint); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+</style>
+
+<div class="page">
+  <header class="doc-head">
+    <div class="eyebrow">AIdiver イベント企画書<span class="status">v3ドラフト — 人選は打診前・あぽろぐ分析反映</span></div>
+    <h1>AI Contact Center Summit 2026<span class="sub">編集部セッション（全6枠）企画案</span></h1>
+    <div class="meta">
+      <span><b>作成</b>　2026-08-27　AIdiver編集部（planner）</span>
+      <span><b>開催</b>　2027年1月22日（金）13:00–18:40　砂防会館別館</span>
+      <span><b>構成</b>　2トラック／全16セッション（うち編集部6）</span>
+    </div>
+  </header>
+
+  <div class="summary">
+    <div class="label">一文サマリー（結論）</div>
+    <p>経営企画・AX推進・コンタクトセンター部門のリーダー層に「<strong>コンタクトセンターを経営アジェンダとして扱う視点と実装の現在地</strong>」を持ち帰らせる6講演を編集部枠に置き、事業会社リッチな登録リストをつくってスポンサー協賛<strong>1,480万円の満売</strong>につなげる。編集部枠は<strong>事業会社5＋有識者1、ベンダー0</strong>で構成する。</p>
+    <p style="margin-top:10px; font-size:14px; color:var(--ink-soft);"><strong>v2改訂：</strong>社内アポデータ「あぽろぐ」（日報8,885件）のコンタクトセンター関連45件を分析し、人選第1候補を「未接点の理想候補」から<strong>取材実績のある高確度候補</strong>（三井住友カード・資生堂ジャパン・アフラック生命・令和トラベル・エニトグループ）に差し替えた。<br><strong>v3改訂：</strong>あぽろぐ「CX」163件・「顧客接点」10件を追加分析し、マーケ・顧客接点文脈に振る場合の候補群を付録（09）として追加した。</p>
+  </div>
+
+  <section>
+    <h2><span class="no">01</span>前提（ご案内書仮案より）</h2>
+    <div class="tablewrap">
+    <table>
+      <tr><th>編集部枠</th><td>オープニング×2、基調講演×2、クロージング×2（各30分）。スポンサー枠はプラチナ4＋ゴールド6の計10（各20分）</td></tr>
+      <tr><th>想定規模</th><td>事前登録 300–400名／来場 150–200名</td></tr>
+      <tr><th>来場ターゲット</th><td>経営企画・DX推進・AI推進部門の責任者 6–7割／コンタクトセンター部門リーダー職以上 3–4割</td></tr>
+      <tr><th>協賛売上</th><td>プラチナ 150万×4 ＋ ゴールド 100万×6 ＋ 展示 40万×7 ＝ <strong>1,480万円（満売時）</strong></td></tr>
+      <tr><th>確定デッドライン</th><td>10月中旬に編集部セッション決定 → 10月下旬セッション情報締切 → 11月中旬サイト公開・集客開始</td></tr>
+    </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">02</span>全体コンセプト — 競合が空けているポジションを取る</h2>
+    <p>競合のリックテレコム「生成AI×コンタクトセンター・サミット」（2026/8/26、400名規模）は、FAQ設計・応対品質・教育DXなど<strong>現場・運用寄り</strong>の構成で、モデレーターにCCコンサルタントを多用する。事業会社登壇はメルカリ・みずほ銀行・ベネッセ・イオンFS・パナソニックEW・カウネット・JR西日本CRなど。</p>
+    <p>本イベントの勝ち筋は<span class="accent">「経営アジェンダとしてのコンタクトセンターAX」</span>。ターゲットの6–7割が経営企画・AX推進の責任者である以上、オペレーション改善の話ではなく<strong>投資判断・組織再設計・VoC経営</strong>の話に寄せる。これは競合が空けているポジションであり、AIdiverのパーパス（AI活用を推進するリーダーを日本に1000人作る）とも一致する。</p>
+  </section>
+
+  <section>
+    <h2><span class="no">03</span>スポンサー観点の3原則</h2>
+    <ol class="principles">
+      <li><strong>編集部枠にツールベンダーを登壇させない。</strong>プラチナ150万／ゴールド100万で販売する枠の価値を毀損するため。編集部枠は事業会社＋有識者のみで構成する。</li>
+      <li><strong>登壇事業会社は「スポンサー候補ベンダーの導入企業」から優先打診する。</strong>例：横浜銀行（モビルス）、東京海上日動（RightTouch）、三菱UFJ銀行（NTTドコモビジネス）。「自社顧客が基調講演に出る」ことはベンダーの協賛動機に直結する。</li>
+      <li><strong>金融・通信・小売の大手事業会社を看板にして、登録リストの事業会社比率を上げる。</strong>ベンダーが買うのは営業リード。同業大手の登壇は同業リーダー層の登録を呼ぶ。</li>
+    </ol>
+    <p>競合リックのスポンサー一覧（プラチナ：CAT.AI／Content Guru／ジェネシス／PKSHA、ゴールド：ZVC JAPAN／コンセントリクス／Verbex／フライル／ベルシステム24／RightTouch、ほかシルバー7社）は、そのまま本イベントの<strong>協賛見込みリスト</strong>として広告課に渡せる。</p>
+    <h3 style="margin-top:24px;">協賛見込みリスト（あぽろぐ由来・接点あり順）</h3>
+    <p style="font-size:14px; color:var(--ink-soft);">社内アポデータ45件から抽出した、既に翔泳社と接点のあるベンダー。競合スポンサー一覧より優先度が高い。</p>
+    <div class="tablewrap">
+    <table>
+      <tr><th>優先</th><th>企業</th><th>根拠（あぽろぐ）</th></tr>
+      <tr><td>◎</td><td>フライル</td><td>AI×CCテーマで広告出稿実績（2026-08掲載進行・温度感高）。競合リックのゴールドでもある</td></tr>
+      <tr><td>◎</td><td>ワークスモバイルジャパン（LINE WORKS）</td><td>AiCall等CC向け製品群。<strong>「コールセンター系イベントへの積極的な出展意向」を明言</strong>（2026-08）</td></tr>
+      <tr><td>◎</td><td>Gen-AX</td><td>三井住友カード登壇が実現すれば「自社第1号ユーザーの基調講演」となり協賛動機が最大化</td></tr>
+      <tr><td>○</td><td>Channel Corporation</td><td>AIエージェント「ALF」。エニトグループ事例取材済（温度感高）</td></tr>
+      <tr><td>○</td><td>ナイスジャパン</td><td>日本法人社長を取材済（温度感高）。ルフトハンザ・トヨタ事例</td></tr>
+      <tr><td>○</td><td>ZVC JAPAN（Zoom）</td><td>BZ「CX起点の事業変革」企画が好感触（温度感高）。CCソリューション保有</td></tr>
+      <tr><td>○</td><td>ジェネシス／RightTouch／IVRy／AI Shift</td><td>取材・会見・意見交換の接点あり</td></tr>
+      <tr><td>△</td><td>カラクリ／Helpfeel／トランスコスモス／NTTマーケティングアクトProCX</td><td>会見等で接点。トランスコスモスは過去に「Day協賛視野」の記録あり</td></tr>
+    </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">04</span>成功指標</h2>
+    <ul class="plain">
+      <li>事前登録 <strong>400名</strong>（レンジ上限側）、うち<strong>事業会社所属比率 70%以上</strong>（登録フォームの部門属性で計測）</li>
+      <li>来場 200名、経営企画・DX/AI推進責任者比率 6–7割の維持</li>
+      <li>スポンサー<strong>満売 1,480万円</strong></li>
+      <li>AIdiver新規会員登録：イベント経由で計測（目標値は営業・編集で別途設定）</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="no">05</span>編集部6セッション企画</h2>
+
+    <div class="session">
+      <div class="session-head">
+        <span class="slot">オープニング A</span><span class="time">13:00–13:30／Aトラック</span>
+        <h3>AIエージェント時代の顧客接点戦略 — コンタクトセンターは“コストセンター”から“企業の顔”になる</h3>
+      </div>
+      <div class="session-body">
+        <div class="row"><div class="k">目的</div><p class="v">経営企画・AX推進層を初手で掴む「看板セッション」。集客の主エンジン。</p></div>
+        <div class="row"><div class="k">内容</div><p class="v">顧客接点全体の再設計論からCCの位置づけを引き上げる。効率化ではなく事業価値の話に振り切る。</p></div>
+        <div class="row"><div class="k">人選</div><p class="v"><strong>藤井保文氏</strong>（ビービット『アフターデジタル』著者）<br><span class="alt">代替：入山章栄氏（早稲田大学ビジネススクール教授）／小澤健祐氏（AICX協会代表理事 ※競合8月回に登壇済）</span></p></div>
+        <div class="row"><div class="k">協賛観点</div><p class="v">「経営層向けイベント」の格を作り、役職者リードの質を担保する枠。ベンダー中立の有識者であることが必須。</p></div>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-head">
+        <span class="slot">オープニング B</span><span class="time">13:00–13:30／Bトラック</span>
+        <h3>AIネイティブ旅行会社のコンタクトセンター — 自動解決80%と音声AI内製の実際</h3>
+      </div>
+      <div class="session-body">
+        <div class="row"><div class="k">目的</div><p class="v">CC部門リーダー層（来場3–4割）の取り込み。実装当事者の一次情報で「来てよかった」を初手で作る。</p></div>
+        <div class="row"><div class="k">内容</div><p class="v">チャット自動解決率40%→最大80%への引き上げ、音声AIの内製・本番稼働、VOCの商品開発活用。AIネイティブ企業のCC運営の実際。</p></div>
+        <div class="row"><div class="k">人選</div><p class="v"><strong>宇田氏</strong>（令和トラベル 創業メンバー）— 2026-07にAIdiver取材済・温度感高。競合イベント未登壇で新鮮<br><span class="alt">代替：大貫竜平氏（メルカリ ※競合登壇歴あり＝確度高いが既視感）／カインズCC/CX責任者／アスクル（LOHACO）CS責任者</span></p></div>
+        <div class="row"><div class="k">協賛観点</div><p class="v">EC・小売系リードの呼び水。CS SaaSベンダー（フライル、RightTouch等）の営業対象と一致。</p></div>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-head">
+        <span class="slot">基調講演 A</span><span class="time">14:55–15:25／Aトラック</span>
+        <h3>金融のコンタクトセンターAX — AI応対“過半”への道筋とリスク管理</h3>
+      </div>
+      <div class="session-body">
+        <div class="row"><div class="k">目的</div><p class="v">本イベント最重量級の事例。「金融が動いた」で当日来場のピークを作る。</p></div>
+        <div class="row"><div class="k">内容</div><p class="v">生成AI・音声AIオペレーターの段階導入。現場抵抗の克服、品質評価の仕組み、金融特有のガバナンスとの両立。</p></div>
+        <div class="row"><div class="k">人選</div><p class="v"><strong>大保氏</strong>（三井住友カード）— 2026-05にAIdiver取材済・温度感高。Gen-AXユーザー第1号、3年以内にAI応対過半を公言。取材済みのため広報審査も通しやすい<br><span class="alt">代替：三菱UFJ銀行（ドコモビジネスの生成AIルーティングを2025-12導入。未接点）／みずほFG（競合登壇済のため人を変える）／横浜銀行（Mobi-Voice）／セブン銀行</span></p></div>
+        <div class="row"><div class="k">協賛観点</div><p class="v">金融リードはベンダーにとって最高価値。三井住友カード起用は導入ベンダーGen-AX（ソフトバンク子会社）への協賛営業の直接的なフックになる。</p></div>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-head">
+        <span class="slot">基調講演 B</span><span class="time">16:15–16:45／Bトラック</span>
+        <h3>VoCは経営資産である — AIが集めた“顧客の声”を商品開発・経営指標につなぐ</h3>
+      </div>
+      <div class="session-body">
+        <div class="row"><div class="k">目的</div><p class="v">「効率化で終わらせない」AIdiverらしさの中核。経営企画層に対する本イベントのSo Whatを示す。</p></div>
+        <div class="row"><div class="k">内容</div><p class="v">CCで取得したVoCをAIで構造化し、商品開発・売場・経営会議に流す仕組み。CCが利益貢献部門に変わるロジック。</p></div>
+        <div class="row"><div class="k">人選</div><p class="v"><strong>一木氏</strong>（資生堂ジャパン コンシューマーセンター部門長）— 2026-07にAIdiver取材済。新VOC管理システム（CRM×音声認識×AI要約）とCCのプロフィットセンター化を既に語っており、本セッション趣旨と完全一致<br><span class="alt">代替：カインズCX/マーケ責任者／東京海上日動（RightTouch）／ヤマト運輸／サントリーウエルネス（取材済・温度感高）</span></p></div>
+        <div class="row"><div class="k">協賛観点</div><p class="v">VoC分析・CRM系ベンダー（プラスアルファ・コンサルティング等）の見込み客層とリードが一致。</p></div>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-head">
+        <span class="slot">クロージング A</span><span class="time">18:10–18:40／Aトラック</span>
+        <h3>AIオペレーターは人をどこまで代替するか — 2030年のセンター組織・人材・コスト構造（パネル）</h3>
+      </div>
+      <div class="session-body">
+        <div class="row"><div class="k">目的</div><p class="v">議論型パネルで役職者の最後までの滞在を作り、懇親会（20時〜）に接続する。</p></div>
+        <div class="row"><div class="k">内容</div><p class="v">要員計画・採用・拠点戦略・BPO契約がAIでどう変わるかを事業会社2名と本音で議論。きれいごとで終わらせない。</p></div>
+        <div class="row"><div class="k">人選</div><p class="v">③④とは別の事業会社2名。候補：<strong>藤平氏</strong>（エニトグループ。カスハラ×AIハイブリッド運用、2026-08取材済・温度感高。カスハラ対策義務化の時事性）＋<strong>ヤマト運輸または保険会社</strong>（チューリッヒ等）。モデレーター：押久保（AIdiver編集長）<br><span class="alt">外部モデレーター案の秋山紀郎氏・寺下薫氏は競合イベント常連のため、編集長モデレートを推奨</span></p></div>
+        <div class="row"><div class="k">協賛観点</div><p class="v">「組織・要員計画」の議論はBPO・人材系スポンサー（ベルシステム24、コンセントリクス等）の関心と一致。</p></div>
+      </div>
+    </div>
+
+    <div class="session">
+      <div class="session-head">
+        <span class="slot">クロージング B</span><span class="time">18:10–18:40／Bトラック</span>
+        <h3>AX推進部門はコンタクトセンター改革をどう通すか — 投資対効果と社内合意形成のリアル</h3>
+      </div>
+      <div class="session-body">
+        <div class="row"><div class="k">目的</div><p class="v">経営企画・AX推進部門への「明日からの動き方」の持ち帰り。AIdiverのパーパスの体現枠。</p></div>
+        <div class="row"><div class="k">内容</div><p class="v">現場でなく推進部門の視点。予算獲得のロジック、PoC止まりを防ぐ体制設計、失敗事例。講演＋編集長QA。</p></div>
+        <div class="row"><div class="k">人選</div><p class="v"><strong>アフラック生命 AX戦略統括部</strong>（東原氏・高田氏・歌田氏ら）— 2026-04面談済。AX3部体制（AX戦略統括部・AX開発部・データ統括部）でAXを推進、2026年度中に戦略策定完了予定で「完了後に取材検討」の言質あり。<strong>1月開催は策定完了直後の絶好のタイミング</strong><br><span class="alt">代替：KDDI（ジェネシス経由でCCクラウド再構築事例・SUMMIT取材実績）／みずほFG DX推進部門 ※ソフトバンクは子会社Gen-AXがベンダーのため協賛営業先として扱う</span></p></div>
+        <div class="row"><div class="k">協賛観点</div><p class="v">「AX推進部門の責任者」という本イベントのリードの中心属性を象徴する枠。ベンダーが最も会いたい人物像を登壇側に置き、同属性の来場を最大化する。</p></div>
+      </div>
+    </div>
+
+    <p>構成内訳：<strong>事業会社5枠＋有識者1枠、ベンダー0枠</strong>。事業会社を厚くして登録リストの事業会社比率を上げる方針に合致。</p>
+  </section>
+
+  <section>
+    <h2><span class="no">06</span>スケジュール（全体線表に整合）</h2>
+    <div class="tablewrap">
+    <table>
+      <tr><th>2026年9月上旬〜</th><td>登壇打診開始。<strong>金融は広報審査に1.5〜2カ月かかるため最優先で着手（9月第1週が絶対条件）</strong></td></tr>
+      <tr><th>10月中旬</th><td>編集部セッション決定（ご案内書記載のデッドライン）</td></tr>
+      <tr><th>10月下旬</th><td>セッション情報締切</td></tr>
+      <tr><th>11月中旬</th><td>イベントサイト公開・集客開始</td></tr>
+      <tr><th>2027年1月22日</th><td>開催（懇親会20時〜）／開催後3営業日でリード提供</td></tr>
+    </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">07</span>リスク・弱点（自己批判）</h2>
+    <div class="risk"><p><b>1. 金融登壇の広報審査が10月中旬に間に合わないリスク。</b>対策：三菱UFJ・みずほ・横浜銀の3行同時打診＋不成立時はセブン銀行・保険（チューリッヒ）へ即切替。9月第1週打診開始が絶対条件。</p></div>
+    <div class="risk"><p><b>2. 登壇者の既視感。</b>メルカリ・みずほ・パナソニックEWらは競合イベント常連。同じ顔ぶれなら「リックの後追い」に見える。対策：人選そのものより「経営・組織・ROI」というテーマ軸の差別化を優先し、タイトルに現場運用系ワードを使わない。</p></div>
+    <div class="risk"><p><b>3. クロージング（18:10–18:40）の残存率。</b>金曜夜の最終枠は離脱リスクが高い。パネル型＋懇親会接続で設計したが、弱ければ「当日限定の調査データ発表」等の引きを追加する。</p></div>
+    <div class="risk"><p><b>4. 有識者枠のコスト。</b>藤井氏クラスで講演料数十万円想定。集客投資と割り切るか、AIdiver記事化とのタイアップ連動で回収設計するかを事前に決める。</p></div>
+    <div class="risk"><p><b>5. 「経営寄り」への振りすぎ。</b>CC部門リーダー（3–4割）が置き去りになる恐れ。Bトラック（オープニングB・基調B）を実装・VoC寄りに設計してバランスを取った。</p></div>
+    <div class="risk"><p><b>6. 人選候補は全て未打診。</b>取材実績があっても「記事取材OK」と「登壇OK」は別物。各候補者の現職・肩書は打診前に必ず公式ソースで確認する。</p></div>
+    <div class="risk"><p><b>7. リレーションのyuki.fujii（藤井）氏への一点集中。</b>CC領域の取材はほぼ藤井氏が担っており、打診・調整の負荷が集中する。編集部内で打診分担を設計するか、藤井氏を本イベントの編集側キーパーソンとして正式にアサインする。</p></div>
+    <div class="risk"><p><b>8. 取材と登壇のダブル打診の交通整理。</b>資生堂・三井住友カード・令和トラベルは記事化が進行中/検討中。登壇打診が記事出稿時期・広報審査と干渉しないよう打診時にセットで設計する（記事公開→登壇の順なら相乗効果）。</p></div>
+  </section>
+
+  <section>
+    <h2><span class="no">09</span>付録：マーケ・顧客接点文脈に振る場合の候補（v3追加）</h2>
+    <p>あぽろぐを「CX」（163件）「顧客接点」（10件）で追加分析した、セッションをマーケ・顧客接点の切り口に振る場合の候補群。</p>
+    <div class="risk"><p><b>使いどころの原則。</b>マーケ文脈に寄せすぎるとリード属性が「マーケター」に流れ、CCツールベンダーが買いたい「経営企画・AX推進・CC部門責任者」のリスト純度が下がる。差し替えは<b>①オープニングAの看板（藤井保文氏→西口一希氏の差し替え・並置）②基調Bの候補拡張（資生堂→Vポイント／イオンリテール等）の2カ所まで</b>に留め、Bトラックの実装系（令和トラベル・三井住友カード）は動かさない。</p></div>
+
+    <h3 style="margin-top:22px;">事業会社候補（あぽろぐ接点あり・推奨順）</h3>
+    <div class="tablewrap">
+    <table>
+      <tr><th>候補</th><th>あぽろぐの根拠</th><th>合う枠</th></tr>
+      <tr><td>Vポイントマーケティングジャパン</td><td>2026-07 TU取材済（プレイド同行・温度感高）。1.3億人のV会員データでCX再設計、ポイント＝「体験価値創造装置」構想</td><td>基調級。顧客接点×データの経営話として最大級</td></tr>
+      <tr><td>ANA（DX部門・AI推進チーム）</td><td>2026-01取材打ち合わせ済（温度感高）。AI×顧客体験・従業員の働きがい</td><td>基調級。知名度・集客力大</td></tr>
+      <tr><td>丸亀製麺 CMO 南雲氏</td><td>MZD26春登壇実績（温度感高）。EX→CX→成果の可視化、AIエージェント「ハピカンダッシュボード」</td><td>クロージング向き。登壇確度が最も高い</td></tr>
+      <tr><td>イオンリテール</td><td>IBM経由で2026-07取材。会員1,500万人アプリ×AIパーソナライズ（170属性）→リテールメディア化。広告閲覧者の2人に1人が購入</td><td>基調級。IBM（支援側）との登壇形態の調整要</td></tr>
+      <tr><td>再春館製薬所</td><td>電通デジタル経由タイアップ進行中。LINE起点CRM高度化・CPA20%以上改善</td><td>通販コールセンターの雄。<strong>CC文脈とマーケ文脈の橋渡し役</strong></td></tr>
+      <tr><td>旭化成ホームズ</td><td>2026-04 CX連載取材済（温度感高）。LTV向上・CRMで縦割り打破</td><td>パネル向き</td></tr>
+      <tr><td>ビームス 山崎氏</td><td>ECZD事前MTG済（温度感高）。マイル制ロイヤルティ・AIサジェスト</td><td>小売・EC枠。パネル向き</td></tr>
+      <tr><td>カウシェ CMO 前本氏</td><td>2026-05取材済（温度感高）。Braze×BigQuery×Claude Codeで分析自動化</td><td>スタートアップ枠。令和トラベルの並置候補</td></tr>
+      <tr><td>日本生命</td><td>プレイド（KARTE）事例タイアップ進行中</td><td>金融×デジタル体験。三井住友カードの代替</td></tr>
+    </table>
+    </div>
+
+    <h3 style="margin-top:22px;">有識者候補（マーケ文脈の看板）</h3>
+    <ul class="plain">
+      <li><strong>西口一希氏</strong>（Strategy Partners）— MZ20周年企画で取材済。顧客起点マーケの第一人者。AIファースト時代のマーケター役割変化・CMOの経営者化。<strong>オープニングAの代替・並置として最有力</strong></li>
+      <li><strong>白根英昭氏</strong>（mct CEO）— 『一番やさしいCX経営の教科書』マーケ本大賞受賞、2026-08取材済（温度感高）。「CX経営」がイベントコンセプトと直結</li>
+      <li><strong>奥谷孝司氏</strong>（顧客時間）— 「顧客起点で読む次に来るCX」講演をMZDインプットで聴講済。小売×CXの語り手</li>
+    </ul>
+
+    <h3 style="margin-top:22px;">協賛見込みの追加（マーケ文脈）</h3>
+    <ul class="plain">
+      <li><strong>プレイド</strong> — 接点多数・温度感高。<strong>自社CXアワードの翔泳社連携を先方から模索中</strong>＝協賛＋共催の交渉材料あり</li>
+      <li><strong>トランスコスモス</strong> — CX部署がMarkeZine愛読と発言（2026-07）。MZD・アワード案内済み</li>
+      <li><strong>Braze／Zendesk／クアルトリクス</strong> — いずれも取材接点あり。CX系リードとの相性良</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="no">10</span>参考・出典</h2>
+    <p class="sources">
+      競合：<a href="https://callcenter-japan.com/html/aiccs2026/">リックテレコム「生成AI×コンタクトセンター・サミット」</a>／
+      <a href="https://www.ntt.com/about-us/press-releases/news/article/2025/1216.html">三菱UFJ銀行×NTTドコモビジネス（2025-12-16リリース）</a>／
+      <a href="https://www.softbank.jp/corp/news/press/sbkk/2024/20240701_02/">Gen-AX（ソフトバンク子会社）</a>／
+      <a href="https://aixis.jp/articles/call-center-ai-implementation">コールセンターAI導入事例整理</a>／
+      社内資料：【ご案内書_仮案】AIdiver（コンタクトセンターイベント）.pdf／
+      社内データ：あぽろぐ分析レポート（キーワード「コンタクトセンター」45件・「CX」163件・「顧客接点」10件、2024-04〜2026-08）
+    </p>
+  </section>
+
+  <footer>
+    <span>AIdiver編集部 企画書（社外秘・ドラフト）</span>
+    <span>2026-08-27 planner</span>
+  </footer>
+</div>

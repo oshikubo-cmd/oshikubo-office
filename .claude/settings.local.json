@@ -47,7 +47,10 @@
       "PowerShell(python -c \"import ssl, certifi, io; pem = io.open\\(certifi.where\\(\\), encoding='utf-8'\\).read\\(\\); certs = [ssl.DER_cert_to_PEM_cert\\(c\\) for store in \\('ROOT','CA'\\) for c, enc, _ in ssl.enum_certificates\\(store\\) if enc == 'x509_asn']; out = r'C:\\\\Users\\\\020168\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-020168-Documents-Claude-AIdiver-office\\\\f2b5ce5c-cdf2-4451-be6e-223523418744\\\\scratchpad\\\\ca_bundle.pem'; io.open\\(out, 'w', encoding='utf-8'\\).write\\(pem + '\\\\n' + '\\\\n'.join\\(certs\\)\\); print\\(len\\(certs\\), 'windows certs added'\\)\")",
       "PowerShell($env:SSL_CERT_FILE = \"C:\\\\Users\\\\020168\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-020168-Documents-Claude-AIdiver-office\\\\f2b5ce5c-cdf2-4451-be6e-223523418744\\\\scratchpad\\\\ca_bundle.pem\"; $env:REQUESTS_CA_BUNDLE = $env:SSL_CERT_FILE; $env:CURL_CA_BUNDLE = $env:SSL_CERT_FILE; python \"C:\\\\Users\\\\020168\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-020168-Documents-Claude-AIdiver-office\\\\f2b5ce5c-cdf2-4451-be6e-223523418744\\\\scratchpad\\\\transcribe_s1_fukuda.py\")",
       "WebFetch(domain:docs.google.com)",
-      "mcp__mcp-registry__list_connectors"
+      "mcp__mcp-registry__list_connectors",
+      "Bash(py --version)",
+      "Bash(pip install *)",
+      "mcp__a79c8d00-577f-4a78-94d7-1e9a7e5b7e07__slack_send_message"
     ]
   }
 }
