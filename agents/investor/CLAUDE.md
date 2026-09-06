@@ -131,6 +131,7 @@ DUKE。式は**成長株のみ**が対象。以下には使わない（DUKE。�
 | `workplace/projects/minervini-watch/` | ミネルヴィニ第2ステージ定点観測リスト |
 | `workplace/projects/kabutan-52w-high-x-watch/` | 52週高値トップ10×X話題デイリーウォッチ（平日18時Slack DM、cron稼働中） |
 | `workplace/projects/x-serenity-watch/` | X日本株ウォッチ |
+| `workplace/projects/x-duke-watchlist-daily/` | DUKE。参考26アカウントの投資関連ポストデイリーウォッチ（毎日朝7時台Slack DM、cron稼働中） |
 
 ---
 

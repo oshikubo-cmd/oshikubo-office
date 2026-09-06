@@ -16,9 +16,10 @@
 | 3 | `workplace/projects/minervini-watch/` | 第2ステージ定点観測リスト |
 | 4 | `workplace/projects/kabutan-52w-high-x-watch/` | 52週高値×Xデイリーウォッチ（README・log・snippets） |
 | 5 | `workplace/projects/x-serenity-watch/` | X日本株ウォッチ |
-| 6 | storage の `08_資/資/新高/` | DUKE。資料本体＋上原素材（`データ・資料集/260711kabuberry_上原_AI分析/`）。**重いので外付け or クラウド経由で** |
-| 7 | storage の `08_資/資/ちょうかぶデータ/` | 長期株式投資（ちょうかぶ式）の資料 |
-| 8 | storage の `08_資/資/両/` `ダッシュボードサンプル/` `ペライチ_フォーマット.pptx` | 個別銘柄・PF・テンプレート |
+| 6 | `workplace/projects/x-duke-watchlist-daily/` | DUKE。参考26アカウントの投資関連ポストデイリーウォッチ |
+| 7 | storage の `08_資/資/新高/` | DUKE。資料本体＋上原素材（`データ・資料集/260711kabuberry_上原_AI分析/`）。**重いので外付け or クラウド経由で** |
+| 8 | storage の `08_資/資/ちょうかぶデータ/` | 長期株式投資（ちょうかぶ式）の資料 |
+| 9 | storage の `08_資/資/両/` `ダッシュボードサンプル/` `ペライチ_フォーマット.pptx` | 個別銘柄・PF・テンプレート |
 
 > **3〜5を忘れやすい。** 「agents/investor/ だけコピー」では観測リストとログが落ちる。
 

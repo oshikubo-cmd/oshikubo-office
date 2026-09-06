@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>アシックス(7936) 深堀分析レポート | 新高値ブレイク投資</title>
+<style>
+:root{
+  color-scheme: light;
+  --surface-0:#f5f4f1;
+  --surface-1:#fcfcfb;
+  --surface-2:#efeeea;
+  --border:#dedcd5;
+  --border-strong:#c4c1b8;
+  --text-primary:#0b0b0b;
+  --text-secondary:#52514e;
+  --text-muted:#7a7872;
+  --series-1:#2a78d6;
+  --series-2:#eb6834;
+  --series-3:#1baf7a;
+  --good:#0f7a4d;
+  --warn:#b06a00;
+  --crit:#b3271f;
+  --accent:#2a78d6;
+}
+@media (prefers-color-scheme: dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme: dark;
+    --surface-0:#141413;
+    --surface-1:#1a1a19;
+    --surface-2:#242422;
+    --border:#34342f;
+    --border-strong:#4a4a44;
+    --text-primary:#ffffff;
+    --text-secondary:#c3c2b7;
+    --text-muted:#96958c;
+    --series-1:#3987e5;
+    --series-2:#d95926;
+    --series-3:#199e70;
+    --good:#3fae7c;
+    --warn:#d99a2b;
+    --crit:#e66767;
+    --accent:#3987e5;
+  }
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--surface-0);color:var(--text-primary);
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI","Noto Sans JP",Meiryo,sans-serif;
+  line-height:1.7;font-size:15px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 20px 80px}
+header.hero{
+  background:var(--surface-1);border:1px solid var(--border);border-radius:14px;
+  padding:24px 26px;margin-bottom:22px;
+}
+.eyebrow{font-size:12px;letter-spacing:.12em;color:var(--text-muted);text-transform:uppercase;margin:0 0 6px}
+h1{margin:0 0 4px;font-size:28px;line-height:1.3;letter-spacing:-.01em}
+.sub{margin:0;color:var(--text-secondary);font-size:14px}
+.meta{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--text-secondary)}
+.meta b{color:var(--text-primary);font-weight:600}
+
+h2{
+  font-size:19px;margin:38px 0 12px;padding-left:12px;
+  border-left:4px solid var(--accent);line-height:1.4;letter-spacing:-.01em;
+}
+h2 .num{color:var(--text-muted);font-size:13px;font-weight:600;margin-right:8px;letter-spacing:.05em}
+h3{font-size:15px;margin:22px 0 8px;color:var(--text-primary)}
+p{margin:0 0 12px}
+section{background:var(--surface-1);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:6px}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:4px 0 18px}
+.tile{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.tile .k{font-size:11.5px;color:var(--text-muted);margin-bottom:3px}
+.tile .v{font-size:21px;font-weight:650;letter-spacing:-.02em;line-height:1.25}
+.tile .n{font-size:11.5px;color:var(--text-secondary);margin-top:2px}
+.up{color:var(--good)} .dn{color:var(--crit)}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:6px 0 14px}
+caption{text-align:left;font-size:12.5px;color:var(--text-muted);padding-bottom:6px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left;white-space:normal;min-width:104px}
+
+/* サマリー表 */
+table.sm{table-layout:fixed;margin:2px 0 0;border:1px solid var(--border-strong)}
+table.sm th,table.sm td{border:1px solid var(--border);vertical-align:top;text-align:left;white-space:normal;padding:10px 12px;font-size:13.5px;line-height:1.7;min-width:0}
+table.sm th.g{width:32px;background:var(--surface-2);color:var(--text-primary);text-align:center;padding:12px 5px;vertical-align:middle}
+table.sm th.g span{display:block;font-weight:700;font-size:13px;line-height:1.45;word-break:break-all;white-space:normal;letter-spacing:0}
+table.sm th.s{width:150px;background:var(--surface-2);font-weight:650;color:var(--text-secondary);font-size:12.5px}
+table.sm th.t{width:194px;background:var(--surface-2);font-weight:700;color:var(--text-primary)}
+table.sm th.t small{display:block;font-weight:400;font-size:11.5px;color:var(--text-secondary);margin-top:2px;letter-spacing:0}
+table.sm tbody tr:hover{background:transparent}
+table.sm td p{margin:0 0 8px}
+table.sm td p:last-child{margin:0}
+
+/* 2列の項目／値テーブル（会社概要）：1列目を固定幅、2列目は左寄せで折り返す */
+table.kv{table-layout:fixed}
+table.kv td:first-child{width:190px;min-width:190px;font-weight:600;color:var(--text-secondary);vertical-align:top;line-height:1.5}
+table.kv td:last-child{text-align:left;white-space:normal;word-break:normal;overflow-wrap:anywhere;vertical-align:top}
+thead th{color:var(--text-secondary);font-weight:600;font-size:12.5px;border-bottom:1.5px solid var(--border-strong);background:var(--surface-2)}
+tbody tr:hover{background:var(--surface-2)}
+tr.hl td{font-weight:650;background:color-mix(in srgb,var(--series-1) 8%,transparent)}
+.tnum{font-variant-numeric:tabular-nums}
+
+ul,ol{margin:0 0 12px;padding-left:1.3em}
+li{margin-bottom:7px}
+.tag{display:inline-block;font-size:11px;font-weight:650;padding:2px 8px;border-radius:99px;vertical-align:middle;margin-right:6px}
+.tag-y{background:color-mix(in srgb,var(--good) 16%,transparent);color:var(--good)}
+.tag-r{background:color-mix(in srgb,var(--crit) 16%,transparent);color:var(--crit)}
+.tag-o{background:color-mix(in srgb,var(--warn) 18%,transparent);color:var(--warn)}
+.callout{background:var(--surface-2);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:12px 0;font-size:14px}
+.callout.warnbox{border-left-color:var(--warn)}
+.callout.critbox{border-left-color:var(--crit)}
+.callout p:last-child{margin-bottom:0}
+
+.chartrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin:8px 0 6px}
+figure{margin:0;background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:14px 16px 10px}
+figcaption{font-size:13px;font-weight:650;margin-bottom:2px}
+.figsub{font-size:11.5px;color:var(--text-muted);margin-bottom:10px}
+.bars{display:flex;flex-direction:column;gap:9px}
+.barrow{display:grid;grid-template-columns:64px 1fr;align-items:center;gap:10px}
+.barlab{font-size:11.5px;color:var(--text-secondary);text-align:right;font-variant-numeric:tabular-nums}
+.bartrack{position:relative;height:22px;display:flex;align-items:center}
+.barfill{height:18px;border-radius:0 4px 4px 0;background:var(--series-1);min-width:2px}
+.barfill.f2{background:var(--series-2)}
+.barfill.f3{background:var(--series-3)}
+.barfill.est{background:repeating-linear-gradient(135deg,var(--series-1),var(--series-1) 5px,color-mix(in srgb,var(--series-1) 45%,var(--surface-1)) 5px,color-mix(in srgb,var(--series-1) 45%,var(--surface-1)) 10px)}
+.barfill.est2{background:repeating-linear-gradient(135deg,var(--series-2),var(--series-2) 5px,color-mix(in srgb,var(--series-2) 45%,var(--surface-1)) 5px,color-mix(in srgb,var(--series-2) 45%,var(--surface-1)) 10px)}
+.barval{font-size:11.5px;color:var(--text-primary);font-variant-numeric:tabular-nums;margin-left:7px;white-space:nowrap;font-weight:600}
+.barnote{font-size:11px;color:var(--text-muted);margin-left:6px;white-space:nowrap}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--text-secondary);margin-top:10px;padding-top:8px;border-top:1px solid var(--border)}
+.swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.sw1{background:var(--series-1)} .sw2{background:var(--series-2)}
+.swE{background:repeating-linear-gradient(135deg,var(--series-1),var(--series-1) 3px,color-mix(in srgb,var(--series-1) 40%,var(--surface-1)) 3px,color-mix(in srgb,var(--series-1) 40%,var(--surface-1)) 6px)}
+
+footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--text-muted)}
+footer a{color:var(--text-secondary)}
+.disc{background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;font-size:12.5px;color:var(--text-secondary);margin-top:20px}
+@media(max-width:1120px){
+  table:not(.kv){display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
+}
+@media(max-width:820px){
+  table.kv td:first-child{width:118px;min-width:118px}
+}
+@media(max-width:640px){
+  h1{font-size:22px} .wrap{padding:18px 14px 60px}
+  section{padding:16px 14px} table{font-size:12.5px} th,td{padding:6px 6px}
+  th:first-child,td:first-child{min-width:84px}
+  .barrow{grid-template-columns:56px 1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">新高値ブレイク投資 / 深堀分析シート</p>
+  <h1>株式会社アシックス（7936）</h1>
+  <p class="sub">東証プライム・その他製品（小売りセクター）／12月決算／スポーツ用品（ランニングシューズ中心、オニツカタイガー等ライフスタイルブランドも展開）</p>
+  <div class="meta">
+    <span>作成日 <b>2026年9月6日</b></span>
+    <span>株価基準日 <b>2026年9月4日 終値</b></span>
+    <span>直近決算 <b>2026年12月期 第2四半期（8/14発表、8/13に通期上方修正・増配を公表）</b></span>
+    <span>作成 <b>investor（押久保・個人投資リサーチ）</b></span>
+  </div>
+</header>
+
+<div class="tiles">
+  <div class="tile"><div class="k">株価（9/4終値）</div><div class="v tnum">4,266円</div><div class="n">52週高値 5,440円 / 安値 3,505円（日中ベース）</div></div>
+  <div class="tile"><div class="k">時価総額</div><div class="v tnum">約3.13兆円</div><div class="n">31,333億円（押久保算出）</div></div>
+  <div class="tile"><div class="k">PER（会社計画）</div><div class="v tnum">25.2倍</div><div class="n">過去3期末平均 28.4倍</div></div>
+  <div class="tile"><div class="k">時価総額÷営業利益</div><div class="v tnum">16.1倍</div><div class="n">今期会社計画1,950億円ベース</div></div>
+  <div class="tile"><div class="k">ROE（25/12実績）</div><div class="v tnum up">39.1%</div><div class="n">PBR 10.5倍（26/12予BPS基準）</div></div>
+  <div class="tile"><div class="k">目標株価（適正・6-12ヶ月）</div><div class="v tnum">6,000円</div><div class="n up">上値余地 +40.7%</div></div>
+</div>
+
+<div class="callout critbox">
+  <p><b>DUKE式エントリー判定（2026-09-06時点）：エントリー対象外に近い。</b>トレンドテンプレートは8条件中4/8（厳格版）〜5/8（緩い版）にとどまり、150日線・200日線割れ（条件①）、52週安値からの上昇率不足（条件⑤、+21.7%で25%未達）、直近6週の相対的弱さ（条件⑧）が不合格。8/17高値5,440円から9/3安値4,151円まで日中ベースで<b>-23.7%</b>という、この上昇局面で最大の下落を演じており、判断軸は「ステージ2上昇開始以来の最大下落＝ほとんどは売りシグナル。この急落を買いのチャンスと考えてはならない」と明記する局面に該当する。以下のバリュエーション・上値余地の記述は<b>ウォッチリスト生成・利確判断のための物差し</b>であり、エントリー根拠には用いない。詳細と最新の値動きは08章。</p>
+</div>
+
+<!-- ============ サマリー ============ -->
+<h2>サマリー</h2>
+<section>
+<table class="sm">
+  <tbody>
+    <tr>
+      <th class="t" colspan="2">テーマ<small>何が追い風なのか</small></th>
+      <td>会社計画26/12期営業利益195.0十億円（8/13上方修正後、会社計画比+36.8%）を最低ラインに、SMBC日興証券は1H実績（売上5,345億円+32.7%、営業利益1,205億円+48.5%）を踏まえ26/12期199.4十億円・27/12期224.3十億円へ上方修正。ランニングシューズに加えテニス等の他競技、スポーツスタイル（SPS）・オニツカタイガー（OT）の高収益カテゴリーが引き続き牽引しており、営業利益率は23/12期9.5%→25/12期17.6%→26/12期1H実績22.5%（前年同期比+2.4pt）と構造的に改善している。</td>
+    </tr>
+    <tr>
+      <th class="g" rowspan="2"><span>ビッグチェンジ</span></th>
+      <th class="s">一言で表すと</th>
+      <td>パフォーマンスランニング中心の会社から、スポーツスタイル・オニツカタイガーという高収益カテゴリーが増益を牽引する会社へと事業構成が変質している。</td>
+    </tr>
+    <tr>
+      <th class="s">その詳細は</th>
+      <td>
+        <p><b>収益構造の転換。</b>売上原価率は24/12期44.2%→25/12期43.2%→26/12期予42.6%と一貫して改善し、粗利率は逆に上昇基調。営業利益率は23/12期9.5%から26/12期1H実績22.5%まで、2〜3年で2倍以上に高まった。</p>
+        <p><b>高収益2カテゴリーの拡大。</b>26/12期1H実績（押久保算出、出所はSMBC日興証券の四半期業績モデル）で、スポーツスタイルは売上123.2十億円（前年同期比+83.1%）・カテゴリー利益率34.0%（同+3.4pt）、オニツカタイガーは売上89.5十億円（同+35.8%）・利益率39.8%（同+0.8pt）。主力のパフォーマンスランニングも売上220.6十億円（同+19.2%）・利益率26.3%（同+1.1pt）と安定成長を維持している。</p>
+        <p><b>全地域・全カテゴリーがプラス成長。</b>SMBC日興は「地域別の利益構成比は限定的」としつつ、海外同業の苦戦がむしろアシックスの販路拡大・シェア拡大の機会になり得るとの見立てを示している。</p>
+      </td>
+    </tr>
+    <tr>
+      <th class="g" rowspan="2"><span>カタリスト</span></th>
+      <th class="s">何が起こると株価が<br>上昇するのか</th>
+      <td>
+        <p><b>11月17日公表予定の新中期経営計画（VISION・中期経営計画2029）。</b>SMBC日興はパンデミック前後からの「収益性改善ステージ」が終わり、「高い収益性を維持しつつトップライン拡大を狙うステージ」に移ると位置付けており、カテゴリー別・地域別の成長シナリオと在庫・コストマネジメント方針が焦点になるとしている。</p>
+        <p><b>会社の上方修正の継続。</b>26/12期計画は期初1,710億円→8/13時点で1,950億円へ既に上方修正されており、Q3決算（11月中旬想定）での再上方修正余地の有無が次のトリガーになり得る。</p>
+        <p>足元（9/4時点）：8/14の決算ギャップアップ後、8/17高値5,440円から9/3安値4,151円まで日中ベースで-23.7%下落。9/4は安値4,126円から反発し終値4,266円（レンジ内位置81%）で引けたが、8/20・8/28にも同様の反発の型が出ながら翌営業日以降に失敗しており、<b>まだ「戻りの確認」はできていない</b>（詳細は08章）。</p>
+      </td>
+    </tr>
+    <tr>
+      <th class="s">それはいつ<br>起きるのか</th>
+      <td>新中期経営計画：2026年11月17日公表予定（SMBC日興証券レポートに明記）。Q3決算：例年の発表パターンから2026年11月中旬頃と推定（確定日は未確認、IR質問参照）。</td>
+    </tr>
+    <tr>
+      <th class="g"><span>リスク</span></th>
+      <th class="s">事業リスクや<br>株価リスク</th>
+      <td>
+        <p><b>直近3週間の急落と需給悪化。</b>下落局面（9/1〜9/4）の出来高は年間平均（200〜400万株程度）を上回る水準で推移しており、「売りが枯れた」状態にはまだ至っていない。初期兆候はDUKE式トレンドテンプレート条件①⑤⑧の回復有無。</p>
+        <p><b>海外同業の苦戦の波及。</b>ナイキ（直近1年株価騰落率-46%）・On（-37%）・Dick's（-39%）・Deckers（-27%）・アディダス（-12%）と海外勢は軒並み調整しており、米国の年末クリアランスシーズンの動向次第で北米事業（売上構成比17%）への波及リスクが残る。</p>
+        <p><b>バリュエーション。</b>トレーリングPER30.9倍・PBR約10.5〜11.1倍は国内同業（ヨネックス17.7倍・ミズノ15.9倍・ゴールドウィン12.8倍、いずれもFY1コンセンサスPER）を大きく上回り、SMBC日興も「業界でトップクラスに高いバリュエーション」と明記。成長鈍化が確認されればマルチプル収縮リスクが大きい。</p>
+        <p>棚卸資産は25/12期実績で前期比+30.1%（179.0十億円）と売上高の伸び+19.5%を上回るペースで増加した。26/12期は会社計画・SMBC予想とも売上高並みの伸びに戻る前提だが、実際の在庫水準は要継続監視。</p>
+      </td>
+    </tr>
+    <tr>
+      <th class="g"><span>上値</span></th>
+      <th class="s">目標株価</th>
+      <td>27/12期予想EPS222.3円（SMBC日興証券採用）×PER27倍（同社1期先PERの過去2年レンジ上限水準）＝<b>適正株価6,000円（上値余地+40.7%）</b>。マルチプル一段の切り上がりを想定した理論EPS239円×PER30倍の<b>アップサイド株価7,200円（+68.1%）</b>。弱気ケースは理論EPS204円×PER20倍で<b>4,100円（-3.9%）</b>。DUKE式（時価総額＝予想営業利益×営業利益倍率）での検算では約5,497円となり、上原式との乖離（約9%）は実効税率（前提33%に対し実際は約30.0%）と自己株式取得による期中平均株式数の減少が主因とみられる。<b>ただしこの上値計算はエントリー根拠にはしない</b>（07〜08章）。</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ============ 01 ============ -->
+<h2><span class="num">01</span>銘柄を選んだ理由 ― ビッグチェンジの有無</h2>
+<section>
+  <p><span class="tag tag-y">ビッグチェンジ あり</span></p>
+
+  <h3>① 事業構成の転換 ― 高収益2カテゴリーが増益の主エンジンに</h3>
+  <p>25/12期実績の事業別売上構成はパフォーマンスランニング45%・スポーツスタイル17%・オニツカタイガー17%・コアパフォーマンススポーツ11%・アパレル等5%・その他5%（出所: SMBC日興証券レポート2026-09-01付、会社資料ベース）。26/12期1H実績（押久保算出）ではスポーツスタイル（利益率34.0%）とオニツカタイガー（利益率39.8%）という高収益2カテゴリーの伸びがパフォーマンスランニング（利益率26.3%）を上回るペースで拡大しており、利益構成における比重が増している。</p>
+
+  <h3>② 収益構造そのものの改善</h3>
+  <p>営業利益率は23/12期9.5%→24/12期14.8%→25/12期17.6%→26/12期1H実績22.5%（前年同期比+2.4pt）と一貫して改善。売上原価率も44.2%(24/12)→43.2%(25/12)→42.6%(26/12予)と低下基調にあり、値上げ・製品ミックス改善・生産効率化が積み上がっている構図がうかがえる。3期連続の増収増益（24/12期営業利益+84.7%、25/12期+42.4%）。</p>
+
+  <h3>③ 中長期の成長期待 ― 新中期経営計画というカタリスト</h3>
+  <p>SMBC日興証券は、パンデミック前後から現在までを「収益性改善のステージ」、今後を「高い収益性を維持しつつトップライン拡大を追求するステージ」への移行と位置付けており、その内容を占う<b>2026年11月17日公表予定の新中期経営計画（VISION・中期経営計画2029）</b>が最大の注目イベントとされている。</p>
+
+  <h3>株価としての形</h3>
+  <p>2026年8月13日（引け後）に26/12期通期業績予想の上方修正・増配を公表、翌8/14に出来高2,632万株（通常の約8〜10倍）を伴い前日比+9.4%の急伸、8/17に52週高値5,440円（日中ベース）を更新した。しかし高値をつけた8/17自体が大陰線寄りの反転日型（レンジ内位置31%）となり、以後9/3安値4,151円まで日中ベースで-23.7%下落。9/4時点では反発途上にあり、<b>初押しというよりは「急騰後の急落からの戻りを試している最中」</b>という位置づけである。ステージ判定・トレンドテンプレートの詳細評価は08章を参照。</p>
+</section>
+
+<!-- ============ 02–03 ============ -->
+<h2><span class="num">02–03</span>会社概要・株価・バリュエーション</h2>
+<section>
+  <table class="kv">
+    <caption>基本データ（株価は2026年9月4日終値、業績は2026年12月期会社計画・SMBC日興証券予想ベース）</caption>
+    <tbody>
+      <tr><td>会社名 / 証券コード</td><td>株式会社アシックス／<b>7936</b>（東証プライム・その他製品）</td></tr>
+      <tr><td>本社 / 決算期</td><td>神戸市中央区／12月決算</td></tr>
+      <tr><td>経営体制</td><td>2018年に代表取締役COOに就任した廣田康人氏主導でカテゴリー基軸の経営改革に着手（14/12期をピークに一時業績が下降トレンドにあったが回復）</td></tr>
+      <tr><td>主力事業</td><td>パフォーマンスランニング45%・スポーツスタイル17%・オニツカタイガー17%・コアパフォーマンススポーツ11%・アパレル等5%・その他5%（25/12期実績、事業別）。地域別は欧州28%（最大）・日本25%・北米17%・中華圏15%・オセアニア6%・東南南アジア6%（25/12期実績）</td></tr>
+      <tr><td>株価</td><td class="tnum">4,266円（52週高値 5,440円［2026-08-17］／52週安値 3,505円［2025-11-19］、いずれも日中高値・安値ベース）</td></tr>
+      <tr><td>時価総額</td><td class="tnum">約3.13兆円・31,333億円（押久保算出＝株価×発行済734,482千株［自己株式含む、2026-08-31時点］）</td></tr>
+      <tr class="hl"><td><b>PER（会社計画EPS 169.3円）</b></td><td class="tnum"><b>25.2倍</b>（過去3期末PER: 22.9倍［23/12］→35.2倍［24/12］→27.2倍［25/12］、平均28.4倍）</td></tr>
+      <tr class="hl"><td><b>時価総額 ÷ 営業利益（＝DUKE式営業利益倍率）</b></td><td class="tnum"><b>16.1倍</b>（今期会社計画195.0十億円ベース）／SMBC日興予想199.4十億円ベースでは15.7倍</td></tr>
+      <tr><td>PER（トレーリング、25/12実績EPS基準）</td><td class="tnum">30.9倍</td></tr>
+      <tr><td>PBR</td><td class="tnum">10.5倍（26/12予想BPS404.6円基準）／11.1倍（25/12実績BPS383.2円基準）</td></tr>
+      <tr><td>配当</td><td class="tnum">26/12期予想38円（前期28円から増配）／利回り約0.89%</td></tr>
+      <tr><td>財務</td><td class="tnum">自己資本比率46.3%（25/12実績）→46.7%（26/12予）／ROE 39.1%（25/12実績）・44.0%（26/12予）</td></tr>
+      <tr><td>外国人持株比率</td><td class="tnum">53.5%（2026-08-31時点、SMBC日興証券レポート）</td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <p><b>バリュエーションの読み方：</b>会社計画ベースPER25.2倍は過去3期末平均28.4倍をやや下回るが、トレーリングPER（30.9倍）で見ると国内同業（ヨネックス17.7倍・ミズノ15.9倍・ゴールドウィン12.8倍、いずれもFY1コンセンサスPER）を大きく上回る。3年EPS CAGR72.0%（SMBC集計）という高成長を踏まえるとPEGレシオは1倍を下回る計算になり、成長率対比では「単純な割高」と言い切れない面もある。ただし判断軸が禁じる「割安/割高だけを買い理由にする」姿勢はとらず、あくまで上値余地の目安として扱う。</p>
+  </div>
+</section>
+
+<!-- ============ 04 ============ -->
+<h2><span class="num">04</span>過去3年間および今期会社計画の売上高・営業利益</h2>
+<section>
+  <table>
+    <caption>連結業績推移（日本基準・単位：十億円）／出所：会社資料・SMBC日興証券予想（2026-09-01付レポート）。27/12・28/12はSMBC日興予想を押久保が採用予想として使用</caption>
+    <thead>
+      <tr><th>決算期</th><th>売上高</th><th>前期比</th><th>営業利益</th><th>前期比</th><th>営業利益率</th><th>純利益</th><th>EPS</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>2024/12 実績</td><td class="tnum">678.5</td><td class="tnum up">+18.9%</td><td class="tnum">100.1</td><td class="tnum up">+84.7%</td><td class="tnum">14.8%</td><td class="tnum">63.8</td><td class="tnum">88.3円</td></tr>
+      <tr><td>2025/12 実績</td><td class="tnum">810.9</td><td class="tnum up">+19.5%</td><td class="tnum">142.5</td><td class="tnum up">+42.4%</td><td class="tnum">17.6%</td><td class="tnum">98.7</td><td class="tnum">138.1円</td></tr>
+      <tr class="hl"><td><b>2026/12 会社計画</b><br><span style="font-size:12px;color:var(--text-secondary)">8/13上方修正後（期初：売上950.0／営業171.0）</span></td><td class="tnum"><b>1,050.0</b></td><td class="tnum up"><b>+29.5%</b></td><td class="tnum"><b>195.0</b></td><td class="tnum up"><b>+36.8%</b></td><td class="tnum"><b>18.6%</b></td><td class="tnum"><b>120.0</b></td><td class="tnum"><b>169.3円</b></td></tr>
+      <tr><td>（採用予想）2026/12 SMBC日興</td><td class="tnum">1,055.2</td><td class="tnum up">+30.1%</td><td class="tnum">199.4</td><td class="tnum up">+39.9%</td><td class="tnum">18.9%</td><td class="tnum">131.8</td><td class="tnum">189.3円</td></tr>
+      <tr><td>（参考）2026/12 1H実績</td><td class="tnum">534.5</td><td class="tnum up">+32.7%</td><td class="tnum">120.5</td><td class="tnum up">+48.5%</td><td class="tnum">22.5%</td><td class="tnum">82.2</td><td class="tnum">―</td></tr>
+      <tr><td>（採用予想）2027/12 SMBC日興</td><td class="tnum">1,178.7</td><td class="tnum up">+11.7%</td><td class="tnum">224.3</td><td class="tnum up">+12.5%</td><td class="tnum">19.0%</td><td class="tnum">152.0</td><td class="tnum">222.3円</td></tr>
+      <tr><td>（参考）2028/12 SMBC日興</td><td class="tnum">1,297.1</td><td class="tnum up">+10.0%</td><td class="tnum">251.6</td><td class="tnum up">+12.2%</td><td class="tnum">19.4%</td><td class="tnum">172.4</td><td class="tnum">256.9円</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12.5px;color:var(--text-secondary)">※押久保（investor）は今回、独自の上振れ調整は行わずSMBC日興証券予想をそのまま採用予想として使用している。理由は、同予想が1H実績（会社計画比で大幅な上振れ）を踏まえた修正であり、既に「会社計画をそのまま信じない」という要件を満たしていること、および今回は追加の一次情報（IR取材等）を持たないため。</p>
+
+  <div class="chartrow">
+    <figure>
+      <figcaption>売上高の推移</figcaption>
+      <div class="figsub">単位：十億円 ／ 2026年は会社計画、2027-28年はSMBC日興予想（採用）</div>
+      <div class="bars">
+        <div class="barrow"><span class="barlab">2024</span><div class="bartrack"><div class="barfill" style="width:52.3%"></div><span class="barval">678.5</span></div></div>
+        <div class="barrow"><span class="barlab">2025</span><div class="bartrack"><div class="barfill" style="width:62.5%"></div><span class="barval">810.9</span></div></div>
+        <div class="barrow"><span class="barlab">2026計画</span><div class="bartrack"><div class="barfill" style="width:81.0%"></div><span class="barval">1,050.0</span><span class="barnote">初の1兆円超</span></div></div>
+        <div class="barrow"><span class="barlab">2027予</span><div class="bartrack"><div class="barfill est" style="width:90.9%"></div><span class="barval">1,178.7</span></div></div>
+        <div class="barrow"><span class="barlab">2028予</span><div class="bartrack"><div class="barfill est" style="width:100%"></div><span class="barval">1,297.1</span></div></div>
+      </div>
+      <div class="legend"><span><i class="swatch sw1"></i>実績・会社計画</span><span><i class="swatch swE"></i>SMBC日興予想（採用）</span></div>
+    </figure>
+
+    <figure>
+      <figcaption>営業利益と営業利益率</figcaption>
+      <div class="figsub">単位：十億円 ／ 右の%は営業利益率</div>
+      <div class="bars">
+        <div class="barrow"><span class="barlab">2024</span><div class="bartrack"><div class="barfill f2" style="width:39.8%"></div><span class="barval">100.1</span><span class="barnote">14.8%</span></div></div>
+        <div class="barrow"><span class="barlab">2025</span><div class="bartrack"><div class="barfill f2" style="width:56.6%"></div><span class="barval">142.5</span><span class="barnote">17.6%</span></div></div>
+        <div class="barrow"><span class="barlab">2026計画</span><div class="bartrack"><div class="barfill f2" style="width:77.5%"></div><span class="barval">195.0</span><span class="barnote">18.6%</span></div></div>
+        <div class="barrow"><span class="barlab">2027予</span><div class="bartrack"><div class="barfill est2" style="width:89.1%"></div><span class="barval">224.3</span><span class="barnote">19.0%</span></div></div>
+        <div class="barrow"><span class="barlab">2028予</span><div class="bartrack"><div class="barfill est2" style="width:100%"></div><span class="barval">251.6</span><span class="barnote">19.4%</span></div></div>
+      </div>
+      <div class="legend"><span><i class="swatch sw2"></i>実績・会社計画</span><span><i class="swatch swE" style="background:repeating-linear-gradient(135deg,var(--series-2),var(--series-2) 3px,color-mix(in srgb,var(--series-2) 40%,var(--surface-1)) 3px,color-mix(in srgb,var(--series-2) 40%,var(--surface-1)) 6px)"></i>SMBC日興予想（採用）</span></div>
+    </figure>
+  </div>
+
+  <div class="callout warnbox">
+    <p><b>会社計画の下期は前年並みよりやや保守的、採用予想（SMBC日興）はほぼ前年並み。</b>会社計画1,050.0十億円－1H実績534.5十億円＝下期計画515.5十億円、下期営業利益計画74.5十億円→下期営業利益率<b>14.5%</b>。前年下期（25/12期3Q+4Q）実績は61.4十億円÷408.2十億円＝<b>15.0%</b>。会社計画は前年をやや下回る保守的な置き方（-0.6pt）。一方、採用予想（SMBC日興）の下期営業利益率は78.9÷520.7＝<b>15.2%</b>で前年並み〜微増。会社計画通りなら11月のQ3決算で上振れ余地が残るが、その幅は限定的（0.6pt程度）とみるのが実態に近い。</p>
+  </div>
+</section>
+
+<!-- ============ 05 ============ -->
+<h2><span class="num">05</span>重要KPI</h2>
+<section>
+  <h3>A. カテゴリー別（2026年12月期第2四半期累計＝1H実績）― ここが一番大事</h3>
+  <table>
+    <caption>単位：十億円。押久保がSMBC日興証券レポート掲載の四半期業績モデル（1Q・2Q実績を合算）から算出。前年同期比・利益率差も同モデルの1Q・2Q実績値から算出</caption>
+    <thead><tr><th>カテゴリー</th><th>売上</th><th>前年同期比</th><th>カテゴリー利益</th><th>利益率</th><th>前年差</th></tr></thead>
+    <tbody>
+      <tr><td>パフォーマンスランニング</td><td class="tnum">220.6</td><td class="tnum up">+19.2%</td><td class="tnum">58.1</td><td class="tnum">26.3%</td><td class="tnum up">+1.1pt</td></tr>
+      <tr><td>コアパフォーマンススポーツ</td><td class="tnum">55.2</td><td class="tnum up">+25.2%</td><td class="tnum">13.1</td><td class="tnum">23.7%</td><td class="tnum up">+2.4pt</td></tr>
+      <tr class="hl"><td><b>スポーツスタイル</b></td><td class="tnum"><b>123.2</b></td><td class="tnum up"><b>+83.1%</b></td><td class="tnum"><b>41.9</b></td><td class="tnum"><b>34.0%</b></td><td class="tnum up">+3.4pt</td></tr>
+      <tr><td>アパレル・エクィップメント</td><td class="tnum">35.6</td><td class="tnum up">+78.0%</td><td class="tnum">4.3</td><td class="tnum">12.1%</td><td class="tnum dn">-2.9pt</td></tr>
+      <tr class="hl"><td><b>オニツカタイガー</b></td><td class="tnum"><b>89.5</b></td><td class="tnum up"><b>+35.8%</b></td><td class="tnum"><b>35.6</b></td><td class="tnum"><b>39.8%</b></td><td class="tnum up">+0.8pt</td></tr>
+      <tr><td>その他</td><td class="tnum">10.3</td><td class="tnum">―</td><td class="tnum">―</td><td class="tnum">―</td><td class="tnum">―</td></tr>
+      <tr><td>本社費等（全社共通）</td><td class="tnum">―</td><td class="tnum">―</td><td class="tnum">-32.6</td><td class="tnum">―</td><td class="tnum">―</td></tr>
+      <tr class="hl"><td><b>合計（連結）</b></td><td class="tnum"><b>534.5</b></td><td class="tnum up"><b>+32.7%</b></td><td class="tnum"><b>120.5</b></td><td class="tnum"><b>22.5%</b></td><td class="tnum up">+2.4pt</td></tr>
+    </tbody>
+  </table>
+
+  <figure style="margin-bottom:16px">
+    <figcaption>カテゴリー利益率の序列（2026年12月期1H）</figcaption>
+    <div class="figsub">オニツカタイガー・スポーツスタイルの2カテゴリーが高収益をけん引</div>
+    <div class="bars">
+      <div class="barrow"><span class="barlab">オニツカ</span><div class="bartrack"><div class="barfill f3" style="width:100%"></div><span class="barval">39.8%</span></div></div>
+      <div class="barrow"><span class="barlab">スポスタ</span><div class="bartrack"><div class="barfill f3" style="width:85.4%"></div><span class="barval">34.0%</span></div></div>
+      <div class="barrow"><span class="barlab">P.RUN</span><div class="bartrack"><div class="barfill" style="width:66.1%"></div><span class="barval">26.3%</span></div></div>
+      <div class="barrow"><span class="barlab">CPS</span><div class="bartrack"><div class="barfill" style="width:59.5%"></div><span class="barval">23.7%</span></div></div>
+      <div class="barrow"><span class="barlab">アパレル</span><div class="bartrack"><div class="barfill" style="width:30.4%"></div><span class="barval">12.1%</span></div></div>
+    </div>
+  </figure>
+
+  <h3>B. 地域別（2025年12月期・通期実績）</h3>
+  <table>
+    <caption>出所：SMBC日興証券レポート（会社資料ベース）、IRBANK list_segments（2026-09-06取得）でクロスチェック済み。四半期・1Hベースの地域別内訳は今回のソースでは確認できず、IR質問リストの一項目とした</caption>
+    <thead><tr><th>地域</th><th>売上構成比</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><b>欧州</b></td><td class="tnum"><b>28%</b></td><td>最大セグメント</td></tr>
+      <tr><td>日本</td><td class="tnum">25%</td><td></td></tr>
+      <tr><td>北米</td><td class="tnum">17%</td><td>米国消費動向の感応度に注目（06章・10章）</td></tr>
+      <tr><td>中華圏</td><td class="tnum">15%</td><td>ハイエンド商材は堅調との評価あり</td></tr>
+      <tr><td>オセアニア</td><td class="tnum">6%</td><td></td></tr>
+      <tr><td>東南・南アジア</td><td class="tnum">6%</td><td></td></tr>
+      <tr><td>その他・調整額</td><td class="tnum">2%</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h3>C. 収益性・在庫・資本政策</h3>
+  <div class="tiles">
+    <div class="tile"><div class="k">売上原価率（26/12予）</div><div class="v tnum">42.6%</div><div class="n up">44.2%(24/12)→43.2%(25/12)→42.6%(26/12予)</div></div>
+    <div class="tile"><div class="k">営業利益率（26/12期1H実績）</div><div class="v tnum up">22.5%</div><div class="n up">前年同期比+2.4pt</div></div>
+    <div class="tile"><div class="k">棚卸資産（25/12期末）</div><div class="v tnum dn">179.0十億円</div><div class="n dn">前期末比+30.1%（要ウォッチ）</div></div>
+    <div class="tile"><div class="k">棚卸資産回転日数DIO(2025年)</div><div class="v tnum">164.9日</div><div class="n">2023:171.3→2024:158.1→2025:164.9（下げ止まり、SMBC算出）</div></div>
+    <div class="tile"><div class="k">実効税率（26/12・27/12予）</div><div class="v tnum">約30.0%</div><div class="n">DUKE式換算の前提33%との乖離要因</div></div>
+    <div class="tile"><div class="k">自己株式取得（CF計算書ベース）</div><div class="v tnum">約500億円/年</div><div class="n">26/12予以降、毎期同水準を計上</div></div>
+  </div>
+
+  <p><b>継続的にウォッチすべきKPI（優先順）：</b></p>
+  <ol>
+    <li><b>スポーツスタイルの成長率（1H+83.1%）の持続性</b> — 円ベースの伸びであり為替寄与を含む可能性がある。現地通貨ベースの伸び率が確認できていない点はIR質問とした。鈍化が最初に出るのはこの数字。</li>
+    <li><b>アパレル・エクィップメントの利益率悪化（1Hで-2.9pt、15.0%→12.1%）</b> — 値引き販売の兆候である可能性。他カテゴリーに波及していないか。</li>
+    <li><b>棚卸資産の対売上高伸び率</b> — 25/12期実績で在庫+30.1%が売上+19.5%を上回った（乖離+10.6pt）。26/12期に解消されるかを四半期ごとに確認する。</li>
+    <li><b>実効税率（約30.0%）</b> — 目標株価のEPS計算に直結。前提の33%との乖離が続くかどうかで検算結果が変わる。</li>
+    <li><b>11月17日新中計のカテゴリー別・地域別成長シナリオ</b> — 現状の高成長カテゴリーの持続性を会社自身がどう見ているかの一次情報。</li>
+  </ol>
+</section>
+
+<!-- ============ 06 ============ -->
+<h2><span class="num">06</span>IRへ質問したい内容</h2>
+<section>
+  <p style="font-size:13px;color:var(--text-secondary)">※「調べれば分かること」は聞かない。仮説の生死を分ける論点のみ。太字が特に聞きたい3つ。</p>
+  <ol>
+    <li><b>11月17日公表予定の新中期経営計画（VISION・中期経営計画2029）について、カテゴリー別（パフォーマンスランニング／スポーツスタイル／オニツカタイガー／コアパフォーマンススポーツ／アパレル等）・地域別（欧州・北米・中華圏等）でどのような成長シナリオを描いているか。特に在庫・コストマネジメントの徹底で足元の営業利益率（26/12期1H実績22.5%）をどこまで維持・向上させる計画か。</b></li>
+    <li><b>8/17高値5,440円から9/3安値4,151円まで3週間で日中ベース約-24%下落した局面を会社側はどう受け止めているか。</b>SMBC日興証券は「海外同業（ナイキ・アディダス・On等）の決算を受けた業界全体への懸念伝播」と説明しているが、この解釈で合っているか。社内で認識している需要面の変化（受注動向・店頭消化率等）はあるか。</li>
+    <li>北米事業（売上構成比17%、25/12期実績）の今後の成長戦略。米国消費減速懸念に対する会社の見解と、価格戦略・チャネル戦略の方向性。</li>
+    <li><b>棚卸資産について、25/12期実績で前期比+30.1%（179.0十億円）と売上高の伸び+19.5%を上回るペースで増加した。</b>26/12期は会社計画・SMBC予想ともに売上高並みの伸びに戻る前提だが、実際の在庫水準・品目別の状況（急成長中のスポーツスタイル等の在庫リスク）をどう管理しているか。</li>
+    <li>27/12期予想の実効税率が約30.0%（税前利益217.1十億円・法人税等65.1十億円から算出）で、26/12期予想も同水準。この水準は28/12期以降も継続する前提か、それとも一時的な要因によるものか。</li>
+    <li>自己株式取得の方針。キャッシュフロー計算書ベースで26/12期以降も年間500億円規模の取得が続く前提とみられるが、期中平均株式数と期末発行済株式数（734,482千株、自己株式含む）の差が拡大している。EPS計算上の実務的な扱いと、今後の消却方針を確認したい。</li>
+    <li>スポーツスタイルの26/12期1H売上+83.1%（前年同期比）という高成長の持続性。現地通貨ベースの成長率、単品・トレンド依存度、供給計画・生産キャパシティの手当ては十分か。</li>
+    <li>アパレル・エクィップメントの26/12期1H利益率が前年同期比-2.9pt（15.0%→12.1%）に低下している。要因（値引き販売・コスト増等）と今後の改善策。</li>
+    <li>中華圏（売上構成比15%）の消費環境について。SMBC日興は「ハイエンド商材は好調」としているが、会社としての現地消費動向の見立てと、現地競合（安踏・李寧等）への対抗戦略。</li>
+    <li>下期（3Q・4Q）の想定為替レート（USD/JPY、EUR/JPY等）と、1円変動あたりの営業利益感応度。26/12期の増収のうち為替寄与は何割程度か。</li>
+  </ol>
+</section>
+
+<!-- ============ 07 ============ -->
+<h2><span class="num">07</span>自分の今期業績予想・目標株価</h2>
+<section>
+  <h3>今期（2026年12月期）予想</h3>
+  <table>
+    <caption>単位：十億円。会社計画は2026年8月13日修正後。押久保（investor）は独自の上振れ調整を行わず、SMBC日興証券予想をそのまま採用</caption>
+    <thead><tr><th>項目</th><th>会社計画</th><th>採用予想（SMBC日興）</th><th>計画比</th></tr></thead>
+    <tbody>
+      <tr><td>売上高</td><td class="tnum">1,050.0</td><td class="tnum">1,055.2</td><td class="tnum up">+0.5%</td></tr>
+      <tr class="hl"><td><b>営業利益</b></td><td class="tnum">195.0</td><td class="tnum"><b>199.4</b></td><td class="tnum up"><b>+2.3%</b></td></tr>
+      <tr><td>営業利益率</td><td class="tnum">18.6%</td><td class="tnum">18.9%</td><td class="tnum">+0.3pt</td></tr>
+      <tr><td>純利益</td><td class="tnum">120.0</td><td class="tnum">131.8</td><td class="tnum up">+9.8%</td></tr>
+      <tr><td>EPS</td><td class="tnum">169.3円</td><td class="tnum">189.3円</td><td class="tnum up">+11.8%</td></tr>
+    </tbody>
+  </table>
+  <p><b>採用の考え方：</b></p>
+  <ul>
+    <li>会社計画の下期営業利益率（14.5%）は前年同期実績（15.0%）をやや下回る保守的な置き方である一方、SMBC日興の採用予想は下期営業利益率15.2%と前年並み〜微増を想定しており、その差は最大でも0.6pt程度にとどまる（04章）。押久保として独自にこれを超える上振れを見積もる根拠（一次情報）は今回持たないため、SMBC日興予想をそのまま採用する。</li>
+    <li>会社の上方修正の実績（期初計画171.0十億円→8/13時点で195.0十億円へ+14%）を踏まえると、11月のQ3決算で再度の上方修正余地はゼロではないが、その幅は限定的とみる。</li>
+  </ul>
+
+  <h3>目標株価</h3>
+  <table>
+    <caption>基準株価 4,266円（2026年9月4日終値）。すべてSMBC日興証券レポート（2026-09-01付）の算出根拠に基づく</caption>
+    <thead><tr><th>シナリオ</th><th>前提EPS</th><th>採用PER</th><th>目標株価</th><th>上値余地</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><b>適正株価（6-12ヶ月目安）</b><br><span style="font-size:12px;color:var(--text-secondary)">27/12期予想EPSを織り込む</span></td><td class="tnum"><b>222.3円</b></td><td class="tnum"><b>27倍</b></td><td class="tnum"><b>6,000円</b></td><td class="tnum up"><b>+40.7%</b></td></tr>
+      <tr class="hl"><td><b>アップサイド株価（強気ケース）</b></td><td class="tnum"><b>239円</b>（理論値）</td><td class="tnum"><b>30倍</b></td><td class="tnum"><b>7,200円</b></td><td class="tnum up"><b>+68.1%</b></td></tr>
+      <tr><td>弱気ケース</td><td class="tnum">204円（理論値）</td><td class="tnum">20倍</td><td class="tnum">4,100円</td><td class="tnum dn">-3.9%</td></tr>
+    </tbody>
+  </table>
+
+  <p><b>前提の内訳：</b></p>
+  <ul>
+    <li><b>適正株価</b>：27/12期予想EPS222.3円（SMBC日興、27/12期予想純利益152.0十億円ベース）×PER27倍（同社1期先PERの過去2年レンジ上限水準。従来は海外同業比較を用いていたが、海外各社の株価調整が大きいため同社自身のレンジに変更）。</li>
+    <li><b>アップサイド株価</b>：27/12期売上高1.24兆円・営業利益2,409億円を想定した理論EPS239円に、ベースケースへ10%プレミアムを付与した30倍を乗じて算出（スポーツ市場の活性化・構造改革効果のさらなる発揮を想定）。</li>
+    <li><b>弱気ケース</b>：27/12期売上高1.11兆円・営業利益2,056億円を想定した理論EPS204円に、同社1期先平均PERの直近2年レンジ下限20倍を乗じて算出（ランニングシューズ市場の停滞・在庫過剰による利益率伸び悩みを想定）。</li>
+  </ul>
+
+  <h3>DUKE式（営業利益倍率）での検算</h3>
+  <p>DUKE式は時価総額＝予想営業利益×営業利益倍率で考える（PER≒営業利益倍率×1.5、実効税率33%前提の換算式）。PER27倍≒営業利益倍率18倍として、27/12期予想営業利益224.3十億円×18倍＝時価総額約4兆374億円÷発行済株式数734,482千株≒<b>株価5,497円</b>。上原式（6,000円）との乖離は約9%で、要因は（a）実効税率が前提の33%に対し実際は約30.0%であること、（b）EPSの分母（期中平均株式数）が自己株式取得により期末発行済株式数より少ない可能性、の2点とみられる（05章C参照）。目標株価としては発行体固有の実効税率・株式数を反映した上原式6,000円をより信頼できる値とし、DUKE式換算値5,497円は目安として併記する。</p>
+
+  <div class="callout warnbox">
+    <p><b>参考（押久保の延長試算・SMBCの直接公表値ではない）：</b>SMBC日興が公表している28/12期予想EPS256.9円・29/12期予想EPS289.1円に、目標株価と同じPER27倍を機械的に当てはめると、それぞれ6,936円（+62.6%）・7,806円（+83.0%）となる。ただし成長率が26/12期+39.9%→27/12期+12.5%→28/12期+12.2%と鈍化していく前提であることを踏まえると、PERを一定に据え置くこと自体の妥当性は下がる。<b>あくまで参考値であり、目標株価として採用しない。</b></p>
+  </div>
+</section>
+
+<!-- ============ 08 ============ -->
+<h2><span class="num">08</span>上値余地とエントリー判断</h2>
+<section>
+  <div class="tiles">
+    <div class="tile"><div class="k">適正株価（6-12ヶ月）</div><div class="v tnum">6,000円</div><div class="n up">+40.7%（目安30%以上をクリア）</div></div>
+    <div class="tile"><div class="k">アップサイド株価</div><div class="v tnum">7,200円</div><div class="n up">+68.1%</div></div>
+    <div class="tile"><div class="k">弱気ケース（下値メド）</div><div class="v tnum">4,100円</div><div class="n dn">-3.9%（現値にごく近い）</div></div>
+    <div class="tile"><div class="k">リスクリワード（適正・損切10%基準）</div><div class="v tnum up">約4.1倍</div><div class="n">上値+1,734円 ÷ 下値-426.6円</div></div>
+  </div>
+
+  <p><span class="tag tag-y">上値余地（バリュエーション基準）：合格</span><span class="tag tag-r">エントリータイミング（DUKE式）：対象外に近い</span></p>
+  <p>上値余地は+40.7%（適正）〜+68.1%（アップサイド）と目安の「1年後30%以上」を明確にクリアしており、弱気ケース（4,100円）も現在値4,266円から-3.9%とごく近く、ダウンサイドは限定的に見える。<b>しかしこれはあくまでバリュエーションの物差しであり、DUKE式のタイミング判定（門番）を満たしていない現状ではエントリー根拠にならない。</b>判断軸が明示する禁じ手（「割安・上値余地が大きいことを買い理由にする」＝ステージ4の罠と同型の誤り）を避けるため、以下では直近の値動きを技術的に確認する。</p>
+
+  <h3>直近の値動きと反発日の検証（8/14ブレイク〜9/4）</h3>
+  <table>
+    <caption>「反発日」＝終値がその日のレンジの中値より上（高値に近いほど良い）。出所：IRBANK MCP get_price_history（東証、2026-09-06取得、JPX日次株価）</caption>
+    <thead><tr><th>日付</th><th>始値</th><th>高値</th><th>安値</th><th>終値</th><th>レンジ内位置</th><th>反発日</th><th>出来高</th></tr></thead>
+    <tbody>
+      <tr><td>8/14 ブレイク</td><td class="tnum">4,797</td><td class="tnum">5,389</td><td class="tnum">4,721</td><td class="tnum">5,281</td><td class="tnum">84%</td><td class="tnum up">◎</td><td class="tnum">2,632万</td></tr>
+      <tr><td>8/17 52週高値</td><td class="tnum">5,342</td><td class="tnum">5,440</td><td class="tnum">5,017</td><td class="tnum">5,148</td><td class="tnum">31%</td><td class="tnum">×</td><td class="tnum">871万</td></tr>
+      <tr><td>8/20</td><td class="tnum">4,888</td><td class="tnum">4,917</td><td class="tnum">4,760</td><td class="tnum">4,917</td><td class="tnum">100%</td><td class="tnum up">○ 高値引け</td><td class="tnum">404万</td></tr>
+      <tr><td>8/21（1回目の失敗）</td><td class="tnum">4,802</td><td class="tnum">4,837</td><td class="tnum">4,618</td><td class="tnum">4,689</td><td class="tnum">32%</td><td class="tnum dn">× 8/20安値割れ</td><td class="tnum">647万</td></tr>
+      <tr><td>8/28</td><td class="tnum">4,480</td><td class="tnum">4,616</td><td class="tnum">4,470</td><td class="tnum">4,601</td><td class="tnum">90%</td><td class="tnum up">○ 高値引け近辺</td><td class="tnum">743万</td></tr>
+      <tr><td>8/31（2回目の失敗）</td><td class="tnum">4,588</td><td class="tnum">4,616</td><td class="tnum">4,468</td><td class="tnum">4,500</td><td class="tnum">22%</td><td class="tnum dn">×</td><td class="tnum">528万</td></tr>
+      <tr><td>9/3 直近安値</td><td class="tnum">4,260</td><td class="tnum">4,281</td><td class="tnum">4,151</td><td class="tnum">4,195</td><td class="tnum">34%</td><td class="tnum">×</td><td class="tnum">543万</td></tr>
+      <tr class="hl"><td><b>9/4（3回目・未確定）</b></td><td class="tnum">4,150</td><td class="tnum">4,299</td><td class="tnum">4,126</td><td class="tnum"><b>4,266</b></td><td class="tnum"><b>81%</b></td><td class="tnum up"><b>○</b></td><td class="tnum">506万</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout critbox">
+    <p><b>エントリー判定：見送り。過去2回の反発の型がいずれも失敗しており、9/4の反発はまだ「3回目の試み」の段階。</b></p>
+    <ul style="margin-bottom:0">
+      <li><b>8/20は教科書どおりの反発日だった</b>（終値＝高値、レンジ内位置100%）。しかし翌8/21に大きく下放れ、8/20安値4,760円を明確に割り込んで失敗した。</li>
+      <li><b>8/28も同様の反発日型</b>（レンジ内位置90%）だったが、8/31に反落し、以後9/3安値4,151円まで下げが続いた。</li>
+      <li><b>9/4も反発日の型</b>（レンジ内位置81%、安値4,126円から+140円で引ける）だが、過去2回とも翌営業日以降に失敗しているため、<b>この時点でエントリーを正当化する根拠にはならない</b>。9/5以降、前日高値（4,299円）を上抜けて終値ベースで維持できるかが最初の確認ポイント。</li>
+      <li><b>出来高は下落局面で枯れていない。</b>9/1〜9/4の出来高（464万〜701万株）は年間の平常水準（200〜400万株程度）を上回っており、判断軸が押し目買いの前提とする「売りの枯渇」がまだ確認できない。</li>
+      <li><b>52週安値からの上昇率が25%未達（+21.7%）</b>で、トレンドテンプレート条件⑤が不合格のまま。これはステージ2の定義そのものに関わる不合格であり、緩められない部類にあたる。</li>
+    </ul>
+  </div>
+
+  <h3>資金管理メモ（現時点でエントリーする場合の参考値・押久保個人用）</h3>
+  <div class="callout">
+    <ul style="margin-bottom:0">
+      <li><b>損切りライン：</b>DUKE式の外枠である最大10%（3,839円）に加え、直近安値4,126円（9/4安値）・4,151円（9/3安値）を明確に下抜けたらボックス割れとして撤退。</li>
+      <li><b>ポジションサイズ：</b>自分のルールに基づき、エントリーする場合も試し玉（総資金の1/25）から。今回はトレンドテンプレートの不合格数が多く、通常の試し玉よりさらに小さいサイズか、見送りが妥当。</li>
+      <li><b>買い増し条件：</b>150日線（4,516.5円）・200日線（4,349.8円）を終値で回復し、かつ11/17新中計または11月のQ3決算で上方修正が確認された場合に限り検討する。</li>
+      <li><b>watch水準：</b>4,126円（9/4安値・生命線）／4,349.8円（200日線）／4,516.5円（150日線）／4,716.4円（50日線）／5,440円（52週高値）。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 09 ============ -->
+<h2><span class="num">09</span>競合比較・差別化ポイント</h2>
+<section>
+  <table>
+    <caption>国内同業比較（2026年8月28日付ブルームバーグコンセンサスベース、SMBC日興証券レポートより）</caption>
+    <thead><tr><th>企業</th><th>PER（FY1/FY2/FY3）</th><th>PBR（FY1）</th><th>ROE（FY1）</th><th>OPM（FY1）</th><th>EPS 3年CAGR</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><b>アシックス（7936）</b></td><td class="tnum"><b>25.0／21.5／18.9倍</b></td><td class="tnum"><b>8.8倍</b></td><td class="tnum up"><b>42.4%</b></td><td class="tnum"><b>17.6%</b></td><td class="tnum up"><b>72.0%</b></td></tr>
+      <tr><td>ヨネックス（7906）</td><td class="tnum">17.7／16.2／14.9倍</td><td class="tnum">2.8倍</td><td class="tnum">17.2%</td><td class="tnum">10.1%</td><td class="tnum">18.9%</td></tr>
+      <tr><td>ミズノ（8022）</td><td class="tnum">15.9／14.6／13.6倍</td><td class="tnum">1.7倍</td><td class="tnum">11.7%</td><td class="tnum">8.7%</td><td class="tnum">22.9%</td></tr>
+      <tr><td>ゴールドウィン（8111）</td><td class="tnum">12.8／11.0／10.0倍</td><td class="tnum">2.3倍</td><td class="tnum">19.5%</td><td class="tnum">18.8%</td><td class="tnum">4.2%</td></tr>
+      <tr><td>（国内スポーツ平均）</td><td class="tnum">17.8／15.8／14.3倍</td><td class="tnum">3.9倍</td><td class="tnum">20.4%</td><td class="tnum">12.4%</td><td class="tnum">30.3%</td></tr>
+    </tbody>
+  </table>
+
+  <table>
+    <caption>海外同業比較（直近1年株価騰落率はSMBC日興証券レポート記載値、2026年9月1日時点）</caption>
+    <thead><tr><th>企業</th><th>PER（FY1）</th><th>ROE（FY1）</th><th>OPM（FY1）</th><th>直近1年株価騰落率</th><th>過去5年株価（2021/9=100）</th></tr></thead>
+    <tbody>
+      <tr><td>ナイキ（NKE）</td><td class="tnum">18.4倍</td><td class="tnum">22.1%</td><td class="tnum">8.2%</td><td class="tnum dn">-46%</td><td class="tnum dn">-75%</td></tr>
+      <tr><td>アディダス（ADS）</td><td class="tnum">19.6倍</td><td class="tnum">24.7%</td><td class="tnum">8.3%</td><td class="tnum dn">-12%</td><td class="tnum dn">-47%</td></tr>
+      <tr><td>On（ONON）</td><td class="tnum">17.8倍</td><td class="tnum">24.0%</td><td class="tnum">12.5%</td><td class="tnum dn">-37%</td><td class="tnum up">+20%</td></tr>
+      <tr><td>デッカーズ（DECK）</td><td class="tnum">12.2倍</td><td class="tnum">42.6%</td><td class="tnum">23.1%</td><td class="tnum dn">-27%</td><td class="tnum up">+21%</td></tr>
+      <tr><td>Dick's Sporting Goods</td><td class="tnum">―</td><td class="tnum">―</td><td class="tnum">―</td><td class="tnum dn">-39%</td><td class="tnum up">+3%</td></tr>
+      <tr><td>安踏（Anta）</td><td class="tnum">11.5倍</td><td class="tnum">23.7%</td><td class="tnum">17.6%（OPM推定）</td><td class="tnum dn">-18%</td><td class="tnum dn">-51%</td></tr>
+      <tr><td>李寧（Li-Ning）</td><td class="tnum">10.0倍</td><td class="tnum">10.8%</td><td class="tnum">―</td><td class="tnum dn">-26%</td><td class="tnum dn">-86%</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12.5px;color:var(--text-secondary)">※アシックスの過去5年株価は+580%（同基準）。ミズノ+347%・ヨネックス+228%と国内3社が海外同業を大きく上回っている一方、直近1年は海外同業の株価調整が国内企業のバリュエーション比較を通じて心理的な逆風になっている、というのが現在の局面。</p>
+
+  <h3>差別化ポイント</h3>
+  <ol>
+    <li><b>国内同業の中で最高のPER・ROE・成長率を同時に持つ。</b>ヨネックス・ミズノ・ゴールドウィンいずれと比べても、PER（25.0倍）・ROE（42.4%）・EPS3年CAGR（72.0%）が上回る。これは「高い評価に見合う実際の稼ぐ力」の裏付けでもあり、単純な割高論では片付かない理由になっている。</li>
+    <li><b>北米依存度が相対的に低い（売上構成比17%）。</b>米国売上比率が過半を占めるデッカーズや、北米が大きな比重を占めるナイキと比べ、米国消費減速リスクへの構造的な耐性は相対的に高いとみられる（ただし05章Bの通り、四半期・地域別の詳細な検証は今回未実施）。</li>
+    <li><b>スポーツスタイル・オニツカタイガーという高収益カテゴリーを併せ持つ。</b>ナイキ・On・デッカーズがパフォーマンス寄りの単一路線であるのに対し、アシックスはランニング機能性とライフスタイル・ヘリテージの二枚看板を持ち、片方が減速しても他方が補う構造になり得る。</li>
+    <li><b>海外同業の苦戦が相対的な追い風になり得る。</b>SMBC日興は「海外競合他社の苦戦は国内企業にとって成長機会」と評しており、シェア拡大の余地としてポジティブに解釈する視点もある（ただし「懸念の伝播」という逆方向のリスクとも表裏一体、詳細は10章）。</li>
+  </ol>
+</section>
+
+<!-- ============ 10 ============ -->
+<h2><span class="num">10</span>想定される事業リスク</h2>
+<section>
+  <h3><span class="tag tag-r">高</span>1. 直近3週間の株価急落と需給の悪化</h3>
+  <p>8/17高値5,440円から9/3安値4,151円まで日中ベースで<b>-23.7%</b>下落し、この上昇局面で最大の下落となった。判断軸は「ステージ2上昇開始以来の最大下落＝ほとんどは売りシグナル」「決してこの急落を買いのチャンスと考えてはならない」と明記する局面に該当する。出来高は下落局面（9/1〜9/4）でも年間平均を上回る水準（464万〜701万株）で推移しており、初期兆候は<b>戻り高値の更新失敗が続くか</b>（8/20・8/28の反発がいずれも翌営業日以降に失敗済み、08章）。</p>
+
+  <h3><span class="tag tag-r">高</span>2. 海外スポーツ用品業界の懸念伝播</h3>
+  <p>ナイキ（直近1年-46%）・On（-37%）・Dick's（-39%）・デッカーズ（-27%）・アディダス（-12%）と海外同業は軒並み株価調整。SMBC日興は「地域別の利益構成比の違いから国内各社への影響は限定的」としているが、これは1証券会社の見立てであり確定した事実ではない。米国の年末クリアランスシーズンの動向次第で、北米事業（売上構成比17%）へ悪影響が波及するリスクは残る。初期兆候は北米セグメントの成長率鈍化。</p>
+
+  <h3><span class="tag tag-o">中</span>3. バリュエーション調整</h3>
+  <p>トレーリングPER30.9倍・PBR約10.5〜11.1倍は国内同業（ヨネックス17.7倍・ミズノ15.9倍・ゴールドウィン12.8倍）を大きく上回り、SMBC日興も「業界でトップクラスに高いバリュエーション」と明記している。成長率鈍化（26/12期+39.9%→27/12期+12.5%→28/12期+12.2%、いずれもSMBC予想）が確認された場合、マルチプル収縮によって業績が計画通りでも株価が大きく下落するリスクがある。</p>
+
+  <h3><span class="tag tag-o">中</span>4. 棚卸資産の増加ペース</h3>
+  <p>25/12期実績で棚卸資産は前期比+30.1%（179.0十億円）と、売上高の伸び+19.5%を大きく上回るペースで増加した（乖離+10.6pt）。26/12期は会社計画・SMBC予想とも売上高並みの伸び率に戻る前提だが、急成長中のスポーツスタイル等で需要予測を誤ると値引き販売・粗利率悪化に直結する。業界横断のDIO（棚卸資産回転日数）で見てもアシックスの2025年164.9日はNike(103.3日)・Yonex(88.5日)より高く、Adidas(164.5日)・Mizuno(145.5日)と同水準。</p>
+
+  <h3><span class="tag tag-o">中</span>5. 高成長カテゴリーの持続性</h3>
+  <p>26/12期1Hのスポーツスタイル+83.1%・オニツカタイガー+35.8%（いずれも前年同期比）という高成長は、トレンド性の高い商材にも支えられており、ファッションサイクルの反転リスクを内包する。SMBC日興も業界レポートで「一定のファッションサイクルがある可能性」に言及している。初期兆候はアパレル・エクィップメントの利益率悪化（1Hで-2.9pt）が他カテゴリーに波及するかどうか。</p>
+
+  <h3><span class="tag tag-o">中</span>6. 為替</h3>
+  <p>海外売上比率が高い（25/12期実績で日本25%以外の約75%が海外）。円高進行時には増収率・増益率が鈍化するリスクがある。想定為替レートと感応度は未確認であり、IR質問リストに含めた。</p>
+
+  <h3><span class="tag tag-o">中</span>7. 実効税率・株式数の前提変化</h3>
+  <p>実効税率（約30.0%）や自己株式取得ペース（年間約500億円）の前提が変われば、EPSベースの目標株価（適正6,000円・アップサイド7,200円）の計算そのものが変動する。DUKE式換算値（約5,497円）との乖離もこの2点に起因しており、想定と異なる動きが出た場合は目標株価の再計算が必要になる。</p>
+
+  <h3><span class="tag tag-o">中</span>8. 新中期経営計画のイベントリスク</h3>
+  <p>11月17日公表予定の新中計は最大のカタリスト候補である一方、内容が保守的・市場の期待未達だった場合はネガティブサプライズになり得る。イベントを跨いだポジション保有には、自分のルールにある「決算またぎを避ける事前利確」と同種のリスクが伴う。</p>
+</section>
+
+<div class="disc">
+  <b>データ出所：</b>IRBANK MCP（get_price_history／get_valuation_metrics_history／get_financials／list_segments／list_disclosures／list_dividend_history、東証・金融庁EDINET・TDnet由来、いずれも2026-09-06取得）。SMBC日興証券レポート3件（「小売りセクター（スポーツ）＜業界アップデート＞懸念が強まる今こそ、将来の成長性に注目」2026-09-01付、「アシックス（7936）＜目標株価変更＞近視眼的な警戒より新たな成長ステージに目を向けたい」2026-09-01付、Opening Bell 2026-09-02付、外部資料庫パス参照）。判断軸: `agents/investor/knowledge/新高値ブレイク_判断軸.md`、`agents/investor/knowledge/目標株価とバリュエーション_上原式.md`。前回分析: `workplace/projects/7936-asics-box-pullback/2026-09-06_分析.md`。<br>
+  <b>免責：</b>本資料は押久保個人の投資検討用メモであり、投資勧誘を目的としたものではありません。業績予想・目標株価はSMBC日興証券の予想を採用したものであり、その実現を保証するものではありません。競合他社のPER・株価騰落率は各種報道・SMBC日興証券レポートに基づく参考値です。本資料は投資助言ではなく、最終的な投資判断はご自身の責任で行ってください。
+</div>
+
+<footer>
+  アシックス（7936）深堀分析シート ／ 新高値ブレイク投資 ／ 2026年9月6日作成 ／ 株価基準日 2026年9月4日終値
+</footer>
+
+</div>
+</body>
+</html>
