@@ -30,7 +30,7 @@
 
 - テーマ: 「OpenAIが描く、人とAIの協働 ─ GPT-6 Astraは、企業の仕事と人の役割をどう作り変えるのか」
 - 素材: MarkeZine向け講演資料（最新版OpenAI_MarkeZine_2026_20260907_最終版_高画質.pptx／21枚・読み上げスクリプト付き）
-- 成果物: workplace/projects/openai-mizushima-video/（企画書.md＋【取材依頼書】OpenAI水嶋様_AIdiver.docx）
+- 成果物: workplace/projects/20260915-openai-mizushima-video/（企画書.md＋【取材依頼書】OpenAI水嶋様_AIdiver.docx）
 
 ### [INSIGHT] 同一登壇者への再依頼は「読者層と問いの高度」でずらす
 
@@ -45,7 +45,7 @@
 動画版は oshikubo_storage/01_進行中/動画_NVIDIA/【取材依頼書_質問あり】NVIDIA井﨑様_AIdiver.docx が正本で、
 「取材依頼書」タイトル＋●取材希望日時→●動画シリーズの概要→●取材テーマ→●取材趣旨→●当日の質問項目→●媒体概要→●記事事前確認 の順。
 書式関数（MS明朝10.5pt・余白25mm）と法務2文はスキルのbuild_request.pyから再利用できる。
-生成スクリプトは workplace/projects/openai-mizushima-video/build_video_req.py に保存済み。
+生成スクリプトは workplace/projects/20260915-openai-mizushima-video/build_video_req.py に保存済み。
 
 ### 水嶋氏対応時のNG（9/8対談時の合意事項を継承）
 

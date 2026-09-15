@@ -90,7 +90,7 @@ oshikubo_office is a structured workspace for managing AI agents, projects, task
 
 - 資料・素材を探すときは、まずこの資料庫を確認する
 - 保管庫の資料は正本として参照し、勝手に移動・削除しない
-- 案件着手時に必要なテキスト系素材のみ `workplace/projects/<案件名>/` にコピーして使う
+- 案件着手時に必要なテキスト系素材のみ `workplace/projects/YYYYMMDD-<案件名>/` にコピーして使う（日付は案件着手日。あとから探しやすいよう先頭に必ず日付を付ける）
 - 重いメディアファイル（音声・動画）は保管庫に置いたままパス参照する（gitに入れない）
 
 ## Directory Structure
@@ -109,7 +109,7 @@ agents/
             digest.md # Summarized knowledge ready for retrieval
 
 workplace/
-    projects/        # Active project workspaces
+    projects/        # Active project workspaces（`YYYYMMDD-slug` 形式。例: 20260915-openai-mizushima-video）
     board-mtg/       # Board / management meeting materials
     tickets/
         unstarted/   # Work items not yet started

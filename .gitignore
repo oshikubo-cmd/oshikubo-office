@@ -1,2 +1,12 @@
 # Claude Code temporary worktrees
 .claude/worktrees/
+
+# Python
+__pycache__/
+*.pyc
+
+# Office の一時ロックファイル（ファイルを開いている間だけ生成される）
+~$*
+
+# Windows のショートカット
+*.lnk
