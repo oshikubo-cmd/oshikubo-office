@@ -8,7 +8,7 @@
 - 完了日: 2026-09-14
 
 ## 概要
-初回分析（`workplace/projects/4203-sumibe-analysis/`）で未確認だった4項目を確認する。
+初回分析（`workplace/projects/20260914-4203-sumibe-analysis/`）で未確認だった4項目を確認する。
 
 ## タスクリスト
 - [x] 同業との営業利益倍率の比較表（実績ベース、同業6社＋参考2社）
@@ -17,7 +17,7 @@
 - [ ] SMBCレポート本体 → 入手不可（資料庫・Gmailにない。日興イージートレードのログインが必要）
 
 ## 成果物
-- レポートに「追補」を追記: `workplace/projects/4203-sumibe-analysis/2026-09-14_住友ベークライト投資分析.md`
+- レポートに「追補」を追記: `workplace/projects/20260914-4203-sumibe-analysis/2026-09-14_住友ベークライト投資分析.md`
 - カルテ更新: `agents/investor/companies/4203_住友ベークライト/README.md`
 
 ## 発生した問題と対処

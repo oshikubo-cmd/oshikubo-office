@@ -18,7 +18,7 @@
 - ステージ・TT8条件・ベース段数・買いポイント・目標株価（2方式）・RR・リスクを整理
 
 ## 成果物
-- `workplace/projects/4203-sumibe-analysis/2026-09-14_住友ベークライト投資分析.md`
+- `workplace/projects/20260914-4203-sumibe-analysis/2026-09-14_住友ベークライト投資分析.md`
 - `agents/investor/companies/4203_住友ベークライト/README.md`
 
 ## 発生した問題と対処

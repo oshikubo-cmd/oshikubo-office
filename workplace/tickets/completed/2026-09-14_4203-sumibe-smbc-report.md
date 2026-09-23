@@ -16,7 +16,7 @@
 - 自分の目標株価（適正8,800／アップサイド10,900円）と突き合わせ
 
 ## 成果物
-- レポートに「追補2」を追記: `workplace/projects/4203-sumibe-analysis/2026-09-14_住友ベークライト投資分析.md`
+- レポートに「追補2」を追記: `workplace/projects/20260914-4203-sumibe-analysis/2026-09-14_住友ベークライト投資分析.md`
 - カルテのチェックリストを更新: `agents/investor/companies/4203_住友ベークライト/README.md`
 
 ## 発生した問題と対処
