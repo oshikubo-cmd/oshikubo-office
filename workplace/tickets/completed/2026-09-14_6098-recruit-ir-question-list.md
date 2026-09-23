@@ -22,7 +22,7 @@
 
 ## 成果物
 
-- `workplace/projects/6098-recruit-analysis/2026-09-14_IR質問リスト.md`（新規）
+- `workplace/projects/20260914-6098-recruit-analysis/2026-09-14_IR質問リスト.md`（新規）
 - `agents/investor/companies/6098_リクルートHD/README.md`（「2026-09-14 追記」節を追加）
 - `agents/investor/memory/raw.md`（追記）
 
