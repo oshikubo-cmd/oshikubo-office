@@ -9,8 +9,15 @@ import re
 import html
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SRC = os.path.join(HERE, "原稿_ver1.md")
-OUT = os.path.join(HERE, "preview.html")
+# 既定は最新版。`python build_preview.py 原稿_ver1.md` のように指定もできる
+import sys as _sys
+_arg = _sys.argv[1] if len(_sys.argv) > 1 else None
+if _arg:
+    SRC = os.path.join(HERE, _arg)
+    OUT = os.path.join(HERE, "preview_%s.html" % os.path.splitext(_arg)[0])
+else:
+    SRC = os.path.join(HERE, "原稿_ver2.md")
+    OUT = os.path.join(HERE, "preview.html")
 
 CSS = """
 :root{ --fs:19px; }
